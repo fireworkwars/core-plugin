@@ -1,0 +1,4 @@
+name: firework-wars-core-plugin
+version: '1.0-SNAPSHOT'
+main: foundation.esoteric.fireworkwarscore.FireworkWarsCorePlugin
+api-version: '1.21'
