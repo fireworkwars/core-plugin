@@ -5,13 +5,19 @@ import org.bukkit.entity.Player
 @Suppress("unused")
 interface FireworkWarsPluginData {
     fun getArenaJoinCommand(): ArenaJoinCommand
+    fun getArenaLeaveCommand(): ArenaJoinCommand
     fun getBarracksArenas(): List<Arena>
     fun getTownArenas(): List<Arena>
 }
 
 @Suppress("unused")
 interface ArenaJoinCommand {
-    fun executeForPlayer(player: Player, arenaNumber: Int)
+    fun executeJoinForPlayer(player: Player, arenaNumber: Int)
+}
+
+@Suppress("unused")
+interface ArenaLeaveCommand {
+    fun executeLeaveForPlayer(player: Player)
 }
 
 @Suppress("unused")
