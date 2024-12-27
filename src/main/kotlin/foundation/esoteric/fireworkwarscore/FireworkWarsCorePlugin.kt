@@ -14,6 +14,11 @@ class FireworkWarsCorePlugin : BasePlugin() {
     lateinit var lobbyPluginData: LobbyPluginData
 
     override fun onEnable() {
-        // Plugin startup logic
+        dataFolder.mkdir()
+        saveDefaultConfig()
+    }
+
+    override fun onDisable() {
+        playerDataManager.save()
     }
 }
