@@ -21,6 +21,7 @@ dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.3-R0.1-SNAPSHOT")
     paperweight.paperDevBundle("1.21.3-R0.1-SNAPSHOT")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("org.apache.commons", "commons-compress", "1.24.0")
 }
 
 val targetJavaVersion = 21
