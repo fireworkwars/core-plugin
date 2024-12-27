@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull
 
 abstract class BasePlugin : JavaPlugin() {
     @get:NotNull
-    abstract val playerDataManager: PlayerDataManager
+    abstract var playerDataManager: PlayerDataManager
     @get:NotNull
-    abstract val languageManager: LanguageManager
+    abstract var languageManager: LanguageManager
 }
