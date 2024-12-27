@@ -1,4 +1,4 @@
-package foundation.esoteric.fireworkwarscore.intercom
+package foundation.esoteric.fireworkwarscore.communication
 
 import org.bukkit.entity.Player
 
