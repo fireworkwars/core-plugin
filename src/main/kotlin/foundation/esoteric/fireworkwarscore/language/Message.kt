@@ -1,6 +1,6 @@
-package foundation.esoteric.fireworkwarscore.language;
+package foundation.esoteric.fireworkwarscore.language
 
-public enum Message {
+enum class Message {
     SET_LANGUAGE_SUCCESSFULLY,
     UNKNOWN_LANGUAGE,
 
