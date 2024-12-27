@@ -16,54 +16,63 @@ import java.util.function.Consumer
 import java.util.function.Function
 
 @Suppress("UNCHECKED_CAST", "unused", "MemberVisibilityCanBePrivate")
-object NMSUtil {
-    fun <T : Entity> toNMSEntity(bukkit: org.bukkit.entity.Entity): T {
-        return (bukkit as CraftEntity).handle as T
-    }
-
-    fun toNMSWorld(world: World): Level {
-        return (world as org.bukkit.craftbukkit.CraftWorld).handle
-    }
-
-    fun sendPacket(player: Player, packetCreator: Function<ServerPlayer?, Packet<ClientGamePacketListener?>?>) {
-        val serverPlayer: ServerPlayer = toNMSEntity(player)
-        serverPlayer.connection.send(packetCreator.apply(serverPlayer)!!)
-    }
-
-    fun sendEntityAdd(player: Player, entity: org.bukkit.entity.Entity) {
-        val nmsEntity: Entity = toNMSEntity(entity)
-
-        sendPacket(player) {
-            ClientboundAddEntityPacket(
-                nmsEntity, nmsEntity.id, BlockPos(nmsEntity.blockX, nmsEntity.blockY, nmsEntity.blockZ))
+class NMSUtil {
+    companion object {
+        @JvmStatic
+        fun <T : Entity> toNMSEntity(bukkit: org.bukkit.entity.Entity): T {
+            return (bukkit as CraftEntity).handle as T
         }
-    }
 
-    fun getCollidingEntities(entity: Entity, hitboxModifier: Consumer<AABB?>): List<org.bukkit.entity.Entity> {
-        val world: Level = entity.level()
-        val entityBoundingBox: AABB = entity.boundingBox
+        @JvmStatic
+        fun toNMSWorld(world: World): Level {
+            return (world as org.bukkit.craftbukkit.CraftWorld).handle
+        }
 
-        hitboxModifier.accept(entityBoundingBox)
+        @JvmStatic
+        fun sendPacket(player: Player, packetCreator: Function<ServerPlayer?, Packet<ClientGamePacketListener?>?>) {
+            val serverPlayer: ServerPlayer = toNMSEntity(player)
+            serverPlayer.connection.send(packetCreator.apply(serverPlayer)!!)
+        }
 
-        val result: MutableList<org.bukkit.entity.Entity> = ArrayList()
+        @JvmStatic
+        fun sendEntityAdd(player: Player, entity: org.bukkit.entity.Entity) {
+            val nmsEntity: Entity = toNMSEntity(entity)
 
-        for (otherEntity in world.entities.all) {
-            if (otherEntity !== entity) {
-                val otherEntityBoundingBox: AABB = otherEntity.boundingBox
-
-                if (entityBoundingBox.intersects(otherEntityBoundingBox)) {
-                    result.add(otherEntity.bukkitEntity)
-                }
+            sendPacket(player) {
+                ClientboundAddEntityPacket(
+                    nmsEntity, nmsEntity.id, BlockPos(nmsEntity.blockX, nmsEntity.blockY, nmsEntity.blockZ)
+                )
             }
         }
 
-        return result
-    }
+        @JvmStatic
+        fun getCollidingEntities(entity: Entity, hitboxModifier: Consumer<AABB?>): List<org.bukkit.entity.Entity> {
+            val world: Level = entity.level()
+            val entityBoundingBox: AABB = entity.boundingBox
 
-    fun getCollidingLivingEntities(entity: Entity, hitboxModifier: Consumer<AABB?>): List<LivingEntity> {
-        return getCollidingEntities(entity, hitboxModifier).stream()
-            .filter { LivingEntity::class.java.isInstance(it) }
-            .map { LivingEntity::class.java.cast(it) }
-            .toList()
+            hitboxModifier.accept(entityBoundingBox)
+
+            val result: MutableList<org.bukkit.entity.Entity> = ArrayList()
+
+            for (otherEntity in world.entities.all) {
+                if (otherEntity !== entity) {
+                    val otherEntityBoundingBox: AABB = otherEntity.boundingBox
+
+                    if (entityBoundingBox.intersects(otherEntityBoundingBox)) {
+                        result.add(otherEntity.bukkitEntity)
+                    }
+                }
+            }
+
+            return result
+        }
+
+        @JvmStatic
+        fun getCollidingLivingEntities(entity: Entity, hitboxModifier: Consumer<AABB?>): List<LivingEntity> {
+            return getCollidingEntities(entity, hitboxModifier).stream()
+                .filter { LivingEntity::class.java.isInstance(it) }
+                .map { LivingEntity::class.java.cast(it) }
+                .toList()
+        }
     }
 }
