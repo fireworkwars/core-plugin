@@ -20,6 +20,9 @@ class PlayerDataManager(private val plugin: BasePlugin) {
 
     private val playerData: MutableMap<UUID, PlayerProfile> = HashMap()
 
+    val size: Int
+        get() = playerData.size
+
     init {
         loadProfiles()
     }

@@ -40,6 +40,14 @@ public class LanguageManager {
         return languages.keySet();
     }
 
+    public int getTotalLanguages() {
+        return languages.size();
+    }
+
+    public int getTotalMessages() {
+        return languages.get(defaultLanguage).size();
+    }
+
     public LanguageManager(BasePlugin plugin) {
         this.plugin = plugin;
         File dataFolder = plugin.getDataFolder();
