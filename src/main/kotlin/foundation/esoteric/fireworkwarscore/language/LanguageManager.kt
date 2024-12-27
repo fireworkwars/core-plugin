@@ -1,348 +1,342 @@
-package foundation.esoteric.fireworkwarscore.language;
+package foundation.esoteric.fireworkwarscore.language
 
-import foundation.esoteric.fireworkwarscore.BasePlugin;
-import foundation.esoteric.fireworkwarscore.file.FileUtil;
-import foundation.esoteric.fireworkwarscore.profiles.PlayerProfile;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextReplacementConfig;
-import net.kyori.adventure.text.minimessage.MiniMessage;
-import org.bukkit.Bukkit;
-import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
-import org.checkerframework.checker.nullness.qual.NonNull;
+import foundation.esoteric.fireworkwarscore.BasePlugin
+import foundation.esoteric.fireworkwarscore.file.FileUtil
+import foundation.esoteric.fireworkwarscore.profiles.PlayerProfile
+import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.TextReplacementConfig
+import net.kyori.adventure.text.minimessage.MiniMessage
+import org.bukkit.Bukkit
+import org.bukkit.command.CommandSender
+import org.bukkit.configuration.file.YamlConfiguration
+import org.bukkit.entity.Player
+import java.io.File
+import java.util.*
+import java.util.Objects.requireNonNull
 
-import java.io.File;
-import java.util.*;
-import java.util.stream.Stream;
 
-import static java.util.Objects.requireNonNull;
+@Suppress("unused", "MethodCouldBePrivate", "MemberVisibilityCanBePrivate")
+class LanguageManager(private val plugin: BasePlugin) {
+    private val miniMessage = MiniMessage.miniMessage()
 
-@SuppressWarnings({"unused", "FieldCanBeLocal"})
-public class LanguageManager {
-    private final MiniMessage miniMessage = MiniMessage.miniMessage();
+    private val languagesFolderName = "languages"
+    private val languagesFolderPath: String
+    private val languagesFolder: File
 
-    private final BasePlugin plugin;
+    val defaultLanguage: String
 
-    private final String languagesFolderName = "languages";
-    private final String languagesFolderPath;
-    private final File languagesFolder;
+    private val languages: MutableMap<String?, Map<Message, String>> = HashMap()
 
-    private final String defaultLanguage;
+    val totalLanguages: Int
+        get(): Int = languages.size
+    val totalMessages: Int
+        get(): Int = languages[defaultLanguage]!!.size
 
-    private final Map<String, Map<Message, String>> languages = new HashMap<>();
-
-    public String getDefaultLanguage() {
-        return defaultLanguage;
+    fun getLanguages(): Set<String?> {
+        return languages.keys
     }
 
-    public Set<String> getLanguages() {
-        return languages.keySet();
+    init {
+        val dataFolder: File = plugin.dataFolder
+        languagesFolderPath = dataFolder.path + File.separator + languagesFolderName
+        languagesFolder = File(languagesFolderPath)
+
+        saveLanguageFiles()
+        loadLanguageMessages()
+
+        defaultLanguage = plugin.getConfig().getString("default-language")!!
     }
 
-    public int getTotalLanguages() {
-        return languages.size();
+    private fun saveLanguageFiles() {
+        val languagesResourceFolderName = "$languagesFolderName/"
+        val languageResourceFileNames = FileUtil.getFileNamesInFolder(languagesResourceFolderName)
+
+        languageResourceFileNames.forEach {
+            plugin.saveResource(languagesFolderName + File.separator + it, true)
+        }
     }
 
-    public int getTotalMessages() {
-        return languages.get(defaultLanguage).size();
-    }
+    private fun loadLanguageMessages() {
+        for (languageMessagesFile in requireNonNull(languagesFolder.listFiles())) {
+            val languageName = languageMessagesFile.name.split("\\.".toRegex(), limit = 2).toTypedArray()[0]
 
-    public LanguageManager(BasePlugin plugin) {
-        this.plugin = plugin;
-        File dataFolder = plugin.getDataFolder();
+            val languageMessagesResourcePath = languagesFolderName + File.separator + languageName + ".yaml"
+            plugin.saveResource(languageMessagesResourcePath, true)
 
-        this.languagesFolderPath = dataFolder.getPath() + File.separator + languagesFolderName;
-        this.languagesFolder = new File(languagesFolderPath);
+            val messagesConfiguration = YamlConfiguration.loadConfiguration(languageMessagesFile)
+            val messages: MutableMap<Message, String> = EnumMap(Message::class.java)
 
-        saveLanguageFiles();
-        loadLanguageMessages();
-
-        this.defaultLanguage = plugin.getConfig().getString("default-language");
-    }
-
-    private void saveLanguageFiles() {
-        String languagesResourceFolderName = languagesFolderName + "/";
-        List<String> languageResourceFileNames = FileUtil.getFileNamesInFolder(languagesResourceFolderName);
-
-        languageResourceFileNames.forEach((fileName) -> plugin.saveResource(languagesFolderName + File.separator + fileName, true));
-    }
-
-    private void loadLanguageMessages() {
-        for (File languageMessagesFile : requireNonNull(languagesFolder.listFiles())) {
-            String languageName = languageMessagesFile.getName().split("\\.", 2)[0];
-
-            String languageMessagesResourcePath = languagesFolderName + File.separator + languageName + ".yaml";
-            plugin.saveResource(languageMessagesResourcePath, true);
-
-            YamlConfiguration messagesConfiguration = YamlConfiguration.loadConfiguration(languageMessagesFile);
-            Map<Message, String> messages = new HashMap<>();
-
-            for (Message message : Message.values()) {
-                String mappedResult = messagesConfiguration.getString(message.name());
+            for (message in Message.entries) {
+                val mappedResult = messagesConfiguration.getString(message.name)
 
                 if (mappedResult != null) {
-                    messages.put(message, mappedResult);
+                    messages[message] = mappedResult
                 }
             }
 
-            languages.put(languageName, messages);
+            languages[languageName] = messages
         }
     }
 
-    public String getLanguage(CommandSender commandSender) {
-        String language = getProfileLanguage(commandSender);
+    fun getLanguage(commandSender: CommandSender?): String {
+        var language = getProfileLanguage(commandSender)
 
         if (language == null) {
-            language = getLocale(commandSender);
+            language = getLocale(commandSender)
         }
 
-        return language;
+        return language
     }
 
-    public String getLanguage(UUID uuid) {
-        String language = getProfileLanguage(uuid);
+    fun getLanguage(uuid: UUID?): String {
+        var language = getProfileLanguage(uuid)
 
         if (language == null) {
-            language = getLocale(uuid);
+            language = getLocale(uuid)
         }
 
-        return language;
+        return language
     }
 
-    public String getLanguage(PlayerProfile profile) {
-        return getLanguage(profile.getUuid());
+    fun getLanguage(profile: PlayerProfile): String {
+        return getLanguage(profile.uuid)
     }
 
-    public void setLanguage(PlayerProfile profile, String language) {
-        profile.setLanguage(language);
+    fun setLanguage(profile: PlayerProfile, language: String?) {
+        profile.language = language ?: defaultLanguage
     }
 
-    public void setLanguage(UUID uuid, String language) {
-        setLanguage(plugin.getPlayerDataManager().getPlayerProfile(uuid), language);
+    fun setLanguage(uuid: UUID, language: String?) {
+        setLanguage(plugin.playerDataManager.getPlayerProfile(uuid), language)
     }
 
-    public void setLanguage(Player player, String language) {
-        setLanguage(player.getUniqueId(), language);
+    fun setLanguage(player: Player, language: String?) {
+        setLanguage(player.uniqueId, language)
     }
 
-    public String getLocale(CommandSender commandSender) {
-        if (!(commandSender instanceof Player player)) {
-            return defaultLanguage;
+    fun getLocale(commandSender: CommandSender?): String {
+        if (commandSender !is Player) {
+            return defaultLanguage
         }
 
-        Locale playerLocale = player.locale();
-        String localeDisplayName = playerLocale.getDisplayName();
+        val playerLocale = commandSender.locale()
+        val localeDisplayName = playerLocale.displayName
 
         if (!getLanguages().contains(localeDisplayName)) {
-            return defaultLanguage;
+            return defaultLanguage
         }
 
-        return localeDisplayName;
+        return localeDisplayName
     }
 
-    public String getLocale(UUID uuid) {
-        Player player = Bukkit.getPlayer(uuid);
-        return getLocale(player);
+    fun getLocale(uuid: UUID?): String {
+        val player = Bukkit.getPlayer(uuid!!)
+        return getLocale(player)
     }
 
-    public String getLocale(PlayerProfile profile) {
-        return getLocale(profile.getUuid());
+    fun getLocale(profile: PlayerProfile): String {
+        return getLocale(profile.uuid)
     }
 
-    public String getProfileLanguage(PlayerProfile profile) {
+    fun getProfileLanguage(profile: PlayerProfile?): String? {
         if (profile == null) {
-            return null;
+            return null
         }
 
-        return profile.getLanguage();
+        return profile.language
     }
 
-    public String getProfileLanguage(UUID uuid) {
-        return getProfileLanguage(plugin.getPlayerDataManager().getPlayerProfile(uuid));
+    fun getProfileLanguage(uuid: UUID?): String? {
+        if (uuid == null) {
+            return null
+        }
+
+        return getProfileLanguage(plugin.playerDataManager.getPlayerProfile(uuid))
     }
 
-    public String getProfileLanguage(CommandSender commandSender) {
-        if (commandSender == null) {
-            return null;
-        } else if (commandSender instanceof Player player) {
-            return getProfileLanguage(player.getUniqueId());
-        } else {
-            return defaultLanguage;
+    fun getProfileLanguage(commandSender: CommandSender?): String? {
+        return when (commandSender) {
+            null -> null
+            is Player -> getProfileLanguage(commandSender.uniqueId)
+            else -> defaultLanguage
         }
     }
 
-    public String getRawMessageString(Message message, String language, boolean fallbackOnDefaultLanguage) {
-        Map<Message, String> languageMessageMap = languages.get(language);
-        String miniMessageString = languageMessageMap.get(message);
+    fun getRawMessageString(message: Message, language: String?, fallbackOnDefaultLanguage: Boolean): String? {
+        val languageMessageMap =
+            languages[language]!!
+        val miniMessageString = languageMessageMap[message]
+            ?: return if (fallbackOnDefaultLanguage) getRawMessageString(message, defaultLanguage, false) else null
 
-        if (miniMessageString == null) {
-            return fallbackOnDefaultLanguage ? getRawMessageString(message, defaultLanguage, false) : null;
+        return miniMessageString
+    }
+
+    fun getRawMessageString(message: Message, language: String?): String? {
+        return getRawMessageString(message, language, true)
+    }
+
+    private fun getMessage(message: Message, language: String?, fallbackOnDefaultLanguage: Boolean, vararg arguments: Component): Component {
+        val miniMessageString = checkNotNull(getRawMessageString(message, language, fallbackOnDefaultLanguage))
+
+        var result = miniMessage.deserialize(miniMessageString)
+
+        for (i in arguments.indices) {
+            result = result.replaceText(TextReplacementConfig.builder().matchLiteral("{$i}")
+                .replacement { _, _ -> arguments[i] }
+                .build())
         }
 
-        return miniMessageString;
+        return result
     }
 
-    public String getRawMessageString(Message message, String language) {
-        return getRawMessageString(message, language, true);
+    fun getMessage(message: Message, language: String?, vararg arguments: Component?): Component {
+        return getMessage(message, language, true, *arguments)
     }
 
-    private Component getMessage(Message message, String language, boolean fallbackOnDefaultLanguage, Component @NonNull ... arguments) {
-        String miniMessageString = getRawMessageString(message, language, fallbackOnDefaultLanguage);
-
-        assert miniMessageString != null;
-        Component result = miniMessage.deserialize(miniMessageString);
-
-        for (int i = 0; i < arguments.length; i++) {
-            final int argumentIndex = i;
-
-            result = result.replaceText(TextReplacementConfig.builder().matchLiteral("{" + i + "}").replacement((matchResult, builder) -> arguments[argumentIndex]).build());
-        }
-
-        return result;
+    fun getMessage(message: Message, language: String?, fallbackOnDefaultLanguage: Boolean, vararg arguments: Any?): Component {
+        return getMessage(message, language, fallbackOnDefaultLanguage, *toComponents(*arguments))
     }
 
-    public Component getMessage(Message message, String language, Component... arguments) {
-        return getMessage(message, language, true, arguments);
+    fun getMessage(message: Message, language: String?, vararg arguments: Any?): Component {
+        return getMessage(message, language, true, *arguments)
     }
 
-    public Component getMessage(Message message, String language, boolean fallbackOnDefaultLanguage, Object... arguments) {
-        return getMessage(message, language, fallbackOnDefaultLanguage, toComponents(arguments));
+    fun getMessage(message: Message, commandSender: CommandSender?, fallbackOnDefaultLanguage: Boolean, vararg arguments: Component?): Component {
+        return getMessage(message, getLanguage(commandSender), fallbackOnDefaultLanguage, *arguments)
     }
 
-    public Component getMessage(Message message, String language, Object... arguments) {
-        return getMessage(message, language, true, arguments);
+    fun getMessage(message: Message, commandSender: CommandSender?, vararg arguments: Component?): Component {
+        return getMessage(message, commandSender, true, *arguments)
     }
 
-    public Component getMessage(Message message, CommandSender commandSender, boolean fallbackOnDefaultLanguage, Component... arguments) {
-        return getMessage(message, getLanguage(commandSender), fallbackOnDefaultLanguage, arguments);
+    fun getMessage(message: Message, commandSender: CommandSender?, fallbackOnDefaultLanguage: Boolean, vararg arguments: Any?): Component {
+        return getMessage(message, commandSender, fallbackOnDefaultLanguage, *toComponents(*arguments))
     }
 
-    public Component getMessage(Message message, CommandSender commandSender, Component... arguments) {
-        return getMessage(message, commandSender, true, arguments);
+    fun getMessage(message: Message, commandSender: CommandSender?, vararg arguments: Any?): Component {
+        return getMessage(message, commandSender, true, *arguments)
     }
 
-    public Component getMessage(Message message, CommandSender commandSender, boolean fallbackOnDefaultLanguage, Object... arguments) {
-        return getMessage(message, commandSender, fallbackOnDefaultLanguage, toComponents(arguments));
+    fun getMessage(message: Message, uuid: UUID?, fallbackOnDefaultLanguage: Boolean, vararg arguments: Component?): Component {
+        return getMessage(message, getLanguage(uuid), fallbackOnDefaultLanguage, *arguments)
     }
 
-    public Component getMessage(Message message, CommandSender commandSender, Object... arguments) {
-        return getMessage(message, commandSender, true, arguments);
+    fun getMessage(message: Message, uuid: UUID?, vararg arguments: Component?): Component {
+        return getMessage(message, uuid, true, *arguments)
     }
 
-    public Component getMessage(Message message, UUID uuid, boolean fallbackOnDefaultLanguage, Component... arguments) {
-        return getMessage(message, getLanguage(uuid), fallbackOnDefaultLanguage, arguments);
+    fun getMessage(message: Message, uuid: UUID?, fallbackOnDefaultLanguage: Boolean, vararg arguments: Any?): Component {
+        return getMessage(message, uuid, fallbackOnDefaultLanguage, *toComponents(*arguments))
     }
 
-    public Component getMessage(Message message, UUID uuid, Component... arguments) {
-        return getMessage(message, uuid, true, arguments);
+    fun getMessage(message: Message, uuid: UUID?, vararg arguments: Any?): Component {
+        return getMessage(message, uuid, true, *arguments)
     }
 
-    public Component getMessage(Message message, UUID uuid, boolean fallbackOnDefaultLanguage, Object... arguments) {
-        return getMessage(message, uuid, fallbackOnDefaultLanguage, toComponents(arguments));
+    fun getMessage(message: Message, playerProfile: PlayerProfile, fallbackOnDefaultLanguage: Boolean, vararg arguments: Component?): Component {
+        return getMessage(message, getLanguage(playerProfile), fallbackOnDefaultLanguage, *arguments)
     }
 
-    public Component getMessage(Message message, UUID uuid, Object... arguments) {
-        return getMessage(message, uuid, true, arguments);
+    fun getMessage(message: Message, playerProfile: PlayerProfile, vararg arguments: Component?): Component {
+        return getMessage(message, playerProfile, true, *arguments)
     }
 
-    public Component getMessage(Message message, PlayerProfile playerProfile, boolean fallbackOnDefaultLanguage, Component... arguments) {
-        return getMessage(message, getLanguage(playerProfile), fallbackOnDefaultLanguage, arguments);
+    fun getMessage(message: Message, playerProfile: PlayerProfile, fallbackOnDefaultLanguage: Boolean, vararg arguments: Any?): Component {
+        return getMessage(message, playerProfile, fallbackOnDefaultLanguage, *toComponents(*arguments))
     }
 
-    public Component getMessage(Message message, PlayerProfile playerProfile, Component... arguments) {
-        return getMessage(message, playerProfile, true, arguments);
-    }
-
-    public Component getMessage(Message message, PlayerProfile playerProfile, boolean fallbackOnDefaultLanguage, Object... arguments) {
-        return getMessage(message, playerProfile, fallbackOnDefaultLanguage, toComponents(arguments));
-    }
-
-    public Component getMessage(Message message, PlayerProfile playerProfile, Object... arguments) {
-        return getMessage(message, playerProfile, true, arguments);
+    fun getMessage(message: Message, playerProfile: PlayerProfile, vararg arguments: Any?): Component {
+        return getMessage(message, playerProfile, true, *arguments)
     }
 
     // rolyPolyVole start
 
-    public Component[] getMessages(Message message, CommandSender commandSender, Object... arguments) {
-        String rawMessage = miniMessage.serialize(getMessage(message, commandSender, arguments));
+    fun getMessages(message: Message, commandSender: CommandSender?, vararg arguments: Any?): Array<Component> {
+        val rawMessage = miniMessage.serialize(getMessage(message, commandSender, *arguments))
 
-        return Arrays.stream(rawMessage.split("\\n|<br>"))
+        return rawMessage.split("\\n|<br>".toRegex())
+            .asSequence()
+            .filter { it.isNotEmpty() }
             .map(miniMessage::deserialize)
-            .toArray(Component[]::new);
+            .toList()
+            .toTypedArray()
     }
 
     // rolyPolyVole end
 
-    public void sendMessage(Message message, CommandSender commandSender, boolean fallbackOnDefaultLanguage, Component... arguments) {
-        commandSender.sendMessage(
-            getMessage(message, getLanguage(commandSender), fallbackOnDefaultLanguage, arguments));
+    fun sendMessage(message: Message, commandSender: CommandSender, fallbackOnDefaultLanguage: Boolean, vararg arguments: Component?) {
+        commandSender.sendMessage(getMessage(
+            message, getLanguage(commandSender), fallbackOnDefaultLanguage, *arguments))
     }
 
-    public void sendMessage(Message message, CommandSender commandSender, Component... arguments) {
-        commandSender.sendMessage(
-            getMessage(message, commandSender, true, arguments));
+    fun sendMessage(message: Message, commandSender: CommandSender, vararg arguments: Component?) {
+        commandSender.sendMessage(getMessage(
+            message, commandSender, true, *arguments))
     }
 
-    public void sendMessage(Message message, CommandSender commandSender, boolean fallbackOnDefaultLanguage, Object... arguments) {
-        commandSender.sendMessage(
-            getMessage(message, commandSender, fallbackOnDefaultLanguage, toComponents(arguments)));
+    fun sendMessage(message: Message, commandSender: CommandSender, fallbackOnDefaultLanguage: Boolean, vararg arguments: Any?) {
+        commandSender.sendMessage(getMessage(
+            message, commandSender, fallbackOnDefaultLanguage, *toComponents(*arguments)))
     }
 
-    public void sendMessage(Message message, CommandSender commandSender, Object... arguments) {
-        commandSender.sendMessage(
-            getMessage(message, commandSender, true, arguments));
+    fun sendMessage(message: Message, commandSender: CommandSender, vararg arguments: Any?) {
+        commandSender.sendMessage(getMessage(
+            message, commandSender, true, *arguments))
     }
 
-    public void sendMessage(Message message, UUID uuid, boolean fallbackOnDefaultLanguage, Component... arguments) {
-        requireNonNull(Bukkit.getPlayer(uuid)).sendMessage(
-            getMessage(message, getLanguage(uuid), fallbackOnDefaultLanguage, arguments));
+    fun sendMessage(message: Message, uuid: UUID?, fallbackOnDefaultLanguage: Boolean, vararg arguments: Component?) {
+        requireNonNull(Bukkit.getPlayer(uuid!!))?.sendMessage(
+            getMessage(message, getLanguage(uuid), fallbackOnDefaultLanguage, *arguments))
     }
 
-    public void sendMessage(Message message, UUID uuid, Component... arguments) {
-        requireNonNull(Bukkit.getPlayer(uuid)).sendMessage(
-            getMessage(message, uuid, true, arguments));
+    fun sendMessage(message: Message, uuid: UUID?, vararg arguments: Component?) {
+        requireNonNull(Bukkit.getPlayer(uuid!!))?.sendMessage(
+            getMessage(message, uuid, true, *arguments))
     }
 
-    public void sendMessage(Message message, UUID uuid, boolean fallbackOnDefaultLanguage, Object... arguments) {
-        requireNonNull(Bukkit.getPlayer(uuid)).sendMessage(
-            getMessage(message, uuid, fallbackOnDefaultLanguage, toComponents(arguments)));
+    fun sendMessage(message: Message, uuid: UUID?, fallbackOnDefaultLanguage: Boolean, vararg arguments: Any?) {
+        requireNonNull(Bukkit.getPlayer(uuid!!))?.sendMessage(
+            getMessage(message, uuid, fallbackOnDefaultLanguage, *toComponents(*arguments)))
     }
 
-    public void sendMessage(Message message, UUID uuid, Object... arguments) {
-        requireNonNull(Bukkit.getPlayer(uuid)).sendMessage(
-            getMessage(message, uuid, true, arguments));
+    fun sendMessage(message: Message, uuid: UUID?, vararg arguments: Any?) {
+        requireNonNull(Bukkit.getPlayer(uuid!!))?.sendMessage(
+            getMessage(message, uuid, true, *arguments))
     }
 
-    public void sendMessage(Message message, PlayerProfile playerProfile, boolean fallbackOnDefaultLanguage, Component... arguments) {
-        requireNonNull(Bukkit.getPlayer(playerProfile.getUuid())).sendMessage(
-            getMessage(message, getLanguage(playerProfile), fallbackOnDefaultLanguage, arguments));
+    fun sendMessage(message: Message, playerProfile: PlayerProfile, fallbackOnDefaultLanguage: Boolean, vararg arguments: Component?) {
+        requireNonNull(Bukkit.getPlayer(playerProfile.uuid))?.sendMessage(
+            getMessage(message, getLanguage(playerProfile), fallbackOnDefaultLanguage, *arguments))
     }
 
-    public void sendMessage(Message message, PlayerProfile playerProfile, Component... arguments) {
-        requireNonNull(Bukkit.getPlayer(playerProfile.getUuid())).sendMessage(
-            getMessage(message, playerProfile, true, arguments));
+    fun sendMessage(message: Message, playerProfile: PlayerProfile, vararg arguments: Component?) {
+        requireNonNull(Bukkit.getPlayer(playerProfile.uuid))?.sendMessage(
+            getMessage(message, playerProfile, true, *arguments))
     }
 
-    public void sendMessage(Message message, PlayerProfile playerProfile, boolean fallbackOnDefaultLanguage, Object... arguments) {
-        requireNonNull(Bukkit.getPlayer(playerProfile.getUuid())).sendMessage(
-            getMessage(message, playerProfile, fallbackOnDefaultLanguage, toComponents(arguments)));
+    fun sendMessage(message: Message, playerProfile: PlayerProfile, fallbackOnDefaultLanguage: Boolean, vararg arguments: Any?) {
+        requireNonNull(Bukkit.getPlayer(playerProfile.uuid))?.sendMessage(
+            getMessage(message, playerProfile, fallbackOnDefaultLanguage, *toComponents(*arguments)))
     }
 
-    public void sendMessage(Message message, PlayerProfile playerProfile, Object... arguments) {
-        requireNonNull(Bukkit.getPlayer(playerProfile.getUuid())).sendMessage(
-            getMessage(message, playerProfile, true, arguments));
+    fun sendMessage(message: Message, playerProfile: PlayerProfile, vararg arguments: Any?) {
+        requireNonNull(Bukkit.getPlayer(playerProfile.uuid))?.sendMessage(
+            getMessage(message, playerProfile, true, *arguments))
     }
 
-    public Component[] toComponents(Object... objects) {
-        return Stream.of(objects).map(this::toComponent).toArray(Component[]::new);
+    fun toComponents(vararg objects: Any?): Array<Component> {
+        return objects.asSequence()
+            .filterNotNull()
+            .map { toComponent(it) }
+            .toList()
+            .toTypedArray()
     }
 
-    public Component toComponent(Object object) {
-        if (object instanceof Component component) {
-            return component;
+    fun toComponent(obj: Any): Component {
+        if (obj is Component) {
+            return obj
         }
 
-        return Component.text(String.valueOf(object));
+        return Component.text(obj.toString())
     }
 }
