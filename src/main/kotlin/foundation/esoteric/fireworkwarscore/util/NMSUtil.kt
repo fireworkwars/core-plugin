@@ -6,7 +6,6 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.entity.Entity
-import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.level.Level
 import net.minecraft.world.phys.AABB
 import org.bukkit.World
@@ -68,10 +67,10 @@ class NMSUtil {
         }
 
         @JvmStatic
-        fun getCollidingLivingEntities(entity: Entity, hitboxModifier: Consumer<AABB?>): List<LivingEntity> {
+        fun getCollidingLivingEntities(entity: Entity, hitboxModifier: Consumer<AABB?>): List<org.bukkit.entity.LivingEntity> {
             return getCollidingEntities(entity, hitboxModifier).stream()
-                .filter { LivingEntity::class.java.isInstance(it) }
-                .map { LivingEntity::class.java.cast(it) }
+                .filter { org.bukkit.entity.LivingEntity::class.java.isInstance(it) }
+                .map { org.bukkit.entity.LivingEntity::class.java.cast(it) }
                 .toList()
         }
     }
