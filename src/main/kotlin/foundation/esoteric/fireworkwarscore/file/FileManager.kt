@@ -4,6 +4,7 @@ import foundation.esoteric.fireworkwarscore.BasePlugin
 import java.io.File
 import java.io.IOException
 
+@Suppress("unused")
 class FileManager(private val plugin: BasePlugin) {
     @JvmOverloads
     fun saveFolderToResources(folderPath: String, replace: Boolean = true): File? {

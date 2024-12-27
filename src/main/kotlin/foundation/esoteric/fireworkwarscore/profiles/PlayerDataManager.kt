@@ -10,6 +10,7 @@ import java.io.FileWriter
 import java.io.IOException
 import java.util.*
 
+@Suppress("unused")
 class PlayerDataManager(private val plugin: BasePlugin) {
     private val gson = Gson()
 
