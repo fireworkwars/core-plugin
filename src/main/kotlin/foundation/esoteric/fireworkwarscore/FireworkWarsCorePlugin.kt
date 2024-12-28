@@ -1,5 +1,7 @@
 package foundation.esoteric.fireworkwarscore
 
+import foundation.esoteric.fireworkwarscore.commands.ToggleBuildCommand
+import foundation.esoteric.fireworkwarscore.commands.ToggleDebugCommand
 import foundation.esoteric.fireworkwarscore.communication.FireworkWarsPluginData
 import foundation.esoteric.fireworkwarscore.communication.LobbyPluginData
 import foundation.esoteric.fireworkwarscore.language.LanguageManager
@@ -12,6 +14,9 @@ class FireworkWarsCorePlugin : BasePlugin() {
 
     lateinit var fireworkWarsPluginData: FireworkWarsPluginData
     lateinit var lobbyPluginData: LobbyPluginData
+
+    var isDebugging = false
+    var isBuildModeEnabled = false
 
     @Suppress("UnstableApiUsage")
     override fun onLoad() {
@@ -42,6 +47,13 @@ class FireworkWarsCorePlugin : BasePlugin() {
 
         logger.info("Finished initialising language manager.")
         logger.info("Loaded ${languageManager.totalMessages} messages across ${languageManager.totalLanguages} languages.")
+
+        logger.info("Loading commands...")
+
+        ToggleDebugCommand(this)
+        ToggleBuildCommand(this)
+
+        logger.info("Finished loading commands.")
 
         logger.info("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Firework Wars Core =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
         logger.info("End of logs for Firework Wars Core Plugin.")
