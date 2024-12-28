@@ -41,9 +41,14 @@ publishing {
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.3-R0.1-SNAPSHOT")
+
     paperweight.paperDevBundle("1.21.3-R0.1-SNAPSHOT")
+
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("org.apache.commons", "commons-compress", "1.24.0")
+    implementation("org.apache.commons:commons-compress:1.26.0")
+    implementation("dev.jorel:commandapi-bukkit-shade-mojang-mapped:9.7.0")
+
+    api("fr.mrmicky:fastboard:2.1.3")
 }
 
 val targetJavaVersion = 21
@@ -62,6 +67,8 @@ tasks {
         minimize {
             exclude(dependency("org.jetbrains.kotlin:kotlin-reflect"))
         }
+
+        relocate("fr.mrmicky.fastboard", "foundation.esoteric.libs.fastboard")
     }
 
     build {
