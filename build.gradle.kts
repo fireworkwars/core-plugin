@@ -50,6 +50,11 @@ val targetJavaVersion = 21
 
 kotlin {
     jvmToolchain(targetJavaVersion)
+
+    compilerOptions {
+        optIn.add("kotlin.RequiresOptIn")
+        freeCompilerArgs.add("-Xjvm-default=all-compatibility")
+    }
 }
 
 tasks {
