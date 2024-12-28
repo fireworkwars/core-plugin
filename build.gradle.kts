@@ -68,7 +68,7 @@ tasks {
             exclude(dependency("org.jetbrains.kotlin:kotlin-reflect"))
         }
 
-        relocate("fr.mrmicky.fastboard", "foundation.esoteric.libs.fastboard")
+        relocate("fr.mrmicky.fastboard", "foundation.esoteric.fireworkwarscore.libs.fastboard")
     }
 
     build {
