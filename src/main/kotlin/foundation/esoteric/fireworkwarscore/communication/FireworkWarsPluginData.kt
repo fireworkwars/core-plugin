@@ -27,5 +27,6 @@ interface Arena {
     fun getDescription(): String
     fun getMinPlayers(): Int
     fun getMaxPlayers(): Int
+    fun getCurrentPlayers(): Int
 }
 
