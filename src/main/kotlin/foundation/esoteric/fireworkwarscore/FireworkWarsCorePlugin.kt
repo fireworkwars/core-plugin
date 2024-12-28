@@ -1,5 +1,7 @@
 package foundation.esoteric.fireworkwarscore
 
+import dev.jorel.commandapi.CommandAPI
+import dev.jorel.commandapi.CommandAPIBukkitConfig
 import foundation.esoteric.fireworkwarscore.commands.ToggleBuildCommand
 import foundation.esoteric.fireworkwarscore.commands.ToggleDebugCommand
 import foundation.esoteric.fireworkwarscore.communication.FireworkWarsPluginData
@@ -18,12 +20,16 @@ class FireworkWarsCorePlugin : BasePlugin() {
     var isDebugging = false
     var isBuildModeEnabled = false
 
+    private val commandApiConfig = CommandAPIBukkitConfig(this)
+
     @Suppress("UnstableApiUsage")
     override fun onLoad() {
         logger.info("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Firework Wars Core =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
         logger.info("This is the start of Firework Wars Core Plugin logs.")
         logger.info("Info: v" + pluginMeta.version + " by " + pluginMeta.website)
         logger.info("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= End of Plugin Info =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+
+        CommandAPI.onLoad(commandApiConfig)
     }
 
     override fun onEnable() {
@@ -49,6 +55,8 @@ class FireworkWarsCorePlugin : BasePlugin() {
         logger.info("Loaded ${languageManager.totalMessages} messages across ${languageManager.totalLanguages} languages.")
 
         logger.info("Loading commands...")
+
+        CommandAPI.onEnable()
 
         ToggleDebugCommand(this)
         ToggleBuildCommand(this)
