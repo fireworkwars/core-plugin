@@ -1,8 +1,12 @@
+
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import xyz.jpenilla.resourcefactory.bukkit.BukkitPluginYaml
+import xyz.jpenilla.resourcefactory.bukkit.bukkitPluginYaml
 
 plugins {
     kotlin("jvm") version "2.1.0"
     id("io.papermc.paperweight.userdev") version "1.7.3"
+    id("xyz.jpenilla.resource-factory-paper-convention") version "1.2.0"
     id("com.gradleup.shadow") version "8.3.5"
     id("maven-publish")
 }
@@ -97,4 +101,20 @@ tasks {
     processResources {
         filteringCharset = Charsets.UTF_8.name()
     }
+}
+
+paperPluginYaml {
+    name = "FireworkWarsCore"
+    authors = listOf("rolyPolyVole")
+    website = "https://github.com/EsotericFoundation/firework-wars-core-plugin"
+
+    main = "foundation.esoteric.fireworkwarscore.FireworkWarsCorePlugin"
+    bootstrapper = "foundation.esoteric.fireworkwarscore.FireworkWarsCoreBootstrapper"
+
+    apiVersion = "1.21.3"
+    description = project.description
+}
+
+bukkitPluginYaml {
+    load = BukkitPluginYaml.PluginLoadOrder.STARTUP
 }
