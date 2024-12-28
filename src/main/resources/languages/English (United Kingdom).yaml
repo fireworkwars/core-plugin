@@ -1,0 +1,166 @@
+# Other Commands
+SET_LANGUAGE_SUCCESSFULLY: "<green>Successfully set your language to </green>{0}<green>!</green>"
+UNKNOWN_LANGUAGE: "Unsupported or unknown language: '{0}'."
+
+# Custom Items
+WOOL: "<yellow>Wool</yellow>"
+WOOL_LORE: "<gray>Useful defensive block.</gray>"
+
+FIREWORK_RIFLE: "<red>Firework</red> <aqua>Rifle</aqua>"
+FIREWORK_RIFLE_LORE: "<gray>High range, fast and powerful.</gray>\n<gray>Shoots one firework at a time.</gray>"
+FIREWORK_RIFLE_AMMO: "<yellow>Rifle Ammo</yellow>"
+FIREWORK_RIFLE_AMMO_LORE: "<gray>1x rifle ammo</gray>"
+
+FIREWORK_SHOTGUN: "<red>Firework</red> <aqua>Shotgun</aqua>"
+FIREWORK_SHOTGUN_LORE: "<gray>Extremely powerful at short range.</gray>\n<gray>Fires multiple shots at once.</gray>"
+FIREWORK_SHOTGUN_AMMO: "<yellow>Shotgun Ammo</yellow>"
+FIREWORK_SHOTGUN_AMMO_LORE: "<gray>1x shotgun ammo</gray>"
+
+ROCKET_LAUNCHER: "<dark_red>Rocket Launcher</dark_red>"
+ROCKET_LAUNCHER_LORE: "<gray>Launches explosive firework rockets!</gray>"
+ROCKET_LAUNCHER_AMMO: "<red>Rocket Launcher Ammo</red>"
+ROCKET_LAUNCHER_AMMO_LORE: "<gray>1x rocket launcher ammo</gray>"
+
+PLAYER_COMPASS: "<yellow>Player Tracker</yellow>"
+PLAYER_COMPASS_LORE_NOT_TRACKING: "<!i><gray>No player is being tracked.</gray><!i>"
+PLAYER_COMPASS_LORE_TRACKING: "<!i><gray>Tracking target: </gray>{0}</!i>"
+PLAYER_COMPASS_NO_ENEMY: "<red>No enemy was found.</red>"
+PLAYER_COMPASS_TRACKING_TARGET: "<green>Tracking target:</green> {0}"
+PLAYER_COMPASS_ACTIONBAR_INFO: "<green><bold>Target: </bold></green>{0} <dark_gray>||</dark_gray> <bold>Distance:</bold> {1}"
+
+ENCHANTED_GOLDEN_APPLE: "<yellow>Enchanted Golden Apple</yellow>"
+ENCHANTED_GOLDEN_APPLE_LORE: "<gray>Extremely powerful healing.</gray>"
+
+GOLDEN_APPLE: "<yellow>Golden Apple</yellow>"
+GOLDEN_APPLE_LORE: "<gray>Provides <aqua>Speed II</aqua> and a brief</gray>\n<gray><red>Resistance II</red> on consumption.</gray>"
+
+HEALING_POTION: "<yellow>Healing Potion</yellow>"
+HEALING_POTION_LORE: "<gray>Instant health replenishment.</gray>"
+
+TNT: "<red>TNT</red>"
+TNT_LORE: "<gray>Ignite with <aqua>Flint and Steel</aqua> to explode.</gray>"
+
+THROWABLE_TNT: "<red>Throwable TNT</red>"
+THROWABLE_TNT_LORE: "<gray><yellow><bold>RIGHT CLICK</bold></yellow> to throw in your direction.</gray>"
+
+MILITARY_HELMET: "<dark_green>Military Helmet</dark_green>"
+MILITARY_HELMET_LORE: "<gray>Provides some light protection.</gray>"
+
+HEAVY_ARMOR: "<dark_green>Heavy Armor</dark_green>"
+HEAVY_ARMOR_LORE: "<gray>A sturdy piece of armor.</gray>"
+
+COMBAT_ARMOR: "<dark_green>Combat Armor</dark_green>"
+COMBAT_ARMOR_LORE: "<gray>A reliable piece of protection.</gray>"
+
+HORSE_ARMOR: "<dark_green>Horse Armor</dark_green>"
+HORSE_ARMOR_LORE: "<gray>Powerful defense for your horse.</gray>"
+
+FLINT_AND_STEEL: "<aqua>Flint and Steel</aqua>"
+FLINT_AND_STEEL_LORE: "<gray>Ignites most blocks, including <b><red>TNT</red></b>.</gray>"
+
+SHEARS: "<aqua>Shears</aqua>"
+SHEARS_LORE: "<gray>Efficiently cuts through wool.</gray>"
+
+WATER_BUCKET: "<aqua>Water Bucket</aqua>"
+WATER_BUCKET_LORE: "<gray>Navigate tough terrain & break large falls.</gray>"
+
+WARDENS_WRATH: "<color:#1336aa>Warden's Wrath</color>"
+WARDENS_WRATH_LORE: "<gray>Heavy Mace that draws power from <dark_aqua>souls</dark_aqua></gray>\n<gray>of ancient <dark_aqua>Wardens</dark_aqua>.</gray>\n  \n<gold>Ability: Dash</gold>  <yellow><b>RIGHT CLICK</b></yellow>\n<gray>Speed forwards at <green>8.5 -> 19.0m/s</green> over <aqua>2.25s</aqua>.</gray>\n<gray>Anything you collide into takes <red>7.0❤</red> damage</gray>\n<gray>and large knockback.</gray>\n  \n<gray>Your next hit is <dark_aqua>supercharged</dark_aqua>.</gray>\n<dark_gray>Load Time:</dark_gray> <light_purple>3.0s</light_purple>\n<dark_gray>Cooldown:</dark_gray> <green>3.5s</green>"
+
+WARDENS_WRATH_BROKEN: "<dark_red>Breaking Wrath</dark_red>"
+WARDENS_WRATH_BROKEN_LORE: "<gray>Heavy Mace that draws power from <dark_aqua>souls</dark_aqua></gray>\n<gray>of ancient <dark_aqua>Wardens</dark_aqua>.</gray>\n  \n<gold>Ability: Raging Dash</gold>  <yellow><b>RIGHT CLICK</b></yellow>\n<gray>Speed forwards at <green>8.5 -> 19.0m/s</green> over <aqua>2.25s</aqua>.</gray>\n<gray>Anything you collide into takes <red>14.0❤</red> damage</gray>\n<gray>and large knockback.</gray>\n  \n<gray>You will <red>explode</red> when this ability ends.</gray>\n<dark_gray>Load Time:</dark_gray> <light_purple>3.0s</light_purple>"
+
+WARDENS_WRATH_ON_COOLDOWN: "<dark_aqua>On cooldown for <aqua>{0}s</aqua></dark_aqua>"
+
+# Game Messages
+GAME_STARTING_IN_TIME_PLURAL: "<yellow>The game will start in </yellow><red>{0}</red><yellow> seconds.</yellow>"
+GAME_STARTING_IN_TIME_SINGULAR: "<yellow>The game will start in </yellow><red>{0}</red><yellow> second.</yellow>"
+GAME_STARTED: "<yellow>The game has started!</yellow>"
+COUNTDOWN_CANCELLED: "<red>Start cancelled!</red>"
+
+YOU_ARE_ON_TEAM: "<yellow>YOU ARE</yellow>"
+TEAM_ELIMINATED: "{0}<yellow> has been eliminated!</yellow>"
+
+PLAYER_KILLED_BY_DISCONNECTION: "{0} <gray>died because they disconnected.</gray>"
+PLAYER_RECONNECTED_AS_SPECTATOR: "{0} <gray>reconnected as a spectator.</gray>"
+
+SPECTATING_PLAYER: "<green>You are now spectating {0}.</green>"
+STOPPED_SPECTATING_PLAYER: "<yellow>You are no longer spectating {0}.</yellow>"
+TELEPORTED_TO_PLAYER: "<green>Teleported to {0}.</green>"
+TARGET_LOST: "<red>Target lost.</red>"
+
+TEAM_WON: "{0}<yellow> has won the game!</yellow>"
+DRAW: "<dark_gray>The game ended in a draw!</dark_gray>"
+
+EVENT_CHEST_REFILL: "<yellow>Chests have been refilled!</yellow>"
+EVENT_CHEST_REFILL_WARNING: "<yellow>Chests will be refilled in </yellow><red>{0}</red><yellow> seconds!</yellow>"
+EVENT_SUPPLY_DROP: "<yellow>A supply drop has landed at <gold>[<green>x:</green> <aqua>{0}</aqua><gray>,</gray> <green>y:</green> <aqua>{1}</aqua><gray>,</gray> <green>z:</green> <aqua>{2}</aqua>]</gold></yellow>"
+EVENT_ENDGAME: "<red><bold>The Endgame has begun!</bold></red>"
+
+NO_FRIENDLY_FIRE: "<aqua>You can't damage players on your own team!</aqua>"
+NOT_YOUR_HORSE: "<red>This horse doesn't belong to you!</red>"
+
+YOU_DIED: "<red>YOU DIED!</red>"
+YOU_ARE_NOW_SPECTATOR: "<yellow>You are now a spectator!</yellow>"
+
+YOU_WIN: "<gold><bold>VICTORY</bold></gold>"
+YOU_LOSE: "<red><bold>GAME OVER</bold></red>"
+GAME_DRAWN: "<dark_gray><bold>DRAW</bold></dark_gray>"
+
+ARENA_JOIN: "<gray>{0}</gray> <yellow>has joined the game! (<aqua>{1}</aqua>/<aqua>{2}</aqua>)</yellow>"
+ARENA_LEAVE: "<gray>{0}</gray> <yellow>has left the game! (<aqua>{1}</aqua>/<aqua>{2}</aqua>)</yellow>"
+
+# Warden Messages
+WARDEN_INTRODUCTION_1: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b> <dark_aqua>A thousand years of slumber gone unbroken...</dark_aqua>"
+WARDEN_INTRODUCTION_2: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b> <dark_aqua>A thousand years of peace, rest, and bliss...</dark_aqua>"
+WARDEN_INTRODUCTION_3: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b> <dark_aqua>Until the Great <red>Firework War</red> began...</dark_aqua>"
+WARDEN_INTRODUCTION_4: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b> <dark_aqua>You have awakened me...</dark_aqua>"
+
+WARDEN_TARGET_PLAYER: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b> <dark_aqua>{0}... enjoy your last moments.</dark_aqua>"
+WARDEN_TARGET_PLAYER_WITH_WRATH: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b> <dark_aqua>{0}... Maybe one day you will learn to fear the <color:#1336aa>Warden's Wrath</color>.</dark_aqua>"
+
+WARDEN_YAP_1: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b> <dark_aqua>I am the consequence of your actions.</dark_aqua>"
+WARDEN_YAP_2: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b> <dark_aqua>This is what you have brought upon yourselves. The only possible resolution of this war is death and destruction.</dark_aqua>"
+WARDEN_YAP_3: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b> <dark_aqua>The chaos you have sown will be your undoing.</dark_aqua>"
+WARDEN_YAP_4: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b> <dark_aqua>I can sense the souls... fading as this war draws to a close.</dark_aqua>"
+WARDEN_YAP_5: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b> <dark_aqua>I mark the end of this war... and the end of all life.</dark_aqua>"
+
+WARDEN_INJURED_YAP_1: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b> <dark_aqua>You think you can defeat me? You are mistaken.</dark_aqua>"
+WARDEN_INJURED_YAP_2: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b> <dark_aqua>You are nothing but a mere mortal.</dark_aqua>"
+WARDEN_INJURED_YAP_3: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b> <dark_aqua>You are not worthy of my presence.</dark_aqua>"
+
+WARDEN_KILL_WHISPER: "<i><gray>In the distance, you hear blood splattering over the ground; A warden's kill can be heard from unusually far away.</gray></i>"
+
+WARDEN_KILL_1: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b> <dark_aqua>Pathetic.</dark_aqua>"
+WARDEN_KILL_2: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b> <dark_aqua>Weak.</dark_aqua>"
+WARDEN_KILL_3: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b> <dark_aqua>Fools.</dark_aqua>"
+
+WARDEN_HALF_HEALTH: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b> <dark_aqua>A god does not fear death...</dark_aqua>"
+WARDEN_DEFEATED: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b> <dark_aqua>You have defeated me... but the war rages on.</dark_aqua>"
+
+# Arena Command
+NOT_IN_LOBBY: "<red>You are not in a lobby!</red>"
+INVALID_ARENA: "<red>That arena does not exist!</red>"
+GAME_ALREADY_PLAYING: "<red>That arena already has a game ongoing!</red>"
+GAME_ALREADY_CONTAINS_PLAYER: "<red>You are already in this game!</red>"
+GAME_RELOADING: "<red>This game is currently reloading, please wait a bit.</red>"
+NOT_IN_GAME: "<red>You are not in a game!</red>"
+
+# Scoreboards
+SB_TITLE: "<bold><color:#ff365e>Firework</color> <color:#00e0e0>Wars</color></bold>"
+SB_SEPARATOR: "<gray><bold><st>-------------------</st></bold></gray>"
+
+SB_TEAM: "{0}: <green>{1}</green>"
+SB_OWN_TEAM: "{0}: <green>{1}</green> <gray>(You)</gray>"
+SB_ELIMINATED_TEAM: "{0}: <red>✖</red>"
+SB_ELIMINATED_OWN_TEAM: "{0}: <red>✖</red> <gray>(You)</gray>"
+
+SB_EVENT_SUPPLY_DROP: "Supply drop in: <yellow>{0}</yellow>"
+SB_EVENT_SUPPLY_DROP_SOON: "Supply drop in: <red>{0}</red>"
+SB_EVENT_ENDGAME: "Endgame in: <yellow>{0}</yellow>"
+SB_EVENT_ENDGAME_SOON: "Endgame in: <red>{0}</red>"
+SB_EVENT_GAME_END: "Game ends in: <yellow>{0}</yellow>"
+SB_EVENT_GAME_END_SOON: "Game ends in: <red>{0}</red>"
+
+SB_KILL_COUNT: "Kills: <green>{0}</green>"
+SB_DAMAGE_DEALT: "Damage dealt: <green>{0}</green><red>❤</red>"
