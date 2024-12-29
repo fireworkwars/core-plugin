@@ -1,4 +1,4 @@
-package foundation.esoteric.fireworkwarscore
+package foundation.esoteric.fireworkwarscore.communication
 
 import foundation.esoteric.fireworkwarscore.language.LanguageManager
 import foundation.esoteric.fireworkwarscore.profiles.PlayerDataManager
