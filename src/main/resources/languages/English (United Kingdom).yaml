@@ -141,6 +141,7 @@ WARDEN_DEFEATED: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b
 # Arena Command
 NOT_IN_LOBBY: "<red>You are not in a lobby!</red>"
 INVALID_ARENA: "<red>That arena does not exist!</red>"
+ARENA_FULL: "<red>The game you are trying to join is full!"
 GAME_ALREADY_PLAYING: "<red>That arena already has a game ongoing!</red>"
 GAME_ALREADY_CONTAINS_PLAYER: "<red>You are already in this game!</red>"
 GAME_RELOADING: "<red>This game is currently reloading, please wait a bit.</red>"
