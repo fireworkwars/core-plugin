@@ -35,6 +35,7 @@ class FireworkCreator {
             return item
         }
 
+        @JvmStatic
         fun randomSupplyDropFirework(): ItemStack {
             return createFirework(
                 listOf(Color.BLUE, Color.PURPLE, Color.AQUA, Color.RED).random(),
