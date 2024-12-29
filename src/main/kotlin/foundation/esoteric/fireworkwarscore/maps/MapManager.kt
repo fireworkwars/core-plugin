@@ -7,10 +7,10 @@ import java.io.File
 import java.io.IOException
 import java.nio.file.*
 import java.nio.file.attribute.BasicFileAttributes
-import javax.annotation.ParametersAreNonnullByDefault
 
 class MapManager(private val plugin: FireworkWarsCorePlugin) {
     private val fileManager: FileManager = FileManager(plugin)
+    private val logger = plugin.logger
 
     private val mapsDirectory: Path = Paths.get("plugins/FireworkWarsCore/maps")
     private val rootDirectory: Path = Paths.get("").toAbsolutePath()
@@ -22,37 +22,37 @@ class MapManager(private val plugin: FireworkWarsCorePlugin) {
     @Throws(IOException::class)
     fun saveMaps() {
         if (File(barracksWorld).exists() && File(townWorld).exists()) {
-            plugin.logger.info("Worlds already exist, skipping saving procedure.")
+            logger.info("Worlds already exist, skipping saving procedure.")
         } else {
-            plugin.logger.info("Deleting default world...")
+            logger.info("Deleting default world...")
 
             FileUtils.deleteDirectory(File(defaultWorld))
 
-            plugin.logger.info("Finished deleting default world.")
-            plugin.logger.info("Moving barracks map...")
+            logger.info("Finished deleting default world.")
+            logger.info("Moving barracks map...")
 
             fileManager.saveFolderToResources("maps/barracks")
             plugin.saveResource("maps/barracks/level.dat", true)
 
-            plugin.logger.info("Finished moving barracks map.")
-            plugin.logger.info("Moving town map...")
+            logger.info("Finished moving barracks map.")
+            logger.info("Moving town map...")
 
             fileManager.saveFolderToResources("maps/town")
             plugin.saveResource("maps/town/level.dat", true)
 
-            plugin.logger.info("Finished moving town map.")
-            plugin.logger.info("Moving lobby map...")
+            logger.info("Finished moving town map.")
+            logger.info("Moving lobby map...")
 
             fileManager.saveFolderToResources("maps/world")
             plugin.saveResource("maps/world/level.dat", true)
 
-            plugin.logger.info("Finished moving lobby map.")
-            plugin.logger.info("Moving maps to root server directory.")
+            logger.info("Finished moving lobby map.")
+            logger.info("Moving maps to root server directory.")
 
             moveMapsToRoot()
 
-            plugin.logger.info("Successfully moved maps to root server directory.")
-            plugin.logger.info("Successfully saved Firework Wars maps.")
+            logger.info("Successfully moved maps to root server directory.")
+            logger.info("Successfully saved Firework Wars maps.")
         }
     }
 
@@ -67,7 +67,6 @@ class MapManager(private val plugin: FireworkWarsCorePlugin) {
     private fun moveFolderToRoot(path: Path) {
         if (Files.exists(path)) {
             Files.walkFileTree(path, object : SimpleFileVisitor<Path>() {
-                @ParametersAreNonnullByDefault
                 @Throws(IOException::class)
                 override fun visitFile(file: Path, attrs: BasicFileAttributes): FileVisitResult {
                     val relativePath: Path = mapsDirectory.relativize(file)
@@ -84,9 +83,9 @@ class MapManager(private val plugin: FireworkWarsCorePlugin) {
                 }
             })
 
-            plugin.logger.info("All files moved successfully!")
+            logger.info("All files moved successfully!")
         } else {
-            plugin.logger.info("Directory does not exist.")
+            logger.info("Directory does not exist.")
         }
     }
 }
