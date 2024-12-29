@@ -2,11 +2,17 @@ package foundation.esoteric.fireworkwarscore
 
 import dev.jorel.commandapi.CommandAPI
 import dev.jorel.commandapi.CommandAPIBukkitConfig
+import dev.jorel.commandapi.CommandAPICommand
+import foundation.esoteric.fireworkwarscore.commands.SetLanguageCommand
 import foundation.esoteric.fireworkwarscore.commands.ToggleBuildCommand
 import foundation.esoteric.fireworkwarscore.commands.ToggleDebugCommand
+import foundation.esoteric.fireworkwarscore.communication.BasePlugin
 import foundation.esoteric.fireworkwarscore.communication.FireworkWarsPluginData
 import foundation.esoteric.fireworkwarscore.communication.LobbyPluginData
+import foundation.esoteric.fireworkwarscore.events.PlayerLoseHungerListener
+import foundation.esoteric.fireworkwarscore.interfaces.Event
 import foundation.esoteric.fireworkwarscore.language.LanguageManager
+import foundation.esoteric.fireworkwarscore.maps.MapManager
 import foundation.esoteric.fireworkwarscore.profiles.PlayerDataManager
 
 @Suppress("unused")
@@ -17,18 +23,29 @@ class FireworkWarsCorePlugin : BasePlugin() {
     lateinit var fireworkWarsPluginData: FireworkWarsPluginData
     lateinit var lobbyPluginData: LobbyPluginData
 
+    private val mapManager = MapManager(this)
+
     var isDebugging = false
     var isBuildModeEnabled = false
 
     private val commandApiConfig = CommandAPIBukkitConfig(this)
+    private val commands = mutableListOf<CommandAPICommand>()
 
-    @Suppress("UnstableApiUsage")
-    override fun onLoad() {
+    private val events = mutableListOf<Event>()
+
+    init {
         logger.info("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Firework Wars Core =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
         logger.info("This is the start of Firework Wars Core Plugin logs.")
+        @Suppress("UnstableApiUsage")
         logger.info("Info: v" + pluginMeta.version + " by " + pluginMeta.website)
         logger.info("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= End of Plugin Info =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
 
+        logger.info("Saving Firework Wars maps...")
+
+        mapManager.saveMaps()
+    }
+
+    override fun onLoad() {
         CommandAPI.onLoad(commandApiConfig)
     }
 
@@ -58,10 +75,19 @@ class FireworkWarsCorePlugin : BasePlugin() {
 
         CommandAPI.onEnable()
 
-        ToggleDebugCommand(this)
-        ToggleBuildCommand(this)
+        commands.add(ToggleDebugCommand(this))
+        commands.add(ToggleBuildCommand(this))
+        commands.add(SetLanguageCommand(this))
 
         logger.info("Finished loading commands.")
+        logger.info("Loaded ${commands.size} commands.")
+
+        logger.info("Registering global event listeners...")
+
+        events.add(PlayerLoseHungerListener(this).apply { register() })
+
+        logger.info("Finished registering global event listeners.")
+        logger.info("Registered ${events.size} event listeners.")
 
         logger.info("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Firework Wars Core =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
         logger.info("End of logs for Firework Wars Core Plugin.")
