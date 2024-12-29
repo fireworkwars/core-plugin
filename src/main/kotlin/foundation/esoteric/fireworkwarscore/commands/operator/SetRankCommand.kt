@@ -8,6 +8,7 @@ import foundation.esoteric.fireworkwarscore.FireworkWarsCorePlugin
 import foundation.esoteric.fireworkwarscore.language.Message
 import foundation.esoteric.fireworkwarscore.util.sendMessage
 import org.bukkit.entity.Player
+import java.util.function.Predicate
 
 class SetRankCommand(plugin: FireworkWarsCorePlugin) : CommandAPICommand("set-ranked") {
     private val playerDataManager = plugin.playerDataManager
@@ -16,6 +17,8 @@ class SetRankCommand(plugin: FireworkWarsCorePlugin) : CommandAPICommand("set-ra
     private val rankedArgumentNodeName = "ranked"
 
     init {
+        this.requirements = Predicate { it.isOp }
+
         withArguments(PlayerArgument(targetPlayerArgumentNodeName), BooleanArgument(rankedArgumentNodeName))
         executesPlayer(this::onPlayerExecution)
         register(plugin)
