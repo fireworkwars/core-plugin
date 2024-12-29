@@ -21,39 +21,37 @@ class MapManager(private val plugin: FireworkWarsCorePlugin) {
 
     @Throws(IOException::class)
     fun saveMaps() {
-        if (File(barracksWorld).exists() && File(townWorld).exists()) {
-            logger.info("Worlds already exist, skipping saving procedure.")
-        } else {
-            logger.info("Deleting default world...")
+        logger.info("Deleting existing world folders...")
 
-            FileUtils.deleteDirectory(File(defaultWorld))
+        FileUtils.deleteDirectory(File(defaultWorld))
+        FileUtils.deleteDirectory(File(barracksWorld))
+        FileUtils.deleteDirectory(File(townWorld))
 
-            logger.info("Finished deleting default world.")
-            logger.info("Moving barracks map...")
+        logger.info("Finished deleting worlds. Beginning resetting process...")
+        logger.info("Moving barracks map...")
 
-            fileManager.saveFolderToResources("maps/barracks")
-            plugin.saveResource("maps/barracks/level.dat", true)
+        fileManager.saveFolderToResources("maps/barracks")
+        plugin.saveResource("maps/barracks/level.dat", true)
 
-            logger.info("Finished moving barracks map.")
-            logger.info("Moving town map...")
+        logger.info("Finished moving barracks map.")
+        logger.info("Moving town map...")
 
-            fileManager.saveFolderToResources("maps/town")
-            plugin.saveResource("maps/town/level.dat", true)
+        fileManager.saveFolderToResources("maps/town")
+        plugin.saveResource("maps/town/level.dat", true)
 
-            logger.info("Finished moving town map.")
-            logger.info("Moving lobby map...")
+        logger.info("Finished moving town map.")
+        logger.info("Moving lobby map...")
 
-            fileManager.saveFolderToResources("maps/world")
-            plugin.saveResource("maps/world/level.dat", true)
+        fileManager.saveFolderToResources("maps/world")
+        plugin.saveResource("maps/world/level.dat", true)
 
-            logger.info("Finished moving lobby map.")
-            logger.info("Moving maps to root server directory.")
+        logger.info("Finished moving lobby map.")
+        logger.info("Moving maps to root server directory.")
 
-            moveMapsToRoot()
+        moveMapsToRoot()
 
-            logger.info("Successfully moved maps to root server directory.")
-            logger.info("Successfully saved Firework Wars maps.")
-        }
+        logger.info("Successfully moved maps to root server directory.")
+        logger.info("Successfully saved Firework Wars maps.")
     }
 
     @Throws(IOException::class)
