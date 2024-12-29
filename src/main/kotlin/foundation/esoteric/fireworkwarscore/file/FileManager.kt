@@ -11,14 +11,9 @@ class FileManager(private val plugin: BasePlugin) {
         try {
             FileUtil
                 .getAllFilePathsRecursively(folderPath)
-                .forEach {
-                    println("Saving file to resources: $it")
-                    plugin.saveResource(it, replace)
-                }
+                .forEach { plugin.saveResource(it, replace) }
 
-            val out = File(plugin.dataPath.toString() + File.separator + folderPath)
-            println("Returning: $out")
-            return out
+            return File(plugin.dataPath.toString() + File.separator + folderPath)
         } catch (exception: IOException) {
             exception.printStackTrace()
             return null
