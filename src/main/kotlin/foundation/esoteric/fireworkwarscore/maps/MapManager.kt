@@ -12,7 +12,7 @@ import javax.annotation.ParametersAreNonnullByDefault
 class MapManager(private val plugin: FireworkWarsCorePlugin) {
     private val fileManager: FileManager = FileManager(plugin)
 
-    private val mapsDirectory: Path = Paths.get("plugins/FireworkWarsPlugin/maps")
+    private val mapsDirectory: Path = Paths.get("plugins/FireworkWarsCore/maps")
     private val rootDirectory: Path = Paths.get("").toAbsolutePath()
 
     private val defaultWorld: String = "world"
