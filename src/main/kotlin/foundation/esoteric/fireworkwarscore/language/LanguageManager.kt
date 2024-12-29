@@ -1,6 +1,6 @@
 package foundation.esoteric.fireworkwarscore.language
 
-import foundation.esoteric.fireworkwarscore.BasePlugin
+import foundation.esoteric.fireworkwarscore.communication.BasePlugin
 import foundation.esoteric.fireworkwarscore.file.FileUtil
 import foundation.esoteric.fireworkwarscore.profiles.PlayerProfile
 import net.kyori.adventure.text.Component

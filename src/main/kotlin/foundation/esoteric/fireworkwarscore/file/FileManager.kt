@@ -1,6 +1,6 @@
 package foundation.esoteric.fireworkwarscore.file
 
-import foundation.esoteric.fireworkwarscore.BasePlugin
+import foundation.esoteric.fireworkwarscore.communication.BasePlugin
 import java.io.File
 import java.io.IOException
 

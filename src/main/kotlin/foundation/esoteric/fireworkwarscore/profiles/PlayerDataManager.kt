@@ -1,7 +1,7 @@
 package foundation.esoteric.fireworkwarscore.profiles
 
 import com.google.gson.Gson
-import foundation.esoteric.fireworkwarscore.BasePlugin
+import foundation.esoteric.fireworkwarscore.communication.BasePlugin
 import org.bukkit.entity.Player
 import org.jetbrains.annotations.Contract
 import java.io.File
