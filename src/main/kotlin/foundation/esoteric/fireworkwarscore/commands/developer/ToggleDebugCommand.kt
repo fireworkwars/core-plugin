@@ -1,4 +1,4 @@
-package foundation.esoteric.fireworkwarscore.commands
+package foundation.esoteric.fireworkwarscore.commands.developer
 
 import dev.jorel.commandapi.CommandAPICommand
 import dev.jorel.commandapi.executors.CommandArguments
