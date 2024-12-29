@@ -4,6 +4,7 @@ import org.bukkit.Color
 import org.bukkit.FireworkEffect
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.FireworkMeta
+import kotlin.random.Random
 
 @Suppress("unused")
 class FireworkCreator {
@@ -32,6 +33,15 @@ class FireworkCreator {
 
             item.itemMeta = meta
             return item
+        }
+
+        fun randomSupplyDropFirework(): ItemStack {
+            return createFirework(
+                listOf(Color.BLUE, Color.PURPLE, Color.AQUA, Color.RED).random(),
+                (1..4).random(),
+                listOf(FireworkEffect.Type.BURST, FireworkEffect.Type.STAR).random(),
+                Random.nextBoolean(),
+                Random.nextBoolean())
         }
     }
 }
