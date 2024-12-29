@@ -1,15 +1,21 @@
 package foundation.esoteric.fireworkwarscore.language
 
 enum class Message {
+    //Firework Wars Core
+    SET_LANGUAGE_SUCCESSFULLY,
+    UNKNOWN_LANGUAGE,
+
+    GRANTED_RANK_SUCCESSFULLY,
+    REVOKED_RANK_SUCCESSFULLY,
+    RANK_GRANTED,
+    RANK_REVOKED,
+
     // Firework Wars Lobby
     PLAYER_JOINED_LOBBY,
     RANKED_PLAYER_JOINED_LOBBY,
     WELCOME,
 
     // Firework Wars
-    SET_LANGUAGE_SUCCESSFULLY,
-    UNKNOWN_LANGUAGE,
-
     WOOL,
     WOOL_LORE,
 

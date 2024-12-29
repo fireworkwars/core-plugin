@@ -1,11 +1,16 @@
+# Firework Wars Core
+SET_LANGUAGE_SUCCESSFULLY: "<green>Successfully set your language to </green>{0}<green>!</green>"
+UNKNOWN_LANGUAGE: "Unsupported or unknown language: '{0}'."
+
+GRANTED_RANK_SUCCESSFULLY: "<green>{0} has been granted a <gold>rank</gold>!</green>"
+REVOKED_RANK_SUCCESSFULLY: "<green>{0}'s rank has been removed!"
+RANK_GRANTED: "<green>You have been given a <gold>rank</gold>!</green>"
+RANK_REVOKED: "<green>Your rank has been removed!</green>"
+
 # Firework Wars Lobby
 PLAYER_JOINED_LOBBY: "<dark_aqua><gray>{0}</gray> has joined the lobby!"
 RANKED_PLAYER_JOINED_LOBBY: " <b><gradient:red:#00e0e0:dark_aqua>>>></gradient></b> <gradient:#1568cf:#1137aa><gold>[✫] {0}</gold> has joined the lobby!</gradient> <b><gradient:dark_aqua:#00e0e0:red><<<</gradient></b>"
 WELCOME: "<gray>Welcome to <color:#ff365e>Firework</color> <color:#00e0e0>Wars</color>, {0}!</gray>"
-
-# Other Commands
-SET_LANGUAGE_SUCCESSFULLY: "<green>Successfully set your language to </green>{0}<green>!</green>"
-UNKNOWN_LANGUAGE: "Unsupported or unknown language: '{0}'."
 
 # Custom Items
 WOOL: "<yellow>Wool</yellow>"
