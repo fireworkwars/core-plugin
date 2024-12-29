@@ -1,7 +1,7 @@
 # Firework Wars Lobby
 PLAYER_JOINED_LOBBY: "<dark_aqua><gray>{0}</gray> has joined the lobby!"
 RANKED_PLAYER_JOINED_LOBBY: " <b><gradient:red:#00e0e0:dark_aqua>>>></gradient></b> <gradient:#1568cf:#1137aa><gold>[✫] {0}</gold> has joined the lobby!</gradient> <b><gradient:dark_aqua:#00e0e0:red><<<</gradient></b>"
-WELCOME: "<gray>Welcome to <red>Firework Wars</red>, <dark_aqua>{0}</dark_aqua>!</gray>"
+WELCOME: "<gray>Welcome to <color:#ff365e>Firework</color> <color:#00e0e0>Wars</color>, {0}!</gray>"
 
 # Other Commands
 SET_LANGUAGE_SUCCESSFULLY: "<green>Successfully set your language to </green>{0}<green>!</green>"
