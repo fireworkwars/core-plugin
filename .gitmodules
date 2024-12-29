@@ -1,0 +1,9 @@
+[submodule "src/main/resources/maps/barracks"]
+	path = src/main/resources/maps/barracks
+	url = https://github.com/esotericorganisation/firework-wars-barracks-map.git
+[submodule "src/main/resources/maps/world"]
+	path = src/main/resources/maps/world
+	url = git@github.com:esotericorganisation/firework-wars-lobby.git
+[submodule "src/main/resources/maps/town"]
+	path = src/main/resources/maps/town
+	url = git@github.com:esotericfoundation/firework-wars-town-map.git
