@@ -1,6 +1,12 @@
 package foundation.esoteric.fireworkwarscore.language
 
 enum class Message {
+    // Firework Wars Lobby
+    PLAYER_JOINED_LOBBY,
+    RANKED_PLAYER_JOINED_LOBBY,
+    WELCOME,
+
+    // Firework Wars
     SET_LANGUAGE_SUCCESSFULLY,
     UNKNOWN_LANGUAGE,
 
