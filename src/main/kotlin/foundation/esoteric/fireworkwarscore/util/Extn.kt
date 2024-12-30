@@ -14,7 +14,7 @@ fun Player.playSound(sound: Sound) {
 
 @Suppress("unused")
 fun Player.sendMessage(message: Message, vararg args: Any?) {
-    LanguageManager.globalInstance?.sendMessage(message, this, *args)
+    LanguageManager.globalInstance.sendMessage(message, this, *args)
 }
 
 fun String.format(): Component {
