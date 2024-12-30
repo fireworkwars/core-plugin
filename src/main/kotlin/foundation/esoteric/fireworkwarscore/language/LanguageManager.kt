@@ -1,5 +1,6 @@
 package foundation.esoteric.fireworkwarscore.language
 
+import foundation.esoteric.fireworkwarscore.FireworkWarsCorePlugin
 import foundation.esoteric.fireworkwarscore.communication.BasePlugin
 import foundation.esoteric.fireworkwarscore.file.FileUtil
 import foundation.esoteric.fireworkwarscore.profiles.PlayerProfile
@@ -21,7 +22,7 @@ class LanguageManager(private val plugin: BasePlugin) {
     companion object {
         @JvmStatic
         @get:NotNull
-        var globalInstance: LanguageManager? = null
+        lateinit var globalInstance: LanguageManager
     }
 
     private val miniMessage = MiniMessage.miniMessage()
@@ -44,7 +45,7 @@ class LanguageManager(private val plugin: BasePlugin) {
     }
 
     init {
-        if (globalInstance != null) {
+        if (plugin is FireworkWarsCorePlugin) {
             globalInstance = this
         }
 
