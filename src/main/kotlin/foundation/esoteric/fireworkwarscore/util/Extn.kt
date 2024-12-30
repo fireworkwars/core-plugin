@@ -1,6 +1,6 @@
 package foundation.esoteric.fireworkwarscore.util
 
-import foundation.esoteric.fireworkwarscore.FireworkWarsCorePlugin
+import foundation.esoteric.fireworkwarscore.language.LanguageManager
 import foundation.esoteric.fireworkwarscore.language.Message
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.minimessage.MiniMessage
@@ -14,7 +14,7 @@ fun Player.playSound(sound: Sound) {
 
 @Suppress("unused")
 fun Player.sendMessage(message: Message, vararg args: Any?) {
-    FireworkWarsCorePlugin.INSTANCE.languageManager.sendMessage(message, this, *args)
+    LanguageManager.globalInstance?.sendMessage(message, this, *args)
 }
 
 fun String.format(): Component {
