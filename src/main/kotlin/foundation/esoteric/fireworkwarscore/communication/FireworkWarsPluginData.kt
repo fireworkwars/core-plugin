@@ -28,5 +28,8 @@ interface Arena {
     fun getMinPlayers(): Int
     fun getMaxPlayers(): Int
     fun getCurrentPlayers(): Int
+    fun isFull(): Boolean {
+        return getCurrentPlayers() >= getMaxPlayers()
+    }
 }
 
