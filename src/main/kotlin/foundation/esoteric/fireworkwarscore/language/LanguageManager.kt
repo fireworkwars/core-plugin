@@ -202,11 +202,11 @@ class LanguageManager(private val plugin: BasePlugin) {
     }
 
     fun getDefaultMessage(message: Message, vararg arguments: Component?): Component {
-        return getMessage(message, null as String?, arguments)
+        return getMessage(message, defaultLanguage, arguments)
     }
 
     fun getDefaultMessage(message: Message, vararg arguments: Any?): Component {
-        return getMessage(message, null as String?, arguments)
+        return getMessage(message, defaultLanguage, arguments)
     }
 
     fun getMessage(message: Message, language: String?, vararg arguments: Component?): Component {
