@@ -21,7 +21,7 @@ class FireworkCreator {
             val item = ItemStack(org.bukkit.Material.FIREWORK_ROCKET)
             val meta = item.itemMeta as FireworkMeta
 
-            for (i in (0..amount)) {
+            for (i in (1..amount)) {
                 meta.addEffect(FireworkEffect.builder()
                     .withColor(Color.WHITE)
                     .withFade(color)
