@@ -44,6 +44,10 @@ class LanguageManager(private val plugin: BasePlugin) {
     }
 
     init {
+        if (globalInstance != null) {
+            globalInstance = this
+        }
+
         val dataFolder: File = plugin.dataFolder
         languagesFolderPath = dataFolder.path + File.separator + languagesFolderName
         languagesFolder = File(languagesFolderPath)
