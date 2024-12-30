@@ -18,11 +18,6 @@ import foundation.esoteric.fireworkwarscore.profiles.PlayerDataManager
 
 @Suppress("unused")
 class FireworkWarsCorePlugin : BasePlugin() {
-    companion object {
-        @JvmStatic
-        lateinit var INSTANCE: FireworkWarsCorePlugin
-    }
-
     override lateinit var playerDataManager: PlayerDataManager
     override lateinit var languageManager: LanguageManager
 
@@ -40,8 +35,6 @@ class FireworkWarsCorePlugin : BasePlugin() {
     private val events = mutableListOf<Event>()
 
     init {
-        INSTANCE = this
-
         logger.info("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Firework Wars Core =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
         logger.info("This is the start of Firework Wars Core Plugin logs.")
         @Suppress("UnstableApiUsage")
