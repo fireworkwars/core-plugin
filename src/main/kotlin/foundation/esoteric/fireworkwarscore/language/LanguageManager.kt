@@ -50,13 +50,13 @@ class LanguageManager(private val plugin: BasePlugin) {
         }
 
         val dataFolder: File = plugin.dataFolder
-        languagesFolderPath = dataFolder.path + File.separator + languagesFolderName
-        languagesFolder = File(languagesFolderPath)
+        this.languagesFolderPath = dataFolder.path + File.separator + languagesFolderName
+        this.languagesFolder = File(languagesFolderPath)
 
         saveLanguageFiles()
         loadLanguageMessages()
 
-        defaultLanguage = plugin.getConfig().getString("default-language")!!
+        this.defaultLanguage = plugin.getConfig().getString("default-language")!!
     }
 
     private fun saveLanguageFiles() {
@@ -202,11 +202,11 @@ class LanguageManager(private val plugin: BasePlugin) {
     }
 
     fun getDefaultMessage(message: Message, vararg arguments: Component?): Component {
-        return getMessage(message, defaultLanguage, arguments)
+        return getMessage(message, defaultLanguage, true, arguments)
     }
 
     fun getDefaultMessage(message: Message, vararg arguments: Any?): Component {
-        return getMessage(message, defaultLanguage, arguments)
+        return getMessage(message, defaultLanguage, true, arguments)
     }
 
     fun getMessage(message: Message, language: String?, vararg arguments: Component?): Component {
