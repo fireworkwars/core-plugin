@@ -73,6 +73,8 @@ tasks {
         }
 
         relocate("fr.mrmicky.fastboard", "foundation.esoteric.fireworkwarscore.libs.fastboard")
+
+        destinationDirectory.set(file("../firework-wars-plugin/run/plugins"))
     }
 
     build {
