@@ -10,6 +10,7 @@ import org.bukkit.Bukkit
 import org.bukkit.command.CommandSender
 import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.entity.Player
+import org.jetbrains.annotations.NotNull
 import java.io.File
 import java.util.*
 import java.util.Objects.requireNonNull
@@ -17,6 +18,12 @@ import java.util.Objects.requireNonNull
 
 @Suppress("unused", "MethodCouldBePrivate", "MemberVisibilityCanBePrivate")
 class LanguageManager(private val plugin: BasePlugin) {
+    companion object {
+        @JvmStatic
+        @get:NotNull
+        var globalInstance: LanguageManager? = null
+    }
+
     private val miniMessage = MiniMessage.miniMessage()
 
     private val languagesFolderName = "languages"
