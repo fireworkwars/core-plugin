@@ -15,6 +15,10 @@ enum class Message {
     RANKED_PLAYER_JOINED_LOBBY,
     WELCOME,
 
+    CURRENT_PLAYERS,
+    NO_ARENAS_AVAILABLE,
+    NO_ARENAS_AVAILABLE_LORE,
+
     // Firework Wars
     WOOL,
     WOOL_LORE,
