@@ -193,6 +193,7 @@ class LanguageManager(private val plugin: BasePlugin) {
         var result = miniMessage.deserialize(miniMessageString)
 
         for (i in arguments.indices) {
+            Bukkit.broadcastMessage("index $i arg ${arguments[i]}")
             result = result.replaceText(TextReplacementConfig.builder().matchLiteral("{$i}")
                 .replacement { _, _ -> arguments[i] }
                 .build())
