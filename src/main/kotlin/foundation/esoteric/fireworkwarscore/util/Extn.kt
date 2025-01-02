@@ -20,3 +20,13 @@ fun Player.sendMessage(message: Message, vararg args: Any?) {
 fun String.format(): Component {
     return MiniMessage.miniMessage().deserialize(this)
 }
+
+fun Component.appendSpaceIfNotEmpty(): Component {
+    val isEmpty = MiniMessage.miniMessage().serialize(this).isEmpty()
+
+    return if (!isEmpty) {
+        this.appendSpace()
+    } else {
+        this
+    }
+}
