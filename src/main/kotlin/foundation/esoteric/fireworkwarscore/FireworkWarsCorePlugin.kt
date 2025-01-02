@@ -10,6 +10,7 @@ import foundation.esoteric.fireworkwarscore.commands.player.SetLanguageCommand
 import foundation.esoteric.fireworkwarscore.communication.BasePlugin
 import foundation.esoteric.fireworkwarscore.communication.FireworkWarsPluginData
 import foundation.esoteric.fireworkwarscore.communication.LobbyPluginData
+import foundation.esoteric.fireworkwarscore.config.PluginConfig
 import foundation.esoteric.fireworkwarscore.events.PlayerLoseHungerListener
 import foundation.esoteric.fireworkwarscore.interfaces.Event
 import foundation.esoteric.fireworkwarscore.language.LanguageManager
@@ -23,6 +24,8 @@ class FireworkWarsCorePlugin : BasePlugin() {
 
     lateinit var fireworkWarsPluginData: FireworkWarsPluginData
     lateinit var lobbyPluginData: LobbyPluginData
+
+    private lateinit var pluginConfig: PluginConfig
 
     private val mapManager = MapManager(this)
 
@@ -57,7 +60,12 @@ class FireworkWarsCorePlugin : BasePlugin() {
         dataFolder.mkdir()
         saveDefaultConfig()
 
-        logger.info("Successfully created data folder and loaded default configurations.")
+        logger.info("Saved default configurations.")
+        logger.info("Loading plugin data...")
+
+        this.pluginConfig = PluginConfig(this)
+
+        logger.info("Successfully created data folder and loaded plugin data.")
         logger.info("Loading player profiles...")
 
         this.playerDataManager = PlayerDataManager(this)
