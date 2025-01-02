@@ -51,7 +51,7 @@ class SetRankCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICom
         val targetProfile = playerDataManager.getPlayerProfile(targetPlayer, true)!!
         targetProfile.rank = rank
 
-        if (rank == Rank.PLAYER) {
+        if (rank == Rank.NONE) {
             player.sendMessage(Message.REVOKED_RANK_SUCCESSFULLY, targetPlayer.name())
             targetPlayer.sendMessage(Message.RANK_REVOKED)
         } else {

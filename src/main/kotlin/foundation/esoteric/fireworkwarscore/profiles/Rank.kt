@@ -10,7 +10,7 @@ import org.bukkit.entity.Player
 
 @Suppress("unused", "MemberVisibilityCanBePrivate")
 enum class Rank(val color: TextColor, private val prefixValue: String?, private val listOrder: Int) {
-    PLAYER(NamedTextColor.GRAY, null, 1),
+    NONE(NamedTextColor.GRAY, null, 1),
     GOLD(NamedTextColor.GOLD, "[✫]", 0);
 
     val prefix: Component
@@ -19,11 +19,11 @@ enum class Rank(val color: TextColor, private val prefixValue: String?, private 
         get() = prefix.color(color)
 
     fun formatPlayerName(player: Player): Component {
-        return prefix.appendSpaceIfNotEmpty().append(player.name()).color(color)
+        return prefix.appendSpaceIfNotEmpty().append(player.name()).color(color).compact()
     }
 
     fun toFormattedText(): Component {
-        return prefix.appendSpaceIfNotEmpty().append(text(capitalised())).color(color)
+        return prefix.appendSpaceIfNotEmpty().append(text(capitalised())).color(color).compact()
     }
 
     fun updateTablist(player: Player) {
