@@ -7,4 +7,5 @@ import org.bukkit.World
 interface LobbyPluginData {
     fun getLobbySpawn(): Location
     fun isLobby(world: World): Boolean
+    fun updateScoreboards()
 }
