@@ -18,7 +18,7 @@ NO_ARENAS_AVAILABLE: "<!i><red>Hmm...</red>"
 NO_ARENAS_AVAILABLE_LORE: "<!i><gray>It seems there are no games available</gray><!i><gray>right now. Try again shortly, this doesn't</gray><!i><gray>usually happen.</gray>"
 
 TABLIST_HEADER: "<bold><color:#ff365e>Firework</color> <color:#00e0e0>Wars</color></bold>"
-TABLIST_FOOTER: "<gray>play.fireworkwars.xyz</gray><newline><aqua>discord.gg/[object Object]</aqua>"
+TABLIST_FOOTER: "<newline><gray>play.fireworkwars.xyz</gray><newline><aqua>discord.gg/[object Object]</aqua>"
 
 # Custom Items
 WOOL: "<yellow>Wool</yellow>"
