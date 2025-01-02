@@ -9,9 +9,9 @@ import net.kyori.adventure.text.format.TextColor
 import org.bukkit.entity.Player
 
 @Suppress("unused", "MemberVisibilityCanBePrivate")
-enum class Rank(val listOrder: Int, val color: TextColor, private val prefixValue: String?) {
-    PLAYER(1, NamedTextColor.GRAY, null),
-    GOLD(0, NamedTextColor.GOLD, "[✫]");
+enum class Rank(val color: TextColor, private val prefixValue: String?, private val listOrder: Int) {
+    PLAYER(NamedTextColor.GRAY, null, 1),
+    GOLD(NamedTextColor.GOLD, "[✫]", 0);
 
     val prefix: Component
         get() = if (prefixValue != null) text(prefixValue) else empty()
@@ -24,6 +24,11 @@ enum class Rank(val listOrder: Int, val color: TextColor, private val prefixValu
 
     fun toFormattedText(): Component {
         return prefix.appendSpaceIfNotEmpty().append(text(toString())).color(color)
+    }
+
+    fun updateTablist(player: Player) {
+        player.playerListName(formatPlayerName(player))
+        player.playerListOrder = listOrder
     }
 
     override fun toString(): String {
