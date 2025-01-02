@@ -8,6 +8,7 @@ interface FireworkWarsPluginData {
     fun getArenaLeaveCommand(): ArenaLeaveCommand
     fun getBarracksArenas(): List<Arena>
     fun getTownArenas(): List<Arena>
+    fun getVersionString(): String
 }
 
 @Suppress("unused")
