@@ -56,7 +56,7 @@ class LanguageManager(private val plugin: BasePlugin) {
         saveLanguageFiles()
         loadLanguageMessages()
 
-        this.defaultLanguage = plugin.getConfig().getString("default-language")!!
+        this.defaultLanguage = plugin.config.getString("default-language")!!
     }
 
     private fun saveLanguageFiles() {
