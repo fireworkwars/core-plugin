@@ -58,5 +58,7 @@ class SetRankCommand(plugin: FireworkWarsCorePlugin) : CommandAPICommand("set-ra
             player.sendMessage(Message.GRANTED_RANK_SUCCESSFULLY, targetPlayer.name(), rank.toFormattedText())
             targetPlayer.sendMessage(Message.RANK_GRANTED, rank.toFormattedText())
         }
+
+        rank.updateTablist(player)
     }
 }
