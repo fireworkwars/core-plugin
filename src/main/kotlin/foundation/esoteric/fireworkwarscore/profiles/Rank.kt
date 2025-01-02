@@ -8,9 +8,9 @@ import net.kyori.adventure.text.format.TextColor
 import org.bukkit.entity.Player
 
 @Suppress("unused", "MemberVisibilityCanBePrivate")
-enum class Rank(val color: TextColor, private val prefixValue: String?) {
-    PLAYER(NamedTextColor.GRAY, null),
-    GOLD(NamedTextColor.GOLD, "[✫]");
+enum class Rank(val listOrder: Int, val color: TextColor, private val prefixValue: String?) {
+    PLAYER(1, NamedTextColor.GRAY, null),
+    GOLD(0, NamedTextColor.GOLD, "[✫]");
 
     val prefix: Component
         get() = if (prefixValue != null) text(prefixValue) else empty()
