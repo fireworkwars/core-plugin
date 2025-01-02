@@ -14,7 +14,7 @@ import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import java.util.function.Predicate
 
-class SetRankCommand(plugin: FireworkWarsCorePlugin) : CommandAPICommand("set-rank") {
+class SetRankCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICommand("set-rank") {
     private val playerDataManager = plugin.playerDataManager
 
     private val targetPlayerArgumentNodeName = "targetPlayer"
@@ -60,5 +60,6 @@ class SetRankCommand(plugin: FireworkWarsCorePlugin) : CommandAPICommand("set-ra
         }
 
         rank.updateTablist(player)
+        plugin.lobbyPluginData.updateScoreboards()
     }
 }
