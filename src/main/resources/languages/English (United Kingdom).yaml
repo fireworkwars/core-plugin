@@ -6,6 +6,7 @@ GRANTED_RANK_SUCCESSFULLY: "<green>{0} has been granted a {1} rank!</green>"
 REVOKED_RANK_SUCCESSFULLY: "<green>{0}'s rank has been removed!"
 RANK_GRANTED: "<green>You have been given a {0} rank!</green>"
 RANK_REVOKED: "<green>Your rank has been removed!</green>"
+INVALID_RANK: "<red>That rank doesn't exist!</red>"
 
 # Firework Wars Lobby
 PLAYER_JOINED_LOBBY: "<dark_aqua>{0} has joined the lobby!"

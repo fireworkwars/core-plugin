@@ -9,6 +9,7 @@ enum class Message {
     REVOKED_RANK_SUCCESSFULLY,
     RANK_GRANTED,
     RANK_REVOKED,
+    INVALID_RANK,
 
     // Firework Wars Lobby
     PLAYER_JOINED_LOBBY,
