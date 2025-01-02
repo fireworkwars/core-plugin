@@ -10,7 +10,7 @@ INVALID_RANK: "<red>That rank doesn't exist!</red>"
 
 # Firework Wars Lobby
 PLAYER_JOINED_LOBBY: "<dark_aqua>{0} has joined the lobby!"
-RANKED_PLAYER_JOINED_LOBBY: "<gradient:#1568cf:#1137aa>{0} has joined the lobby!</gradient>"
+RANKED_PLAYER_JOINED_LOBBY: "{0}<gradient:#1568cf:#1137aa> has joined the lobby!</gradient>"
 WELCOME: "<gray>Welcome to <color:#ff365e>Firework</color> <color:#00e0e0>Wars</color>, {0}!</gray>"
 
 CURRENT_PLAYERS: "<!i><dark_gray>{0}/{1} players</dark_gray>"
