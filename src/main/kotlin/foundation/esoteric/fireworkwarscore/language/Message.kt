@@ -19,6 +19,9 @@ enum class Message {
     NO_ARENAS_AVAILABLE,
     NO_ARENAS_AVAILABLE_LORE,
 
+    TABLIST_HEADER,
+    TABLIST_FOOTER,
+
     // Firework Wars
     WOOL,
     WOOL_LORE,
