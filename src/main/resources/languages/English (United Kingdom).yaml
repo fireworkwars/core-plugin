@@ -2,9 +2,9 @@
 SET_LANGUAGE_SUCCESSFULLY: "<green>Successfully set your language to </green>{0}<green>!</green>"
 UNKNOWN_LANGUAGE: "Unsupported or unknown language: '{0}'."
 
-GRANTED_RANK_SUCCESSFULLY: "<green>{0} has been granted a <gold>rank</gold>!</green>"
+GRANTED_RANK_SUCCESSFULLY: "<green>{0} has been granted a {1} rank!</green>"
 REVOKED_RANK_SUCCESSFULLY: "<green>{0}'s rank has been removed!"
-RANK_GRANTED: "<green>You have been given a <gold>rank</gold>!</green>"
+RANK_GRANTED: "<green>You have been given a {0} rank!</green>"
 RANK_REVOKED: "<green>Your rank has been removed!</green>"
 
 # Firework Wars Lobby
