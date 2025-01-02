@@ -23,6 +23,13 @@ enum class Message {
     TABLIST_HEADER,
     TABLIST_FOOTER,
 
+    LOBBY_SB_TITLE,
+    LOBBY_SB_RANK,
+    LOBBY_SB_ACHIEVEMENTS,
+    LOBBY_SB_PLAYERS,
+    LOBBY_SB_FRIENDS,
+    LOBBY_SB_IP,
+
     // Firework Wars
     INVALID_ITEM,
 

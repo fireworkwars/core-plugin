@@ -18,7 +18,14 @@ NO_ARENAS_AVAILABLE: "<!i><red>Hmm...</red>"
 NO_ARENAS_AVAILABLE_LORE: "<!i><gray>It seems there are no games available</gray><!i><gray>right now. Try again shortly, this doesn't</gray><!i><gray>usually happen.</gray>"
 
 TABLIST_HEADER: "<bold><color:#ff365e>Firework</color> <color:#00e0e0>Wars</color></bold>"
-TABLIST_FOOTER: "<newline><gray>Ip: play.fireworkwars.xyz</gray><newline><aqua>discord.gg/[object Object]</aqua>"
+TABLIST_FOOTER: "<newline><gray>Ip: {0}</gray><newline><aqua>{1}</aqua>"
+
+LOBBY_SB_TITLE: "<bold><color:#ff365e>Firework</color> <color:#00e0e0>Wars</color></bold> <dark_gray>v{0}</dark_gray>"
+LOBBY_SB_RANK: " Rank: {0}"
+LOBBY_SB_ACHIEVEMENTS: " Achievements: <dark_aqua>{0}</dark_aqua><dark_gray>/</dark_gray><dark_green>{1}</dark_green>"
+LOBBY_SB_PLAYERS: " Total Players: <gray>{0}</gray>"
+LOBBY_SB_FRIENDS: " Friends Online: <gray>{0}</gray>"
+LOBBY_SB_IP: "<aqua>{0}</aqua>"
 
 # Firework Wars
 INVALID_ITEM: "<red>That item doesn't exist!</red>"
