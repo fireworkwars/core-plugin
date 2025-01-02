@@ -23,12 +23,16 @@ enum class Rank(val color: TextColor, private val prefixValue: String?, private 
     }
 
     fun toFormattedText(): Component {
-        return prefix.appendSpaceIfNotEmpty().append(text(toString())).color(color)
+        return prefix.appendSpaceIfNotEmpty().append(text(capitalised())).color(color)
     }
 
     fun updateTablist(player: Player) {
         player.playerListName(formatPlayerName(player))
         player.playerListOrder = listOrder
+    }
+
+    fun capitalised(): String {
+        return name.lowercase().replaceFirstChar { it.uppercase() }
     }
 
     override fun toString(): String {
