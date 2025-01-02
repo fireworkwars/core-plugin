@@ -25,7 +25,7 @@ LOBBY_SB_RANK: " Rank: {0}"
 LOBBY_SB_ACHIEVEMENTS: " Achievements: <dark_aqua>{0}</dark_aqua><dark_gray>/</dark_gray><dark_green>{1}</dark_green>"
 LOBBY_SB_PLAYERS: " Total Players: <gray>{0}</gray>"
 LOBBY_SB_FRIENDS: " Friends Online: <gray>{0}</gray>"
-LOBBY_SB_IP: "<aqua>{0}</aqua>"
+LOBBY_SB_IP: " <aqua>{0}</aqua>"
 
 # Firework Wars
 INVALID_ITEM: "<red>That item doesn't exist!</red>"
