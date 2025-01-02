@@ -25,7 +25,7 @@ class FireworkWarsCorePlugin : BasePlugin() {
     lateinit var fireworkWarsPluginData: FireworkWarsPluginData
     lateinit var lobbyPluginData: LobbyPluginData
 
-    private lateinit var pluginConfig: PluginConfig
+    lateinit var pluginConfig: PluginConfig
 
     private val mapManager = MapManager(this)
 
