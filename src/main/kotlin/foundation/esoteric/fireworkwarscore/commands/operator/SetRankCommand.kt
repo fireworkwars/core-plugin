@@ -40,6 +40,12 @@ class SetRankCommand(plugin: FireworkWarsCorePlugin) : CommandAPICommand("set-ra
     private fun onPlayerExecution(player: Player, arguments: CommandArguments) {
         val targetPlayer = arguments[targetPlayerArgumentNodeName] as Player
         val rankArgument = arguments[ranksArgumentNodeName] as String
+
+        if (Rank.entries.toTypedArray().none { it.toString() == rankArgument }) {
+            player.sendMessage(Message.INVALID_RANK)
+            return
+        }
+
         val rank = Rank.valueOf(rankArgument.uppercase())
 
         val targetProfile = playerDataManager.getPlayerProfile(targetPlayer, true)!!
