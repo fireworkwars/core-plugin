@@ -8,7 +8,7 @@ import net.kyori.adventure.text.format.TextColor
 import org.bukkit.entity.Player
 
 @Suppress("unused", "MemberVisibilityCanBePrivate")
-enum class Rank(private val color: TextColor, private val prefixValue: String?) {
+enum class Rank(val color: TextColor, private val prefixValue: String?) {
     PLAYER(NamedTextColor.GRAY, null),
     GOLD(NamedTextColor.GOLD, "[✫]");
 
