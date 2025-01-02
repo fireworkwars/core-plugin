@@ -24,6 +24,8 @@ enum class Message {
     TABLIST_FOOTER,
 
     // Firework Wars
+    INVALID_ITEM,
+
     WOOL,
     WOOL_LORE,
 
