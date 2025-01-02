@@ -1,5 +1,6 @@
 package foundation.esoteric.fireworkwarscore.profiles
 
+import foundation.esoteric.fireworkwarscore.util.appendSpaceIfNotEmpty
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.Component.empty
 import net.kyori.adventure.text.Component.text
@@ -18,11 +19,11 @@ enum class Rank(val listOrder: Int, val color: TextColor, private val prefixValu
         get() = prefix.color(color)
 
     fun formatPlayerName(player: Player): Component {
-        return prefix.appendSpace().append(player.name()).color(color)
+        return prefix.appendSpaceIfNotEmpty().append(player.name()).color(color)
     }
 
     fun toFormattedText(): Component {
-        return prefix.appendSpace().append(text(toString())).color(color)
+        return prefix.appendSpaceIfNotEmpty().append(text(toString())).color(color)
     }
 
     override fun toString(): String {
