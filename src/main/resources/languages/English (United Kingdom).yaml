@@ -8,8 +8,8 @@ RANK_GRANTED: "<green>You have been given a {0} rank!</green>"
 RANK_REVOKED: "<green>Your rank has been removed!</green>"
 
 # Firework Wars Lobby
-PLAYER_JOINED_LOBBY: "<dark_aqua><gray>{0}</gray> has joined the lobby!"
-RANKED_PLAYER_JOINED_LOBBY: "<gradient:#1568cf:#1137aa><gold>[✫] {0}</gold> has joined the lobby!</gradient>"
+PLAYER_JOINED_LOBBY: "<dark_aqua>{0} has joined the lobby!"
+RANKED_PLAYER_JOINED_LOBBY: "<gradient:#1568cf:#1137aa><gold>{0} has joined the lobby!</gradient>"
 WELCOME: "<gray>Welcome to <color:#ff365e>Firework</color> <color:#00e0e0>Wars</color>, {0}!</gray>"
 
 CURRENT_PLAYERS: "<!i><dark_gray>{0}/{1} players</dark_gray>"
