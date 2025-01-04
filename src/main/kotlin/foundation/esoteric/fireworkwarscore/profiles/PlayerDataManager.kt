@@ -81,7 +81,14 @@ class PlayerDataManager(private val plugin: BasePlugin) {
     fun getPlayerProfile(uuid: UUID, createNewProfile: Boolean): PlayerProfile? {
         return if (createNewProfile) {
             playerData.computeIfAbsent(uuid) {
-                PlayerProfile(uuid, plugin.languageManager.defaultLanguage, Rank.NONE)
+                PlayerProfile(
+                    uuid = uuid,
+                    language = plugin.languageManager.defaultLanguage,
+                    rank = Rank.NONE,
+                    achievements = mutableListOf(),
+                    friends = mutableListOf(),
+                    blocked = mutableListOf(),
+                    firstJoin = true)
             }
         } else {
             playerData[uuid]
