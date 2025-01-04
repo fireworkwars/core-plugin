@@ -59,7 +59,7 @@ class SetRankCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICom
             targetPlayer.sendMessage(Message.RANK_GRANTED, rank.toFormattedText())
         }
 
-        targetProfile.rank.updateTablist(targetPlayer)
+        targetProfile.rank.updateTablist(targetPlayer, plugin)
         plugin.lobbyPluginData.updateScoreboards()
     }
 }
