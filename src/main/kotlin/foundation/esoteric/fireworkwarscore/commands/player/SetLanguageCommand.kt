@@ -1,6 +1,7 @@
 package foundation.esoteric.fireworkwarscore.commands.player
 
 import dev.jorel.commandapi.CommandAPICommand
+import dev.jorel.commandapi.CommandPermission
 import dev.jorel.commandapi.arguments.Argument
 import dev.jorel.commandapi.arguments.ArgumentSuggestions
 import dev.jorel.commandapi.arguments.CustomArgument
@@ -18,6 +19,9 @@ class SetLanguageCommand(plugin: FireworkWarsCorePlugin) : CommandAPICommand("se
     private val languageArgumentNodeName = "language"
 
     init {
+        setRequirements { it is Player }
+        withPermission(CommandPermission.NONE)
+
         withArguments(getLanguageArgument().includeSuggestions(getLanguageSuggestions()))
         executesPlayer(this::onPlayerExecution)
         register(plugin)
