@@ -15,8 +15,8 @@ import org.bukkit.plugin.java.JavaPlugin
 
 @Suppress("unused", "MemberVisibilityCanBePrivate")
 enum class Rank(val color: TextColor, private val prefixValue: String?, private val listOrder: Int) {
-    NONE(NamedTextColor.GRAY, null, 1),
-    GOLD(NamedTextColor.GOLD, "[✫]", 0);
+    NONE(NamedTextColor.GRAY, null, 0),
+    GOLD(NamedTextColor.GOLD, "[✫]", 1);
 
     val prefix: Component
         get() = if (prefixValue != null) text(prefixValue) else empty()
