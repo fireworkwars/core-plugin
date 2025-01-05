@@ -83,6 +83,7 @@ class PlayerDataManager(private val plugin: FireworkWarsCorePlugin) {
             playerData.computeIfAbsent(uuid) {
                 PlayerProfile(
                     uuid = uuid,
+                    username = plugin.server.getOfflinePlayer(uuid).name ?: "Unknown",
                     language = plugin.languageManager.defaultLanguage,
                     rank = Rank.NONE,
                     achievements = mutableListOf(),

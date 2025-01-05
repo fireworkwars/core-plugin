@@ -6,6 +6,7 @@ import java.util.*
 
 data class PlayerProfile(
     val uuid: UUID,
+    var username: String,
     var language: String,
     var rank: Rank,
     val achievements: MutableList<Any>,
@@ -14,7 +15,7 @@ data class PlayerProfile(
     var firstJoin: Boolean = true
 ) {
     fun formattedName(): Component {
-        return rank.formatPlayerName(Bukkit.getPlayer(uuid)!!)
+        return rank.formatPlayerName(Component.text(username))
     }
 
     fun updateOwnTablist() {
