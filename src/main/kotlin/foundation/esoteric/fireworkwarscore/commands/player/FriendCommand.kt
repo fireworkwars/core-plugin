@@ -230,10 +230,7 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
         }
     }
 
-    private fun removeFriend(player: Player, args: CommandArguments) {
-        val target = args[playerArgumentNodeName] as Player?
-            ?: return player.sendMessage(Message.UNKNOWN_PLAYER)
-
+    fun removeFriend(player: Player, target: Player) {
         if (target.uniqueId == player.uniqueId) {
             return player.sendMessage(Message.CANNOT_FRIEND_SELF)
         }
@@ -250,6 +247,13 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
 
         player.sendMessage(Message.REMOVED_FRIEND, targetProfile.formattedName())
         target.sendMessage(Message.YOU_WERE_REMOVED_AS_FRIEND, profile.formattedName())
+    }
+
+    private fun removeFriend(player: Player, args: CommandArguments) {
+        val target = args[playerArgumentNodeName] as Player?
+            ?: return player.sendMessage(Message.UNKNOWN_PLAYER)
+
+        return removeFriend(player, target)
     }
 
     private fun listFriends(player: Player, args: CommandArguments) {
