@@ -111,7 +111,6 @@ paperPluginYaml {
     website = "https://github.com/EsotericFoundation/firework-wars-core-plugin"
 
     main = "foundation.esoteric.fireworkwarscore.FireworkWarsCorePlugin"
-    bootstrapper = "foundation.esoteric.fireworkwarscore.FireworkWarsCoreBootstrapper"
 
     apiVersion = "1.21.3"
     description = project.description
