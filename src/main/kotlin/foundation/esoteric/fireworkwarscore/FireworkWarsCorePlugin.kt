@@ -17,6 +17,8 @@ import foundation.esoteric.fireworkwarscore.interfaces.Event
 import foundation.esoteric.fireworkwarscore.language.LanguageManager
 import foundation.esoteric.fireworkwarscore.maps.MapManager
 import foundation.esoteric.fireworkwarscore.profiles.PlayerDataManager
+import net.kyori.adventure.text.minimessage.MiniMessage
+import org.bukkit.scheduler.BukkitTask
 
 @Suppress("unused", "MemberVisibilityCanBePrivate")
 class FireworkWarsCorePlugin : BasePlugin() {
@@ -29,6 +31,8 @@ class FireworkWarsCorePlugin : BasePlugin() {
     lateinit var pluginConfig: PluginConfig
 
     private val mapManager = MapManager(this)
+
+    val mm = MiniMessage.miniMessage()
 
     var isDebugging = false
     var isBuildModeEnabled = false
