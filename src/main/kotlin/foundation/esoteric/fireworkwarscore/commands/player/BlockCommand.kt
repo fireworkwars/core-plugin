@@ -29,7 +29,7 @@ class BlockCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComma
                 .withPermission(CommandPermission.NONE)
                 .withShortDescription("Blocks a player")
                 .withFullDescription("Blocks the specified player.")
-                .withArguments(this.playerArgumentSupplier())
+                .withArguments(this.nonBlockedArgumentSupplier())
                 .executesPlayer(this::blockPlayer)
         )
 
@@ -45,11 +45,18 @@ class BlockCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComma
         register(plugin)
     }
 
-    private fun playerArgumentSupplier(): Argument<Player> {
+    private fun nonBlockedArgumentSupplier(): Argument<Player> {
         return PlayerArgument(playerArgumentNodeName).replaceSuggestions(ArgumentSuggestions.strings { info ->
+            val player = info.sender as Player
+            val profile = playerDataManager.getPlayerProfile(player)
+
             val playerNames = plugin.server.onlinePlayers
-                .map { it.name }
-                .filter { it != info.sender.name }
+                .asSequence()
+                .map { it.uniqueId }
+                .filter { it != player.uniqueId }
+                .filter { !profile.blocked.contains(it) }
+                .map { plugin.server.getPlayer(it)!!.name }
+                .toList()
 
             return@strings playerNames.toTypedArray()
         })

@@ -39,7 +39,7 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
                 .withPermission(CommandPermission.NONE)
                 .withShortDescription("Adds a player as a friend")
                 .withFullDescription("Sends a friend request to the specified player, or accepts their friend request if one exists.")
-                .withArguments(this.playerArgumentSupplier())
+                .withArguments(this.nonFriendedOrBlockedArgumentSupplier())
                 .executesPlayer(this::addOrAcceptFriend)
         )
 
@@ -75,7 +75,7 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
                 .withPermission(CommandPermission.NONE)
                 .withShortDescription("Removes a friend")
                 .withFullDescription("Removes the specified player from your friend list.")
-                .withArguments(this.playerArgumentSupplier())
+                .withArguments(this.friendsArgumentSupplier())
                 .executesPlayer(this::removeFriend)
         )
 
@@ -99,16 +99,6 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
         register(plugin)
     }
 
-    private fun playerArgumentSupplier(): Argument<Player> {
-        return PlayerArgument(playerArgumentNodeName).replaceSuggestions(ArgumentSuggestions.strings { info ->
-            val playerNames = plugin.server.onlinePlayers
-                .map { it.name }
-                .filter { it != info.sender.name }
-
-            return@strings playerNames.toTypedArray()
-        })
-    }
-
     private fun outgoingRequestsArgumentSupplier(): Argument<Player> {
         return PlayerArgument(playerArgumentNodeName).replaceSuggestions(ArgumentSuggestions.strings { info ->
             val player = info.sender as Player
@@ -124,6 +114,35 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
             val player = info.sender as Player
             val receivingRequests = friendManager.getReceivingRequests(player)
             val playerNames = receivingRequests.mapNotNull { plugin.server.getPlayer(it)?.name }
+
+            return@strings playerNames.toTypedArray()
+        })
+    }
+
+    private fun nonFriendedOrBlockedArgumentSupplier(): Argument<Player> {
+        return PlayerArgument(playerArgumentNodeName).replaceSuggestions(ArgumentSuggestions.strings { info ->
+            val player = info.sender as Player
+            val profile = playerDataManager.getPlayerProfile(player)
+
+            val playerNames = plugin.server.onlinePlayers
+                .asSequence()
+                .map { it.uniqueId }
+                .filter { it != player.uniqueId }
+                .filter { it !in profile.friends }
+                .filter { it !in profile.blocked }
+                .map { plugin.server.getPlayer(it)!!.name }
+                .toList()
+
+            return@strings playerNames.toTypedArray()
+        })
+    }
+
+    private fun friendsArgumentSupplier(): Argument<Player> {
+        return PlayerArgument(playerArgumentNodeName).replaceSuggestions(ArgumentSuggestions.strings { info ->
+            val player = info.sender as Player
+            val profile = playerDataManager.getPlayerProfile(player)
+            val friends = profile.friends
+            val playerNames = friends.mapNotNull { plugin.server.getOfflinePlayer(it).name }
 
             return@strings playerNames.toTypedArray()
         })
@@ -309,6 +328,7 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
         player.sendMessage(message)
     }
 
+    @Suppress("UNUSED_PARAMETER")
     private fun createParty(player: Player, args: CommandArguments) {
         player.sendMessage(Message.COMING_SOON)
     }
