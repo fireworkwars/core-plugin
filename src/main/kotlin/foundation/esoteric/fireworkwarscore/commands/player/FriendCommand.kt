@@ -13,7 +13,6 @@ import foundation.esoteric.fireworkwarscore.managers.FriendManager
 import foundation.esoteric.fireworkwarscore.profiles.PlayerDataManager
 import foundation.esoteric.fireworkwarscore.util.getMessage
 import foundation.esoteric.fireworkwarscore.util.sendMessage
-import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.Component.text
 import org.bukkit.entity.Player
 import java.util.*
@@ -256,12 +255,17 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
         val friendsOnPage = friends.subList(startIndex, endIndex)
 
         val message = text()
-            .append(getMessage(Message.FRIEND_LIST_SEPARATOR, player)).appendNewline()
-            .append(getMessage(Message.FRIEND_LIST_TITLE, player)).appendNewline()
+            .append(player.getMessage(Message.FRIEND_LIST_SEPARATOR)).appendNewline()
+            .append(player.getMessage(Message.FRIEND_LIST_TITLE)).appendNewline()
 
-        friendsOnPage.forEach {
-            val friendProfile = playerDataManager.getPlayerProfile(it)
-            message.append(friendProfile.formattedName()).appendNewline()
+        friendsOnPage.forEach { uuid ->
+            val friendProfile = playerDataManager.getPlayerProfile(uuid)
+
+            message
+                .append(friendProfile.formattedName())
+                .appendSpace()
+                .append(player.getMessage(this.getStatusMessage(uuid)))
+                .appendNewline()
         }
 
         val prevText = if (page > 1) {
@@ -285,7 +289,18 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
         player.sendMessage(message)
     }
 
-    private fun getMessage(message: Message, player: Player, vararg args: Any): Component {
-        return languageManager.getMessage(message, player, *args)
+    private fun getStatusMessage(uuid: UUID): Message {
+        val offlinePlayer = plugin.server.getOfflinePlayer(uuid)
+        val player = offlinePlayer.player
+
+        if (!offlinePlayer.isOnline) {
+            return Message.STATUS_OFFLINE
+        }
+
+        if (plugin.lobbyPluginData.isLobby(player!!.world)) {
+            return Message.STATUS_IN_LOBBY
+        }
+
+        return Message.STATUS_PLAYING
     }
 }
