@@ -82,6 +82,7 @@ class BlockCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComma
         }
 
         profile.blocked.add(target.uniqueId)
+        profile.friends.remove(target.uniqueId)
 
         player.sendMessage(Message.BLOCKED_PLAYER, targetProfile.formattedName())
     }
