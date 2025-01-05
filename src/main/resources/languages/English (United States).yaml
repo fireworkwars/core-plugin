@@ -20,8 +20,8 @@ YOU_ARE_NOW_FRIENDS: "<green>You are now <aqua>friends</aqua> with {0}!</green>"
 REMOVED_FRIEND: "{0} <green>has been removed from your friend list!</green>"
 YOU_WERE_REMOVED_AS_FRIEND: "{0} <yellow>has removed you from their friend list!</yellow>"
 FRIEND_LIST_SEPARATOR: "<gray><bold><st>-----------------------------------</st></bold></gray>"
-FRIEND_LIST_TITLE: "           <aqua>=-=-=-= Your Friends =-=-=-=</aqua>"
-FRIEND_LIST_PAGING: "           <aqua>=-=-={0} Page {1} of {2} {3}=-=-=</aqua>"
+FRIEND_LIST_TITLE: "<aqua>=-=-=-=-=-=-= Your Friends =-=-=-=-=-=-=-=</aqua><newline>"
+FRIEND_LIST_PAGING: "<newline><aqua>=-=-=-=-=-={0} Page {1} of {2} {3}=-=-=-=-=-=-=</aqua>"
 FRIENDS_PARTY_CREATED: "<green>Your party has been created. An invite has been sent to all online friends!</green>"
 
 CANNOT_FRIEND_SELF: "<red>You can't friend yourself!</red>"
@@ -32,6 +32,10 @@ PLAYER_NOT_FRIENDED: "{0} <red>isn't on your friend list!</red>"
 YOU_HAVE_NO_FRIENDS: "<yellow>You don't have any friends yet. Use <aqua><u><click:suggest_command:/friend add>/friend add</click></u></aqua> to add a friend!</yellow>"
 
 UNKNOWN_PLAYER: "<red>That player does not exist!</red>"
+
+STATUS_OFFLINE: "<red>is currently offline</red>"
+STATUS_PLAYING: "<dark_aqua>is in a game</dark_aqua>"
+STATUS_IN_LOBBY: "<dark_aqua>is in the lobby</dark_aqua>"
 
 # Firework Wars Lobby
 PLAYER_JOINED_LOBBY: "{0} <dark_aqua>has joined the lobby!"

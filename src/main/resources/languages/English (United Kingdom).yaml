@@ -33,6 +33,10 @@ YOU_HAVE_NO_FRIENDS: "<yellow>You don't have any friends yet. Use <aqua><u><clic
 
 UNKNOWN_PLAYER: "<red>That player does not exist!</red>"
 
+STATUS_OFFLINE: "<red>is currently offline</red>"
+STATUS_PLAYING: "<dark_aqua>is in a game</dark_aqua>"
+STATUS_IN_LOBBY: "<dark_aqua>is in the lobby</dark_aqua>"
+
 # Firework Wars Lobby
 PLAYER_JOINED_LOBBY: "{0} <dark_aqua>has joined the lobby!"
 RANKED_PLAYER_JOINED_LOBBY: "{0} <gradient:#1568cf:#1137aa>has joined the lobby!</gradient>"

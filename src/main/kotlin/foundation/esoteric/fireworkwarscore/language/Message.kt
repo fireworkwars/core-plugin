@@ -36,6 +36,10 @@ enum class Message {
 
     UNKNOWN_PLAYER,
 
+    STATUS_OFFLINE,
+    STATUS_PLAYING,
+    STATUS_IN_LOBBY,
+
     // Firework Wars Lobby
     PLAYER_JOINED_LOBBY,
     RANKED_PLAYER_JOINED_LOBBY,
