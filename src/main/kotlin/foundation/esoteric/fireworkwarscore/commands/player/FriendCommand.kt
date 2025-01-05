@@ -21,7 +21,7 @@ import kotlin.math.max
 
 class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICommand("friend") {
     private val playerDataManager: PlayerDataManager = plugin.playerDataManager
-    private val friendManager: FriendManager = FriendManager(plugin)
+    private val friendManager: FriendManager = plugin.friendManager
 
     private val playerArgumentNodeName: String = "targetPlayer"
     private val friendListPageArgumentNodeName: String = "page"
@@ -154,6 +154,14 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
 
         if (profile.friends.contains(targetUuid)) {
             return player.sendMessage(Message.YOU_ARE_ALREADY_FRIENDS, targetProfile.formattedName())
+        }
+
+        if (profile.blocked.contains(targetUuid)) {
+            return player.sendMessage(Message.THAT_PLAYER_IS_BLOCKED)
+        }
+
+        if (targetProfile.blocked.contains(uuid)) {
+            return player.sendMessage(Message.YOU_HAVE_BEEN_BLOCKED)
         }
 
         friendManager.addFriendRequest(player, target) { sender, receiver ->
