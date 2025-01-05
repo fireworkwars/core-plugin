@@ -31,6 +31,13 @@ NO_FRIEND_REQUESTS_TO: "<red>You haven't sent a friend request to {0}!</red>"
 PLAYER_NOT_FRIENDED: "{0} <red>isn't on your friend list!</red>"
 YOU_HAVE_NO_FRIENDS: "<yellow>You don't have any friends yet. Use <aqua><u><click:suggest_command:/friend add>/friend add</click></u></aqua> to add a friend!</yellow>"
 
+BLOCKED_PLAYER: "<green>You have blocked {0}!</green>"
+UNBLOCKED_PLAYER: "<green>You have unblocked {0}!</green>"
+
+CANNOT_BLOCK_SELF: "<red>You can't block yourself!</red>"
+PLAYER_ALREADY_BLOCKED: "<red>You have already blocked this player!</red>"
+PLAYER_NOT_BLOCKED: "<red>This player isn't blocked!</red>"
+
 UNKNOWN_PLAYER: "<red>That player does not exist!</red>"
 
 STATUS_OFFLINE: "<red>is currently offline</red>"
