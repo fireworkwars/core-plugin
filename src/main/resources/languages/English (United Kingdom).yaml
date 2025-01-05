@@ -29,9 +29,9 @@ YOU_ARE_ALREADY_FRIENDS: "<red>You are already friends with this person!</red>"
 NO_FRIEND_REQUESTS_FROM: "{0} <red>hasn't sent you a friend request!</red>"
 NO_FRIEND_REQUESTS_TO: "<red>You haven't sent a friend request to {0}!</red>"
 PLAYER_NOT_FRIENDED: "{0} <red>isn't on your friend list!</red>"
-YOU_HAVE_NO_FRIENDS: "<yellow>You don't have any friends yet. Use <aqua><click:suggest_command:/friend add>/friend add</click></aqua> to add a friend!</yellow>"
+YOU_HAVE_NO_FRIENDS: "<yellow>You don't have any friends yet. Use <aqua><u><click:suggest_command:/friend add>/friend add</click></u></aqua> to add a friend!</yellow>"
 
-UNKNOWN_PLAYER: "<red>Unknown Player.</red>"
+UNKNOWN_PLAYER: "<red>That player does not exist!.</red>"
 
 # Firework Wars Lobby
 PLAYER_JOINED_LOBBY: "{0} <dark_aqua>has joined the lobby!"
