@@ -22,6 +22,10 @@ enum class Rank(val color: TextColor, private val prefixValue: String?, private 
         return prefix.appendSpaceIfNotEmpty().append(player.name()).color(color).compact()
     }
 
+    fun formatPlayerName(name: Component): Component {
+        return prefix.appendSpaceIfNotEmpty().append(name).color(color).compact()
+    }
+
     fun toFormattedText(): Component {
         return prefix.appendSpaceIfNotEmpty().append(text(capitalised())).color(color).compact()
     }
