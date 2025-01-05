@@ -47,18 +47,18 @@ class SetRankCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICom
 
         val rank = Rank.valueOf(rankArgument.uppercase())
 
-        val targetProfile = playerDataManager.getPlayerProfile(targetPlayer, true)!!
+        val targetProfile = playerDataManager.getPlayerProfile(targetPlayer)
         targetProfile.rank = rank
 
         if (rank == Rank.NONE) {
-            player.sendMessage(Message.REVOKED_RANK_SUCCESSFULLY, targetPlayer.name())
+            player.sendMessage(Message.REVOKED_RANK_SUCCESSFULLY, targetProfile.formattedName())
             targetPlayer.sendMessage(Message.RANK_REVOKED)
         } else {
-            player.sendMessage(Message.GRANTED_RANK_SUCCESSFULLY, targetPlayer.name(), rank.toFormattedText())
+            player.sendMessage(Message.GRANTED_RANK_SUCCESSFULLY, targetProfile.formattedName(), rank.toFormattedText())
             targetPlayer.sendMessage(Message.RANK_GRANTED, rank.toFormattedText())
         }
 
-        targetProfile.rank.updateTablist(targetPlayer, plugin)
+        targetProfile.updateOwnTablist()
         plugin.lobbyPluginData.updateScoreboards()
     }
 }
