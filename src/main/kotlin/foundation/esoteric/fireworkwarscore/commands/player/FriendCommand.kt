@@ -74,6 +74,8 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
             CommandAPICommand("help")
                 .withPermission(CommandPermission.NONE)
                 .executesPlayer(this::help))
+
+        register(plugin)
     }
 
     private fun hasMutualRequests(player1: Player, player2: Player): Boolean {
