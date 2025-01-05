@@ -40,6 +40,8 @@ enum class Message {
     STATUS_PLAYING,
     STATUS_IN_LOBBY,
 
+    COMING_SOON,
+
     // Firework Wars Lobby
     PLAYER_JOINED_LOBBY,
     RANKED_PLAYER_JOINED_LOBBY,
