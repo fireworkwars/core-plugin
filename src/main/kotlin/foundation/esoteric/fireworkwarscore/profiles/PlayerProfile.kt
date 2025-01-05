@@ -2,8 +2,10 @@ package foundation.esoteric.fireworkwarscore.profiles
 
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
+import org.bukkit.entity.Player
 import java.util.*
 
+@Suppress("unused")
 data class PlayerProfile(
     val uuid: UUID,
     var username: String,
@@ -20,5 +22,9 @@ data class PlayerProfile(
 
     fun updateOwnTablist() {
         return rank.updateTablist(Bukkit.getPlayer(uuid)!!)
+    }
+
+    fun getOnlineFriends(): List<Player> {
+        return friends.mapNotNull { Bukkit.getPlayer(it) }
     }
 }
