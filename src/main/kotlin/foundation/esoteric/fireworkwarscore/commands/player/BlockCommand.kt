@@ -81,7 +81,10 @@ class BlockCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComma
             return player.sendMessage(Message.PLAYER_ALREADY_BLOCKED)
         }
 
-        player.performCommand("friend remove ${target.name}")
+        if (profile.friends.contains(target.uniqueId)) {
+            plugin.friendCommand.removeFriend(player, target)
+        }
+
         profile.blocked.add(target.uniqueId)
 
         plugin.friendManager.removeRequestData(sender = player, receiver = target)
