@@ -3,7 +3,7 @@ package foundation.esoteric.fireworkwarscore.commands.player
 import dev.jorel.commandapi.CommandAPICommand
 import dev.jorel.commandapi.CommandPermission
 import dev.jorel.commandapi.arguments.IntegerArgument
-import dev.jorel.commandapi.arguments.PlayerArgument
+import dev.jorel.commandapi.arguments.StringArgument
 import dev.jorel.commandapi.executors.CommandArguments
 import foundation.esoteric.fireworkwarscore.FireworkWarsCorePlugin
 import foundation.esoteric.fireworkwarscore.language.LanguageManager
@@ -88,8 +88,8 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
                requests[player2.uniqueId]!!.contains(player1.uniqueId)
     }
 
-    private fun playerArgumentSupplier(): PlayerArgument {
-        return PlayerArgument(playerArgumentNodeName)
+    private fun playerArgumentSupplier(): StringArgument {
+        return StringArgument(playerArgumentNodeName)
     }
 
     private fun pageArgumentSupplier(): IntegerArgument {
@@ -101,7 +101,9 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
     }
 
     private fun denyFriend(player: Player, args: CommandArguments) {
-        val target = args.get(playerArgumentNodeName) as Player
+        val targetArgument = args.get(playerArgumentNodeName) as String? ?: ""
+        val target = plugin.server.getPlayer(targetArgument)
+            ?: return player.sendMessage(Message.UNKNOWN_PLAYER)
 
         val profile = playerDataManager.getPlayerProfile(player)
         val targetProfile = playerDataManager.getPlayerProfile(target)
@@ -118,7 +120,9 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
     }
 
     private fun addOrAcceptFriend(player: Player, args: CommandArguments, acceptOnly: Boolean = false) {
-        val target = args.get(playerArgumentNodeName) as Player
+        val targetArgument = args.get(playerArgumentNodeName) as String? ?: ""
+        val target = plugin.server.getPlayer(targetArgument)
+            ?: return player.sendMessage(Message.UNKNOWN_PLAYER)
 
         val profile = playerDataManager.getPlayerProfile(player)
         val targetProfile = playerDataManager.getPlayerProfile(target)
@@ -165,7 +169,9 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
     }
 
     private fun cancelFriendRequest(player: Player, args: CommandArguments) {
-        val target = args.get(playerArgumentNodeName) as Player
+        val targetArgument = args.get(playerArgumentNodeName) as String? ?: ""
+        val target = plugin.server.getPlayer(targetArgument)
+            ?: return player.sendMessage(Message.UNKNOWN_PLAYER)
 
         val profile = playerDataManager.getPlayerProfile(player)
         val targetProfile = playerDataManager.getPlayerProfile(target)
@@ -182,7 +188,9 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
     }
 
     private fun removeFriend(player: Player, args: CommandArguments) {
-        val target = args.get(playerArgumentNodeName) as Player
+        val targetArgument = args.get(playerArgumentNodeName) as String? ?: ""
+        val target = plugin.server.getPlayer(targetArgument)
+            ?: return player.sendMessage(Message.UNKNOWN_PLAYER)
 
         val profile = playerDataManager.getPlayerProfile(player)
         val targetProfile = playerDataManager.getPlayerProfile(target)
