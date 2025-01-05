@@ -15,6 +15,8 @@ import net.kyori.adventure.text.Component.text
 import org.bukkit.entity.Player
 import org.bukkit.scheduler.BukkitTask
 import java.util.*
+import kotlin.math.ceil
+import kotlin.math.max
 
 
 class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICommand("friend") {
@@ -200,7 +202,7 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
         val friends = profile.friends
 
         val friendsPerPage = 5
-        val totalPages = (friends.size + friendsPerPage - 1) / friendsPerPage
+        val totalPages = max(1, ceil(friends.size.toDouble() / friendsPerPage).toInt())
         val page = Math.clamp(pageArgument.toLong(), 1, totalPages)
 
         val startIndex = (page - 1) * friendsPerPage
