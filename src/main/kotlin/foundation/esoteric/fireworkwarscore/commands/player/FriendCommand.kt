@@ -104,6 +104,10 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
         val target = plugin.server.getPlayer(targetArgument)
             ?: return player.sendMessage(Message.UNKNOWN_PLAYER)
 
+        if (target.uniqueId == player.uniqueId) {
+            return player.sendMessage(Message.CANNOT_FRIEND_SELF)
+        }
+
         val profile = playerDataManager.getPlayerProfile(player)
         val targetProfile = playerDataManager.getPlayerProfile(target)
 
@@ -122,6 +126,10 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
         val targetArgument = args.get(playerArgumentNodeName) as String? ?: ""
         val target = plugin.server.getPlayer(targetArgument)
             ?: return player.sendMessage(Message.UNKNOWN_PLAYER)
+
+        if (target.uniqueId == player.uniqueId) {
+            return player.sendMessage(Message.CANNOT_FRIEND_SELF)
+        }
 
         val profile = playerDataManager.getPlayerProfile(player)
         val targetProfile = playerDataManager.getPlayerProfile(target)
@@ -172,6 +180,10 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
         val target = plugin.server.getPlayer(targetArgument)
             ?: return player.sendMessage(Message.UNKNOWN_PLAYER)
 
+        if (target.uniqueId == player.uniqueId) {
+            return player.sendMessage(Message.CANNOT_FRIEND_SELF)
+        }
+
         val profile = playerDataManager.getPlayerProfile(player)
         val targetProfile = playerDataManager.getPlayerProfile(target)
 
@@ -190,6 +202,10 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
         val targetArgument = args.get(playerArgumentNodeName) as String? ?: ""
         val target = plugin.server.getPlayer(targetArgument)
             ?: return player.sendMessage(Message.UNKNOWN_PLAYER)
+
+        if (target.uniqueId == player.uniqueId) {
+            return player.sendMessage(Message.CANNOT_FRIEND_SELF)
+        }
 
         val profile = playerDataManager.getPlayerProfile(player)
         val targetProfile = playerDataManager.getPlayerProfile(target)
