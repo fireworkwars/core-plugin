@@ -16,6 +16,7 @@ import foundation.esoteric.fireworkwarscore.config.PluginConfig
 import foundation.esoteric.fireworkwarscore.events.PlayerLoseHungerListener
 import foundation.esoteric.fireworkwarscore.interfaces.Event
 import foundation.esoteric.fireworkwarscore.language.LanguageManager
+import foundation.esoteric.fireworkwarscore.managers.FriendManager
 import foundation.esoteric.fireworkwarscore.maps.MapManager
 import foundation.esoteric.fireworkwarscore.profiles.PlayerDataManager
 import net.kyori.adventure.text.Component.text
@@ -34,6 +35,7 @@ class FireworkWarsCorePlugin : JavaPlugin() {
     lateinit var pluginConfig: PluginConfig
 
     private val mapManager = MapManager(this)
+    val friendManager: FriendManager = FriendManager(this)
 
     val mm = MiniMessage.miniMessage()
 
