@@ -6,6 +6,7 @@ import dev.jorel.commandapi.CommandAPICommand
 import foundation.esoteric.fireworkwarscore.commands.developer.ToggleBuildCommand
 import foundation.esoteric.fireworkwarscore.commands.developer.ToggleDebugCommand
 import foundation.esoteric.fireworkwarscore.commands.operator.SetRankCommand
+import foundation.esoteric.fireworkwarscore.commands.player.BlockCommand
 import foundation.esoteric.fireworkwarscore.commands.player.FriendCommand
 import foundation.esoteric.fireworkwarscore.commands.player.LobbyCommand
 import foundation.esoteric.fireworkwarscore.commands.player.SetLanguageCommand
@@ -96,6 +97,7 @@ class FireworkWarsCorePlugin : JavaPlugin() {
         commands.add(SetLanguageCommand(this))
         commands.add(SetRankCommand(this))
         commands.add(FriendCommand(this))
+        commands.add(BlockCommand(this))
         commands.add(LobbyCommand(this))
 
         logger.info("Finished loading commands.")
