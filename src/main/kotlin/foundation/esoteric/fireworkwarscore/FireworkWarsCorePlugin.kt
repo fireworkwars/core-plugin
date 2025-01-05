@@ -18,7 +18,7 @@ import foundation.esoteric.fireworkwarscore.language.LanguageManager
 import foundation.esoteric.fireworkwarscore.maps.MapManager
 import foundation.esoteric.fireworkwarscore.profiles.PlayerDataManager
 
-@Suppress("unused")
+@Suppress("unused", "MemberVisibilityCanBePrivate")
 class FireworkWarsCorePlugin : BasePlugin() {
     override lateinit var playerDataManager: PlayerDataManager
     override lateinit var languageManager: LanguageManager
