@@ -8,20 +8,20 @@ import dev.jorel.commandapi.arguments.IntegerArgument
 import dev.jorel.commandapi.arguments.PlayerArgument
 import dev.jorel.commandapi.executors.CommandArguments
 import foundation.esoteric.fireworkwarscore.FireworkWarsCorePlugin
-import foundation.esoteric.fireworkwarscore.language.LanguageManager
 import foundation.esoteric.fireworkwarscore.language.Message
 import foundation.esoteric.fireworkwarscore.managers.FriendManager
 import foundation.esoteric.fireworkwarscore.profiles.PlayerDataManager
+import foundation.esoteric.fireworkwarscore.util.getMessage
 import foundation.esoteric.fireworkwarscore.util.sendMessage
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.Component.text
 import org.bukkit.entity.Player
+import java.util.*
 import kotlin.math.ceil
 import kotlin.math.max
 
 class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICommand("friend") {
     private val playerDataManager: PlayerDataManager = plugin.playerDataManager
-    private val languageManager: LanguageManager = plugin.languageManager
     private val friendManager: FriendManager = FriendManager(plugin)
 
     private val playerArgumentNodeName: String = "targetPlayer"
@@ -127,31 +127,6 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
             .setOptional(true) as IntegerArgument
     }
 
-    private fun acceptFriend(player: Player, args: CommandArguments) {
-        return addOrAcceptFriend(player, args, true)
-    }
-
-    private fun denyFriend(player: Player, args: CommandArguments) {
-        val target = args[playerArgumentNodeName] as Player?
-            ?: return player.sendMessage(Message.UNKNOWN_PLAYER)
-
-        if (target.uniqueId == player.uniqueId) {
-            return player.sendMessage(Message.CANNOT_FRIEND_SELF)
-        }
-
-        val profile = playerDataManager.getPlayerProfile(player)
-        val targetProfile = playerDataManager.getPlayerProfile(target)
-
-        if (friendManager.getReceivingRequests(player).contains(target.uniqueId)) {
-            friendManager.removeRequestData(sender = target, receiver = player)
-
-            player.sendMessage(Message.FRIEND_REQUEST_DENIED, targetProfile.formattedName())
-            target.sendMessage(Message.FRIEND_REQUEST_DENIED_BY, profile.formattedName())
-        } else {
-            player.sendMessage(Message.NO_FRIEND_REQUESTS_FROM, targetProfile.formattedName())
-        }
-    }
-
     private fun addOrAcceptFriend(player: Player, args: CommandArguments, acceptOnly: Boolean = false) {
         val target = args[playerArgumentNodeName] as Player?
             ?: return player.sendMessage(Message.UNKNOWN_PLAYER)
@@ -215,6 +190,31 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
         }
     }
 
+    private fun acceptFriend(player: Player, args: CommandArguments) {
+        return addOrAcceptFriend(player, args, true)
+    }
+
+    private fun denyFriend(player: Player, args: CommandArguments) {
+        val target = args[playerArgumentNodeName] as Player?
+            ?: return player.sendMessage(Message.UNKNOWN_PLAYER)
+
+        if (target.uniqueId == player.uniqueId) {
+            return player.sendMessage(Message.CANNOT_FRIEND_SELF)
+        }
+
+        val profile = playerDataManager.getPlayerProfile(player)
+        val targetProfile = playerDataManager.getPlayerProfile(target)
+
+        if (friendManager.getReceivingRequests(player).contains(target.uniqueId)) {
+            friendManager.removeRequestData(sender = target, receiver = player)
+
+            player.sendMessage(Message.FRIEND_REQUEST_DENIED, targetProfile.formattedName())
+            target.sendMessage(Message.FRIEND_REQUEST_DENIED_BY, profile.formattedName())
+        } else {
+            player.sendMessage(Message.NO_FRIEND_REQUESTS_FROM, targetProfile.formattedName())
+        }
+    }
+
     private fun removeFriend(player: Player, args: CommandArguments) {
         val target = args[playerArgumentNodeName] as Player?
             ?: return player.sendMessage(Message.UNKNOWN_PLAYER)
@@ -264,21 +264,23 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
             message.append(friendProfile.formattedName()).appendNewline()
         }
 
-        val prevComponent = if (page > 1) {
+        val prevText = if (page > 1) {
             plugin.mm.deserialize(" <yellow><b><click:run_command:/friend list ${page - 1}><<")
         } else {
             plugin.mm.deserialize("<aqua>-=")
         }
 
-        val nextComponent = if (page < totalPages) {
+        val nextText = if (page < totalPages) {
             plugin.mm.deserialize(" <yellow><b><click:run_command:/friend list ${page + 1}>>")
         } else {
             plugin.mm.deserialize("<aqua>=-")
         }
 
-        message.append(getMessage(Message.FRIEND_LIST_PAGING, player, prevComponent, page, totalPages, nextComponent))
-            .appendNewline()
-        message.append(getMessage(Message.FRIEND_LIST_SEPARATOR, player))
+        val pagingText = player.getMessage(
+            Message.FRIEND_LIST_PAGING, prevText, page, totalPages, nextText)
+
+        message.append(pagingText).appendNewline()
+        message.append(player.getMessage(Message.FRIEND_LIST_SEPARATOR))
 
         player.sendMessage(message)
     }

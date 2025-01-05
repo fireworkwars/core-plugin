@@ -17,6 +17,7 @@ import foundation.esoteric.fireworkwarscore.interfaces.Event
 import foundation.esoteric.fireworkwarscore.language.LanguageManager
 import foundation.esoteric.fireworkwarscore.maps.MapManager
 import foundation.esoteric.fireworkwarscore.profiles.PlayerDataManager
+import net.kyori.adventure.text.Component.text
 import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.scheduler.BukkitTask
@@ -119,5 +120,11 @@ class FireworkWarsCorePlugin : JavaPlugin() {
 
     fun runTaskLater(task: Runnable, delay: Long): BukkitTask {
         return server.scheduler.runTaskLater(this, task, delay)
+    }
+
+    fun logLoudly(message: String, force: Boolean = false) {
+        if (isDebugging || force) {
+            server.broadcast(text(message))
+        }
     }
 }
