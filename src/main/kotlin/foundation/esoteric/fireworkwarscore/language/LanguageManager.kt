@@ -1,7 +1,6 @@
 package foundation.esoteric.fireworkwarscore.language
 
 import foundation.esoteric.fireworkwarscore.FireworkWarsCorePlugin
-import foundation.esoteric.fireworkwarscore.communication.BasePlugin
 import foundation.esoteric.fireworkwarscore.file.FileUtil
 import foundation.esoteric.fireworkwarscore.profiles.PlayerProfile
 import net.kyori.adventure.text.Component
@@ -18,7 +17,7 @@ import java.util.Objects.requireNonNull
 
 
 @Suppress("unused", "MethodCouldBePrivate", "MemberVisibilityCanBePrivate")
-class LanguageManager(private val plugin: BasePlugin) {
+class LanguageManager(private val plugin: FireworkWarsCorePlugin) {
     companion object {
         @JvmStatic
         @get:NotNull
@@ -45,9 +44,7 @@ class LanguageManager(private val plugin: BasePlugin) {
     }
 
     init {
-        if (plugin is FireworkWarsCorePlugin) {
-            globalInstance = this
-        }
+        globalInstance = this
 
         val dataFolder: File = plugin.dataFolder
         this.languagesFolderPath = dataFolder.path + File.separator + languagesFolderName

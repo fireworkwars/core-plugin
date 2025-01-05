@@ -1,7 +1,7 @@
 package foundation.esoteric.fireworkwarscore.profiles
 
 import com.google.gson.Gson
-import foundation.esoteric.fireworkwarscore.communication.BasePlugin
+import foundation.esoteric.fireworkwarscore.FireworkWarsCorePlugin
 import org.bukkit.entity.Player
 import org.jetbrains.annotations.Contract
 import java.io.File
@@ -11,7 +11,7 @@ import java.io.IOException
 import java.util.*
 
 @Suppress("unused")
-class PlayerDataManager(private val plugin: BasePlugin) {
+class PlayerDataManager(private val plugin: FireworkWarsCorePlugin) {
     private val gson = Gson()
 
     private val playerDataFolderName = "player-data"
