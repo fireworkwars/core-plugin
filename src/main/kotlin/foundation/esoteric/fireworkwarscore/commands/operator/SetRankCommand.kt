@@ -22,6 +22,10 @@ class SetRankCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICom
     init {
         setRequirements { it.isOp }
 
+        withShortDescription("Set a player's rank")
+        withFullDescription("Set a player's rank")
+        withAliases("rank")
+
         withArguments(PlayerArgument(targetPlayerArgumentNodeName), getRanksArgument())
         executesPlayer(this::onPlayerExecution)
         register(plugin)

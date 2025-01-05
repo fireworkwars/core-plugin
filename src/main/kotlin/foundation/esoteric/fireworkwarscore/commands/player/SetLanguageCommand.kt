@@ -22,6 +22,10 @@ class SetLanguageCommand(plugin: FireworkWarsCorePlugin) : CommandAPICommand("se
         setRequirements { it is Player }
         withPermission(CommandPermission.NONE)
 
+        withShortDescription("Set your language")
+        withFullDescription("Set your language, changing the language of the server messages & texts.")
+        withAliases("lang")
+
         withArguments(getLanguageArgument().includeSuggestions(getLanguageSuggestions()))
         executesPlayer(this::onPlayerExecution)
         register(plugin)

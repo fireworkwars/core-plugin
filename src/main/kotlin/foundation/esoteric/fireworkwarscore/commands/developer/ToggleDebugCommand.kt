@@ -12,6 +12,9 @@ class ToggleDebugCommand(private val plugin: FireworkWarsCorePlugin) : CommandAP
     init {
         this.requirements = Predicate { it.isOp }
 
+        this.withShortDescription("Toggle debugging mode")
+        this.withFullDescription("Toggle debugging mode")
+
         this.executesPlayer(this::executesPlayer)
         this.register(plugin)
     }

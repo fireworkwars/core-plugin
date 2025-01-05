@@ -2,6 +2,7 @@ package foundation.esoteric.fireworkwarscore.commands.player
 
 import dev.jorel.commandapi.CommandAPICommand
 import dev.jorel.commandapi.CommandPermission
+import dev.jorel.commandapi.arguments.Argument
 import dev.jorel.commandapi.arguments.ArgumentSuggestions
 import dev.jorel.commandapi.arguments.IntegerArgument
 import dev.jorel.commandapi.arguments.PlayerArgument
@@ -9,24 +10,19 @@ import dev.jorel.commandapi.executors.CommandArguments
 import foundation.esoteric.fireworkwarscore.FireworkWarsCorePlugin
 import foundation.esoteric.fireworkwarscore.language.LanguageManager
 import foundation.esoteric.fireworkwarscore.language.Message
+import foundation.esoteric.fireworkwarscore.managers.FriendManager
 import foundation.esoteric.fireworkwarscore.profiles.PlayerDataManager
 import foundation.esoteric.fireworkwarscore.util.sendMessage
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.Component.text
-import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
-import org.bukkit.scheduler.BukkitTask
-import java.util.*
 import kotlin.math.ceil
 import kotlin.math.max
-
 
 class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICommand("friend") {
     private val playerDataManager: PlayerDataManager = plugin.playerDataManager
     private val languageManager: LanguageManager = plugin.languageManager
-
-    private val requests: MutableMap<UUID, MutableList<UUID>> = mutableMapOf()
-    private val expiryTasks: MutableMap<UUID, MutableMap<UUID, BukkitTask>> = mutableMapOf()
+    private val friendManager: FriendManager = FriendManager(plugin)
 
     private val playerArgumentNodeName: String = "targetPlayer"
     private val friendListPageArgumentNodeName: String = "page"
@@ -35,65 +31,95 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
         setRequirements { it is Player }
         withPermission(CommandPermission.NONE)
 
+        withShortDescription("All friend-related commands")
+        withFullDescription("Add, remove, view and manage your friends.")
         withAliases("f")
 
         withSubcommand(
             CommandAPICommand("add")
                 .withPermission(CommandPermission.NONE)
+                .withShortDescription("Adds a player as a friend")
+                .withFullDescription("Sends a friend request to the specified player, or accepts their friend request if one exists.")
                 .withArguments(this.playerArgumentSupplier())
-                .executesPlayer(this::addOrAcceptFriend))
+                .executesPlayer(this::addOrAcceptFriend)
+        )
 
         withSubcommand(
             CommandAPICommand("cancel")
                 .withPermission(CommandPermission.NONE)
-                .withArguments(this.playerArgumentSupplier())
-                .executesPlayer(this::cancelFriendRequest))
+                .withShortDescription("Cancels a friend request")
+                .withFullDescription("Cancels a friend request sent to the specified player.")
+                .withArguments(this.outgoingRequestsArgumentSupplier())
+                .executesPlayer(this::cancelFriendRequest)
+        )
 
         withSubcommand(
             CommandAPICommand("accept")
                 .withPermission(CommandPermission.NONE)
-                .withArguments(this.playerArgumentSupplier())
-                .executesPlayer(this::acceptFriend))
+                .withShortDescription("Accepts a friend request")
+                .withFullDescription("Accepts a friend request from the specified player.")
+                .withArguments(this.receivingRequestsArgumentSupplier())
+                .executesPlayer(this::acceptFriend)
+        )
 
         withSubcommand(
             CommandAPICommand("deny")
                 .withPermission(CommandPermission.NONE)
-                .withArguments(this.playerArgumentSupplier())
-                .executesPlayer(this::denyFriend))
+                .withShortDescription("Denies a friend request")
+                .withFullDescription("Denies a friend request from the specified player.")
+                .withArguments(this.receivingRequestsArgumentSupplier())
+                .executesPlayer(this::denyFriend)
+        )
 
         withSubcommand(
             CommandAPICommand("remove")
                 .withPermission(CommandPermission.NONE)
+                .withShortDescription("Removes a friend")
+                .withFullDescription("Removes the specified player from your friend list.")
                 .withArguments(this.playerArgumentSupplier())
-                .executesPlayer(this::removeFriend))
+                .executesPlayer(this::removeFriend)
+        )
 
         withSubcommand(
             CommandAPICommand("list")
                 .withPermission(CommandPermission.NONE)
+                .withShortDescription("Lists your friends")
+                .withFullDescription("Lists all of your friends.")
                 .withArguments(this.pageArgumentSupplier())
-                .executesPlayer(this::listFriends))
-
-        withSubcommand(
-            CommandAPICommand("help")
-                .withPermission(CommandPermission.NONE)
-                .executesPlayer(this::help))
+                .executesPlayer(this::listFriends)
+        )
 
         register(plugin)
     }
 
-    private fun hasMutualRequests(player1: Player, player2: Player): Boolean {
-        return requests.containsKey(player1.uniqueId) &&
-               requests.containsKey(player2.uniqueId) &&
-               requests[player1.uniqueId]!!.contains(player2.uniqueId) &&
-               requests[player2.uniqueId]!!.contains(player1.uniqueId)
+    private fun playerArgumentSupplier(): Argument<Player> {
+        return PlayerArgument(playerArgumentNodeName).replaceSuggestions(ArgumentSuggestions.strings { info ->
+            val playerNames = plugin.server.onlinePlayers
+                .map { it.name }
+                .filter { it != info.sender.name }
+
+            return@strings playerNames.toTypedArray()
+        })
     }
 
-    private fun playerArgumentSupplier(): PlayerArgument {
-        val playerNames = plugin.server.onlinePlayers.map { it.name }
-        val suggestions = ArgumentSuggestions.strings<CommandSender> { playerNames.toTypedArray() }
+    private fun outgoingRequestsArgumentSupplier(): Argument<Player> {
+        return PlayerArgument(playerArgumentNodeName).replaceSuggestions(ArgumentSuggestions.strings { info ->
+            val player = info.sender as Player
+            val outgoingRequests = friendManager.getOutgoingRequests(player)
+            val playerNames = outgoingRequests.mapNotNull { plugin.server.getPlayer(it)?.name }
 
-        return PlayerArgument(playerArgumentNodeName)
-            .replaceSuggestions(suggestions) as PlayerArgument
+            return@strings playerNames.toTypedArray()
+        })
+    }
+
+    private fun receivingRequestsArgumentSupplier(): Argument<Player> {
+        return PlayerArgument(playerArgumentNodeName).replaceSuggestions(ArgumentSuggestions.strings { info ->
+            val player = info.sender as Player
+            val receivingRequests = friendManager.getReceivingRequests(player)
+            val playerNames = receivingRequests.mapNotNull { plugin.server.getPlayer(it)?.name }
+
+            return@strings playerNames.toTypedArray()
+        })
     }
 
     private fun pageArgumentSupplier(): IntegerArgument {
@@ -106,7 +132,7 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
     }
 
     private fun denyFriend(player: Player, args: CommandArguments) {
-        val target = args.get(playerArgumentNodeName) as Player?
+        val target = args[playerArgumentNodeName] as Player?
             ?: return player.sendMessage(Message.UNKNOWN_PLAYER)
 
         if (target.uniqueId == player.uniqueId) {
@@ -116,9 +142,8 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
         val profile = playerDataManager.getPlayerProfile(player)
         val targetProfile = playerDataManager.getPlayerProfile(target)
 
-        if (requests[target.uniqueId]?.contains(player.uniqueId) == true) {
-            requests[target.uniqueId]?.remove(player.uniqueId)
-            expiryTasks[target.uniqueId]?.remove(player.uniqueId)?.cancel()
+        if (friendManager.getReceivingRequests(player).contains(target.uniqueId)) {
+            friendManager.removeRequestData(sender = target, receiver = player)
 
             player.sendMessage(Message.FRIEND_REQUEST_DENIED, targetProfile.formattedName())
             target.sendMessage(Message.FRIEND_REQUEST_DENIED_BY, profile.formattedName())
@@ -128,7 +153,7 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
     }
 
     private fun addOrAcceptFriend(player: Player, args: CommandArguments, acceptOnly: Boolean = false) {
-        val target = args.get(playerArgumentNodeName) as Player?
+        val target = args[playerArgumentNodeName] as Player?
             ?: return player.sendMessage(Message.UNKNOWN_PLAYER)
 
         if (target.uniqueId == player.uniqueId) {
@@ -141,7 +166,7 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
         val uuid = player.uniqueId
         val targetUuid = target.uniqueId
 
-        if (acceptOnly && requests[targetUuid]?.contains(uuid) != true) {
+        if (acceptOnly && !friendManager.getReceivingRequests(player).contains(targetUuid)) {
             return player.sendMessage(Message.NO_FRIEND_REQUESTS_FROM, targetProfile.formattedName())
         }
 
@@ -149,38 +174,28 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
             return player.sendMessage(Message.YOU_ARE_ALREADY_FRIENDS, targetProfile.formattedName())
         }
 
-        requests.computeIfAbsent(uuid) { mutableListOf() }.add(targetUuid)
+        friendManager.addFriendRequest(player, target) { sender, receiver ->
+            sender.sendMessage(Message.FRIEND_REQUEST_EXPIRED, targetProfile.formattedName())
+            receiver.sendMessage(Message.FRIEND_REQUEST_FROM_EXPIRED, profile.formattedName())
+        }
 
-        if (hasMutualRequests(player, target)) {
+        if (friendManager.hasMutualRequests(player, target)) {
             profile.friends.add(targetUuid)
             targetProfile.friends.add(uuid)
 
             player.sendMessage(Message.YOU_ARE_NOW_FRIENDS, targetProfile.formattedName())
             target.sendMessage(Message.YOU_ARE_NOW_FRIENDS, profile.formattedName())
 
-            requests[uuid]?.remove(targetUuid)
-            requests[targetUuid]?.remove(uuid)
-
-            expiryTasks[uuid]?.remove(targetUuid)?.cancel()
-            expiryTasks[targetUuid]?.remove(uuid)?.cancel()
+            friendManager.removeRequestData(sender = player, receiver = target)
+            friendManager.removeRequestData(sender = target, receiver = player)
         } else {
             player.sendMessage(Message.FRIEND_REQUEST_SENT, targetProfile.formattedName())
             target.sendMessage(Message.FRIEND_REQUEST_FROM, profile.formattedName())
-
-            val task = plugin.runTaskLater({
-                requests[uuid]?.remove(targetUuid)
-                expiryTasks[uuid]?.remove(targetUuid)
-
-                player.sendMessage(Message.FRIEND_REQUEST_EXPIRED, targetProfile.formattedName())
-                target.sendMessage(Message.FRIEND_REQUEST_FROM_EXPIRED, profile.formattedName())
-            }, 6000L)
-
-            expiryTasks.computeIfAbsent(uuid) { mutableMapOf() } [targetUuid] = task
         }
     }
 
     private fun cancelFriendRequest(player: Player, args: CommandArguments) {
-        val target = args.get(playerArgumentNodeName) as Player?
+        val target = args[playerArgumentNodeName] as Player?
             ?: return player.sendMessage(Message.UNKNOWN_PLAYER)
 
         if (target.uniqueId == player.uniqueId) {
@@ -190,9 +205,8 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
         val profile = playerDataManager.getPlayerProfile(player)
         val targetProfile = playerDataManager.getPlayerProfile(target)
 
-        if (requests[target.uniqueId]?.contains(player.uniqueId) == true) {
-            requests[target.uniqueId]?.remove(player.uniqueId)
-            expiryTasks[target.uniqueId]?.remove(player.uniqueId)?.cancel()
+        if (friendManager.getOutgoingRequests(player).contains(target.uniqueId)) {
+            friendManager.removeRequestData(sender = player, receiver = target)
 
             player.sendMessage(Message.FRIEND_REQUEST_CANCELLED, targetProfile.formattedName())
             target.sendMessage(Message.FRIEND_REQUEST_CANCELLED_BY, profile.formattedName())
@@ -202,7 +216,7 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
     }
 
     private fun removeFriend(player: Player, args: CommandArguments) {
-        val target = args.get(playerArgumentNodeName) as Player?
+        val target = args[playerArgumentNodeName] as Player?
             ?: return player.sendMessage(Message.UNKNOWN_PLAYER)
 
         if (target.uniqueId == player.uniqueId) {
@@ -262,15 +276,11 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
             plugin.mm.deserialize("<aqua>=-")
         }
 
-        message.append(getMessage(Message.FRIEND_LIST_PAGING, player, prevComponent, page, totalPages, nextComponent)).appendNewline()
+        message.append(getMessage(Message.FRIEND_LIST_PAGING, player, prevComponent, page, totalPages, nextComponent))
+            .appendNewline()
         message.append(getMessage(Message.FRIEND_LIST_SEPARATOR, player))
 
         player.sendMessage(message)
-    }
-
-    @Suppress("UNUSED_PARAMETER")
-    private fun help(player: Player, args: CommandArguments) {
-        player.sendMessage(Message.FRIENDS_HELP)
     }
 
     private fun getMessage(message: Message, player: Player, vararg args: Any): Component {

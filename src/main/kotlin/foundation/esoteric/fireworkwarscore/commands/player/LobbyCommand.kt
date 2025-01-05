@@ -11,9 +11,11 @@ class LobbyCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComma
         setRequirements { it is Player }
         withPermission(CommandPermission.NONE)
 
+        withShortDescription("Return to the lobby")
+        withFullDescription("Return to the lobby")
         withAliases("l", "hub")
-        executesPlayer(this::onPlayerExecution)
 
+        executesPlayer(this::onPlayerExecution)
         register(plugin)
     }
 

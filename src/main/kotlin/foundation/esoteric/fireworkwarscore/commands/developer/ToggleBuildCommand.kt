@@ -12,6 +12,9 @@ class ToggleBuildCommand(private val plugin: FireworkWarsCorePlugin) : CommandAP
     init {
         this.requirements = Predicate { it.isOp }
 
+        this.withShortDescription("Toggle building mode")
+        this.withFullDescription("Toggle building mode")
+
         this.executesPlayer(this::executesPlayer)
         this.register(plugin)
     }
