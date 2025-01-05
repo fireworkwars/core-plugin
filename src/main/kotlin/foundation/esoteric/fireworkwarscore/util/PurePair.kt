@@ -5,6 +5,13 @@ import java.util.Comparator.comparingInt
 
 @Suppress("unused", "MemberVisibilityCanBePrivate")
 class PurePair<T: Any>(left: T, right: T) : Pair<T, T>(left, right) {
+    companion object {
+        @JvmStatic
+        fun <T: Any> of(a: T, b: T): PurePair<T> {
+            return PurePair(a, b)
+        }
+    }
+
     fun min(comparator: Comparator<T>): T {
         return if (comparator.compare(left, right) <= 0) left else right
     }
