@@ -39,8 +39,7 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
             CommandAPICommand("add")
                 .withPermission(CommandPermission.NONE)
                 .withArguments(this.playerArgumentSupplier())
-                .executesPlayer(this::addOrAcceptFriend)
-                .withAliases("a"))
+                .executesPlayer(this::addOrAcceptFriend))
 
         withSubcommand(
             CommandAPICommand("cancel")
@@ -70,8 +69,7 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
             CommandAPICommand("list")
                 .withPermission(CommandPermission.NONE)
                 .withArguments(this.pageArgumentSupplier())
-                .executesPlayer(this::listFriends)
-                .withAliases("l"))
+                .executesPlayer(this::listFriends))
 
         withSubcommand(
             CommandAPICommand("help")
@@ -94,6 +92,7 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
 
     private fun pageArgumentSupplier(): IntegerArgument {
         return IntegerArgument(friendListPageArgumentNodeName)
+            .setOptional(true) as IntegerArgument
     }
 
     private fun acceptFriend(player: Player, args: CommandArguments) {
@@ -207,7 +206,7 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
     }
 
     private fun listFriends(player: Player, args: CommandArguments) {
-        val pageArgument = args.get(friendListPageArgumentNodeName) as Int
+        val pageArgument = args.getOrDefault(friendListPageArgumentNodeName, 1) as Int
 
         val profile = playerDataManager.getPlayerProfile(player)
         val friends = profile.friends
