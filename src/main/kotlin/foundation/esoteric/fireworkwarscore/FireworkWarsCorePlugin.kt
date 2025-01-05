@@ -8,7 +8,6 @@ import foundation.esoteric.fireworkwarscore.commands.developer.ToggleDebugComman
 import foundation.esoteric.fireworkwarscore.commands.operator.SetRankCommand
 import foundation.esoteric.fireworkwarscore.commands.player.FriendCommand
 import foundation.esoteric.fireworkwarscore.commands.player.SetLanguageCommand
-import foundation.esoteric.fireworkwarscore.communication.BasePlugin
 import foundation.esoteric.fireworkwarscore.communication.FireworkWarsPluginData
 import foundation.esoteric.fireworkwarscore.communication.LobbyPluginData
 import foundation.esoteric.fireworkwarscore.config.PluginConfig
@@ -18,12 +17,13 @@ import foundation.esoteric.fireworkwarscore.language.LanguageManager
 import foundation.esoteric.fireworkwarscore.maps.MapManager
 import foundation.esoteric.fireworkwarscore.profiles.PlayerDataManager
 import net.kyori.adventure.text.minimessage.MiniMessage
+import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.scheduler.BukkitTask
 
 @Suppress("unused", "MemberVisibilityCanBePrivate")
-class FireworkWarsCorePlugin : BasePlugin() {
-    override lateinit var playerDataManager: PlayerDataManager
-    override lateinit var languageManager: LanguageManager
+class FireworkWarsCorePlugin : JavaPlugin() {
+    lateinit var playerDataManager: PlayerDataManager
+    lateinit var languageManager: LanguageManager
 
     lateinit var fireworkWarsPluginData: FireworkWarsPluginData
     lateinit var lobbyPluginData: LobbyPluginData
