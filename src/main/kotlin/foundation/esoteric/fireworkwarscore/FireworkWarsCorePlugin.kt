@@ -6,6 +6,7 @@ import dev.jorel.commandapi.CommandAPICommand
 import foundation.esoteric.fireworkwarscore.commands.developer.ToggleBuildCommand
 import foundation.esoteric.fireworkwarscore.commands.developer.ToggleDebugCommand
 import foundation.esoteric.fireworkwarscore.commands.operator.SetRankCommand
+import foundation.esoteric.fireworkwarscore.commands.player.FriendCommand
 import foundation.esoteric.fireworkwarscore.commands.player.SetLanguageCommand
 import foundation.esoteric.fireworkwarscore.communication.BasePlugin
 import foundation.esoteric.fireworkwarscore.communication.FireworkWarsPluginData
@@ -88,6 +89,7 @@ class FireworkWarsCorePlugin : BasePlugin() {
         commands.add(ToggleBuildCommand(this))
         commands.add(SetLanguageCommand(this))
         commands.add(SetRankCommand(this))
+        commands.add(FriendCommand(this))
 
         logger.info("Finished loading commands.")
         logger.info("Loaded ${commands.size} commands.")
@@ -107,5 +109,9 @@ class FireworkWarsCorePlugin : BasePlugin() {
 
     override fun onDisable() {
         playerDataManager.save()
+    }
+
+    fun runTaskLater(task: Runnable, delay: Long): BukkitTask {
+        return server.scheduler.runTaskLater(this, task, delay)
     }
 }
