@@ -16,6 +16,7 @@ import org.bukkit.entity.Player
 import org.bukkit.scheduler.BukkitTask
 import java.util.*
 
+
 class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICommand("friend") {
     private val playerDataManager: PlayerDataManager = plugin.playerDataManager
     private val languageManager: LanguageManager = plugin.languageManager
@@ -233,6 +234,7 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
         player.sendMessage(message)
     }
 
+    @Suppress("UNUSED_PARAMETER")
     private fun help(player: Player, args: CommandArguments) {
         player.sendMessage(Message.FRIENDS_HELP)
     }
