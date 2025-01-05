@@ -201,6 +201,10 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
         val profile = playerDataManager.getPlayerProfile(player)
         val friends = profile.friends
 
+        if (friends.isEmpty()) {
+            return player.sendMessage(Message.YOU_HAVE_NO_FRIENDS)
+        }
+
         val friendsPerPage = 5
         val totalPages = max(1, ceil(friends.size.toDouble() / friendsPerPage).toInt())
         val page = Math.clamp(pageArgument.toLong(), 1, totalPages)
