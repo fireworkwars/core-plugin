@@ -12,9 +12,12 @@ fun Player.playSound(sound: Sound) {
     this.playSound(this, sound, 1.0F, 1.0F)
 }
 
-@Suppress("unused")
 fun Player.sendMessage(message: Message, vararg args: Any?) {
     LanguageManager.globalInstance.sendMessage(message, this, *args)
+}
+
+fun Player.getMessage(message: Message, vararg args: Any?): Component {
+    return LanguageManager.globalInstance.getMessage(message, this, *args)
 }
 
 fun String.format(): Component {
