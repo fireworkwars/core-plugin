@@ -88,6 +88,14 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
                 .executesPlayer(this::listFriends)
         )
 
+        withSubcommand(
+            CommandAPICommand("party")
+                .withPermission(CommandPermission.NONE)
+                .withShortDescription("Create a friend party")
+                .withFullDescription("Creates a party and invites all online friends.")
+                .executesPlayer(this::createParty)
+        )
+
         register(plugin)
     }
 
@@ -287,6 +295,10 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
         message.append(player.getMessage(Message.FRIEND_LIST_SEPARATOR))
 
         player.sendMessage(message)
+    }
+
+    private fun createParty(player: Player, args: CommandArguments) {
+        player.sendMessage(Message.COMING_SOON)
     }
 
     private fun getStatusMessage(uuid: UUID): Message {
