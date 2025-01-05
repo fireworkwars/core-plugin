@@ -25,6 +25,7 @@ FRIEND_LIST_PAGING: "           <aqua>=-=-={0} Page {1} of {2} {3}=-=-=</aqua>"
 FRIENDS_PARTY_CREATED: "<green>Your party has been created. An invite has been sent to all online friends!</green>"
 FRIENDS_HELP: "<yellow>List of friend commands:</yellow><br><gray><gold>-</gold> <green>/friend add <dark_aqua><dark_gray><</dark_gray>player<aqua>!</aqua><dark_gray>></dark_gray></dark_aqua></green><br><i>Sends a friend request to a player</i><br><br><gold>-</gold><green>/friend accept <dark_aqua><dark_gray><</dark_gray>player<aqua>!</aqua><dark_gray>></dark_gray></dark_aqua></green><br><i>Accepts a friend request from a player</i><br><br><gold>-</gold> <green>/friend remove <dark_aqua><dark_gray><</dark_gray>player<aqua>!</aqua><dark_gray>></dark_gray></dark_aqua></green><br><i>Removes a friend from your friend list</i><br><br><gold>-</gold> <green>/friend list <dark_aqua><dark_gray><</dark_gray>page <aqua>= 1</aqua><dark_gray>></dark_gray></dark_aqua></green><br><i>Lists all of your friends</i><br><br><gold>-</gold> <green>/friend party</green><br><i>Creates a party and invites all online friends</gray>"
 
+CANNOT_FRIEND_SELF: "<red>You can't friend yourself!</red>"
 YOU_ARE_ALREADY_FRIENDS: "<red>You are already friends with this person!</red>"
 NO_FRIEND_REQUESTS_FROM: "{0} <red>hasn't sent you a friend request!</red>"
 NO_FRIEND_REQUESTS_TO: "<red>You haven't sent a friend request to {0}!</red>"
