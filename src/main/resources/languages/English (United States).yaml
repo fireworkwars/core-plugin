@@ -34,6 +34,9 @@ YOU_HAVE_NO_FRIENDS: "<yellow>You don't have any friends yet. Use <aqua><u><clic
 BLOCKED_PLAYER: "<green>You have blocked {0}!</green>"
 UNBLOCKED_PLAYER: "<green>You have unblocked {0}!</green>"
 
+THAT_PLAYER_IS_BLOCKED: "<red>You have blocked this player!</red>"
+YOU_HAVE_BEEN_BLOCKED: "<red>You have been blocked by this player!</red>"
+
 CANNOT_BLOCK_SELF: "<red>You can't block yourself!</red>"
 PLAYER_ALREADY_BLOCKED: "<red>You have already blocked this player!</red>"
 PLAYER_NOT_BLOCKED: "<red>This player isn't blocked!</red>"
