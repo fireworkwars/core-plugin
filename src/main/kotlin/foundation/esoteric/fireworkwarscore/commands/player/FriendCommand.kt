@@ -2,6 +2,7 @@ package foundation.esoteric.fireworkwarscore.commands.player
 
 import dev.jorel.commandapi.CommandAPICommand
 import dev.jorel.commandapi.CommandPermission
+import dev.jorel.commandapi.arguments.ArgumentSuggestions
 import dev.jorel.commandapi.arguments.IntegerArgument
 import dev.jorel.commandapi.arguments.StringArgument
 import dev.jorel.commandapi.executors.CommandArguments
@@ -12,6 +13,7 @@ import foundation.esoteric.fireworkwarscore.profiles.PlayerDataManager
 import foundation.esoteric.fireworkwarscore.util.sendMessage
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.Component.text
+import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import org.bukkit.scheduler.BukkitTask
 import java.util.*
@@ -87,7 +89,12 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
     }
 
     private fun playerArgumentSupplier(): StringArgument {
+        val playerNames = plugin.server.onlinePlayers.map { it.name }
+        val suggestions = ArgumentSuggestions.strings<CommandSender>(*playerNames.toTypedArray())
+
         return StringArgument(playerArgumentNodeName)
+            .setOptional(false)
+            .includeSuggestions(suggestions) as StringArgument
     }
 
     private fun pageArgumentSupplier(): IntegerArgument {
