@@ -143,6 +143,9 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
             player.sendMessage(Message.YOU_ARE_NOW_FRIENDS, targetProfile.formattedName())
             target.sendMessage(Message.YOU_ARE_NOW_FRIENDS, profile.formattedName())
 
+            requests[uuid]?.remove(targetUuid)
+            requests[targetUuid]?.remove(uuid)
+
             expiryTasks[uuid]?.remove(targetUuid)?.cancel()
             expiryTasks[targetUuid]?.remove(uuid)?.cancel()
         } else {
