@@ -35,7 +35,9 @@ class FireworkWarsCorePlugin : JavaPlugin() {
     lateinit var pluginConfig: PluginConfig
 
     private val mapManager = MapManager(this)
+
     val friendManager: FriendManager = FriendManager(this)
+    lateinit var friendCommand: FriendCommand
 
     val mm = MiniMessage.miniMessage()
 
@@ -43,8 +45,9 @@ class FireworkWarsCorePlugin : JavaPlugin() {
     var isBuildModeEnabled = false
 
     private val commandApiConfig = CommandAPIBukkitConfig(this)
-    private val commands = mutableListOf<CommandAPICommand>()
 
+
+    private val commands = mutableListOf<CommandAPICommand>()
     private val events = mutableListOf<Event>()
 
     init {
@@ -94,11 +97,13 @@ class FireworkWarsCorePlugin : JavaPlugin() {
 
         CommandAPI.onEnable()
 
+        this.friendCommand = FriendCommand(this)
+
         commands.add(ToggleDebugCommand(this))
         commands.add(ToggleBuildCommand(this))
         commands.add(SetLanguageCommand(this))
         commands.add(SetRankCommand(this))
-        commands.add(FriendCommand(this))
+        commands.add(friendCommand)
         commands.add(BlockCommand(this))
         commands.add(LobbyCommand(this))
 
