@@ -9,7 +9,7 @@ RANK_REVOKED: "<green>Your rank has been removed!</green>"
 INVALID_RANK: "<red>That rank doesn't exist!</red>"
 
 FRIEND_REQUEST_SENT: "<green>You have sent a friend request to {0}!</green>"
-FRIEND_REQUEST_FROM: "{0} <green>has sent you a friend request!</green>"
+FRIEND_REQUEST_FROM: "{0} <green>has sent you a friend request! <aqua><u><click:run_command:/friend accept {1}>Click here</click></u></aqua> to accept!</green>"
 FRIEND_REQUEST_CANCELLED: "<yellow>You have cancelled your friend request to {0}.</yellow>"
 FRIEND_REQUEST_CANCELLED_BY: "{0} <yellow>has cancelled their friend request!</yellow>"
 FRIEND_REQUEST_DENIED: "<yellow>You have denied {0}'s friend request!</yellow>"
