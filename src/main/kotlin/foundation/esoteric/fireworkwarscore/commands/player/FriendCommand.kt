@@ -199,7 +199,7 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
             friendManager.removeRequestData(sender = target, receiver = player)
         } else {
             player.sendMessage(Message.FRIEND_REQUEST_SENT, targetProfile.formattedName())
-            target.sendMessage(Message.FRIEND_REQUEST_FROM, profile.formattedName())
+            target.sendMessage(Message.FRIEND_REQUEST_FROM, profile.formattedName(), profile.username)
         }
     }
 
