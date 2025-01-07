@@ -176,7 +176,7 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
         }
 
         if (profile.blocked.contains(targetUuid)) {
-            return player.sendMessage(Message.THAT_PLAYER_IS_BLOCKED)
+            return player.sendMessage(Message.YOU_BLOCKED_THAT_PLAYER)
         }
 
         if (targetProfile.blocked.contains(uuid)) {
