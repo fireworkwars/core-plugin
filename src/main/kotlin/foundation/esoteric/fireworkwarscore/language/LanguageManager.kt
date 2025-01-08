@@ -184,19 +184,24 @@ class LanguageManager(private val plugin: FireworkWarsCorePlugin) {
     }
 
     private fun getMessage(message: Message, language: String?, fallbackOnDefaultLanguage: Boolean, vararg arguments: Any?): Component {
-        val miniMessageString = checkNotNull(getRawMessageString(message, language, fallbackOnDefaultLanguage))
+        val rawString = getRawMessageString(message, language, fallbackOnDefaultLanguage)
+            ?: throw IllegalArgumentException("Message not found: $message in language: $language")
+
+        val regex = Regex("\\{(\\d+)}")
+
+        val formattedString = rawString.replace(regex) { "#arg${it.groupValues[1]}" }
 
         val placeholders = arguments.mapIndexed { index, argument ->
             when (argument) {
-                is Component -> Placeholder.component("{$index}", argument)
-                is String -> Placeholder.unparsed("{$index}", argument)
-                else -> Placeholder.unparsed("{$index}", argument.toString())
+                is Component -> Placeholder.component("#arg$index", argument)
+                is String -> Placeholder.unparsed("#arg$index", argument)
+                else -> Placeholder.unparsed("#arg$index", argument.toString())
             }
         }
 
         val tagResolver = TagResolver.resolver(*placeholders.toTypedArray())
 
-        return miniMessage.deserialize(miniMessageString, tagResolver)
+        return miniMessage.deserialize(formattedString, tagResolver)
     }
 
     fun getDefaultMessage(message: Message, vararg arguments: Any?): Component {
