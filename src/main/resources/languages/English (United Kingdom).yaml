@@ -1,9 +1,9 @@
 # Firework Wars Core
 SET_LANGUAGE_SUCCESSFULLY: "<green>Successfully set your language to </green>{0}<green>!</green>"
-UNKNOWN_LANGUAGE: "Unsupported or unknown language: '{0}'."
+UNKNOWN_LANGUAGE: "<red>Unsupported or unknown language: '{0}'.</red>"
 
 GRANTED_RANK_SUCCESSFULLY: "<green>{0} has been granted a {1} rank!</green>"
-REVOKED_RANK_SUCCESSFULLY: "<green>{0}'s rank has been removed!"
+REVOKED_RANK_SUCCESSFULLY: "<green>{0}'s rank has been removed!</green>"
 RANK_GRANTED: "<green>You have been given a {0} rank!</green>"
 RANK_REVOKED: "<green>Your rank has been removed!</green>"
 INVALID_RANK: "<red>That rank doesn't exist!</red>"
@@ -50,7 +50,7 @@ STATUS_IN_LOBBY: "<dark_aqua>is in the lobby</dark_aqua>"
 COMING_SOON: "<yellow>Coming soon!</yellow>"
 
 # Firework Wars Lobby
-PLAYER_JOINED_LOBBY: "{0} <dark_aqua>has joined the lobby!"
+PLAYER_JOINED_LOBBY: "{0} <dark_aqua>has joined the lobby!</dark_aqua>"
 RANKED_PLAYER_JOINED_LOBBY: "{0} <gradient:#1568cf:#1137aa>has joined the lobby!</gradient>"
 WELCOME: "<gray>Welcome to <color:#ff365e>Firework</color> <color:#00e0e0>Wars</color>, {0}!</gray>"
 
