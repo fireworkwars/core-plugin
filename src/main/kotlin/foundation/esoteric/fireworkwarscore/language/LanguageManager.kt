@@ -5,8 +5,6 @@ import foundation.esoteric.fireworkwarscore.file.FileUtil
 import foundation.esoteric.fireworkwarscore.profiles.PlayerProfile
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.minimessage.MiniMessage
-import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder
-import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver
 import org.bukkit.Bukkit
 import org.bukkit.command.CommandSender
 import org.bukkit.configuration.file.YamlConfiguration
@@ -24,7 +22,7 @@ class LanguageManager(private val plugin: FireworkWarsCorePlugin) {
         lateinit var globalInstance: LanguageManager
     }
 
-    private val miniMessage = MiniMessage.miniMessage()
+    private val miniMessage = MiniMessage.builder().strict(true).build()
 
     private val languagesFolderName = "languages"
     private val languagesFolderPath: String
@@ -184,24 +182,22 @@ class LanguageManager(private val plugin: FireworkWarsCorePlugin) {
     }
 
     private fun getMessage(message: Message, language: String?, fallbackOnDefaultLanguage: Boolean, vararg arguments: Any?): Component {
-        val rawString = getRawMessageString(message, language, fallbackOnDefaultLanguage)
+        var rawString = getRawMessageString(message, language, fallbackOnDefaultLanguage)
             ?: throw IllegalArgumentException("Message not found: $message in language: $language")
 
-        val regex = Regex("\\{(\\d+)}")
+        arguments.forEachIndexed { index, arg ->
+            val pattern = Regex("\\{${index}}")
 
-        val formattedString = rawString.replace(regex) { "<#arg${it.groupValues[1]}>" }
-
-        val placeholders = arguments.mapIndexed { index, argument ->
-            when (argument) {
-                is Component -> Placeholder.component("#arg$index", argument)
-                is String -> Placeholder.unparsed("#arg$index", argument)
-                else -> Placeholder.unparsed("#arg$index", argument.toString())
+            val replacement = when (arg) {
+                is Component -> miniMessage.serialize(arg)
+                is String -> arg
+                else -> arg.toString()
             }
+
+            rawString = rawString.replace(pattern, replacement)
         }
 
-        val tagResolver = TagResolver.resolver(*placeholders.toTypedArray())
-
-        return miniMessage.deserialize(formattedString, tagResolver)
+        return miniMessage.deserialize(rawString)
     }
 
     fun getDefaultMessage(message: Message, vararg arguments: Any?): Component {
