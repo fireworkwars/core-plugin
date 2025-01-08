@@ -104,7 +104,7 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
         return OfflinePlayerArgument(playerArgumentNodeName).replaceSuggestions(ArgumentSuggestions.strings { info ->
             val player = info.sender as Player
 
-            val outgoingRequestUUIDs = friendManager.getOutgoingRequests(player)
+            val outgoingRequestUUIDs = friendManager.getOutgoingRequestUUIDs(player)
             val playerNames = outgoingRequestUUIDs.mapNotNull { plugin.server.getPlayer(it)?.name }
 
             return@strings playerNames.toTypedArray()
@@ -115,7 +115,7 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
         return OfflinePlayerArgument(playerArgumentNodeName).replaceSuggestions(ArgumentSuggestions.strings { info ->
             val player = info.sender as Player
 
-            val receivingRequestUUIDs = friendManager.getReceivingRequests(player)
+            val receivingRequestUUIDs = friendManager.getReceivingRequestUUIDs(player)
             val playerNames = receivingRequestUUIDs.mapNotNull { plugin.server.getPlayer(it)?.name }
 
             return@strings playerNames.toTypedArray()
@@ -170,7 +170,7 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
         val uuid = player.uniqueId
         val targetUuid = target.uniqueId
 
-        if (acceptOnly && !friendManager.getReceivingRequests(player).contains(targetUuid)) {
+        if (acceptOnly && !friendManager.getReceivingRequestUUIDs(player).contains(targetUuid)) {
             return player.sendMessage(Message.NO_FRIEND_REQUESTS_FROM, targetProfile.formattedName())
         }
 
@@ -217,7 +217,7 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
         val targetProfile = playerDataManager.getPlayerProfile(target, false)
             ?: return player.sendMessage(Message.UNKNOWN_PLAYER)
 
-        if (friendManager.getOutgoingRequests(player).contains(target.uniqueId)) {
+        if (friendManager.getOutgoingRequestUUIDs(player).contains(target.uniqueId)) {
             friendManager.removeRequestData(sender = player, receiver = target)
 
             player.sendMessage(Message.FRIEND_REQUEST_CANCELLED, targetProfile.formattedName())
@@ -242,7 +242,7 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
         val targetProfile = playerDataManager.getPlayerProfile(target, false)
             ?: return player.sendMessage(Message.UNKNOWN_PLAYER)
 
-        if (friendManager.getReceivingRequests(player).contains(target.uniqueId)) {
+        if (friendManager.getReceivingRequestUUIDs(player).contains(target.uniqueId)) {
             friendManager.removeRequestData(sender = target, receiver = player)
 
             player.sendMessage(Message.FRIEND_REQUEST_DENIED, targetProfile.formattedName())

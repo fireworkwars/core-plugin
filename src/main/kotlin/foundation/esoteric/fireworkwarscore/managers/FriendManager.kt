@@ -29,15 +29,15 @@ class FriendManager(private val plugin: FireworkWarsCorePlugin) {
     }
 
     fun hasMutualRequests(player1: OfflinePlayer, player2: OfflinePlayer): Boolean {
-        return getOutgoingRequests(player1).contains(player2.uniqueId) &&
-               getOutgoingRequests(player2).contains(player1.uniqueId)
+        return getOutgoingRequestUUIDs(player1).contains(player2.uniqueId) &&
+               getOutgoingRequestUUIDs(player2).contains(player1.uniqueId)
     }
 
-    fun getOutgoingRequests(player: OfflinePlayer): List<UUID> {
+    fun getOutgoingRequestUUIDs(player: OfflinePlayer): List<UUID> {
         return outgoingRequests[player.uniqueId] ?: emptyList()
     }
 
-    fun getReceivingRequests(player: OfflinePlayer): List<UUID> {
+    fun getReceivingRequestUUIDs(player: OfflinePlayer): List<UUID> {
         return receivingRequests[player.uniqueId] ?: emptyList()
     }
 
