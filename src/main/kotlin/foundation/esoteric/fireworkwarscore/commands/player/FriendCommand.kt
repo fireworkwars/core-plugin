@@ -145,7 +145,9 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
             val profile = playerDataManager.getPlayerProfile(player)
 
             val friendUUIDs = profile.friends
-            val playerNames = friendUUIDs.mapNotNull { plugin.server.getOfflinePlayer(it).name }
+            val playerNames = friendUUIDs.mapNotNull {
+                playerDataManager.getPlayerProfile(it, false)?.username
+            }
 
             return@strings playerNames.toTypedArray()
         })
