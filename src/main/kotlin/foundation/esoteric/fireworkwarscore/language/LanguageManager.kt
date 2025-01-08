@@ -4,8 +4,9 @@ import foundation.esoteric.fireworkwarscore.FireworkWarsCorePlugin
 import foundation.esoteric.fireworkwarscore.file.FileUtil
 import foundation.esoteric.fireworkwarscore.profiles.PlayerProfile
 import net.kyori.adventure.text.Component
-import net.kyori.adventure.text.TextReplacementConfig
 import net.kyori.adventure.text.minimessage.MiniMessage
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder
+import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver
 import org.bukkit.Bukkit
 import org.bukkit.command.CommandSender
 import org.bukkit.configuration.file.YamlConfiguration
@@ -14,7 +15,6 @@ import org.jetbrains.annotations.NotNull
 import java.io.File
 import java.util.*
 import java.util.Objects.requireNonNull
-
 
 @Suppress("unused", "MethodCouldBePrivate", "MemberVisibilityCanBePrivate")
 class LanguageManager(private val plugin: FireworkWarsCorePlugin) {
@@ -35,9 +35,9 @@ class LanguageManager(private val plugin: FireworkWarsCorePlugin) {
     private val languages: MutableMap<String?, Map<Message, String>> = HashMap()
 
     val totalLanguages: Int
-        get(): Int = languages.size
+        get() = languages.size
     val totalMessages: Int
-        get(): Int = languages[defaultLanguage]!!.size
+        get() = languages[defaultLanguage]!!.size
 
     fun getLanguages(): Set<String?> {
         return languages.keys
@@ -172,8 +172,7 @@ class LanguageManager(private val plugin: FireworkWarsCorePlugin) {
     }
 
     fun getRawMessageString(message: Message, language: String?, fallbackOnDefaultLanguage: Boolean): String? {
-        val languageMessageMap =
-            languages[language]!!
+        val languageMessageMap = languages[language]!!
         val miniMessageString = languageMessageMap[message]
             ?: return if (fallbackOnDefaultLanguage) getRawMessageString(message, defaultLanguage, false) else null
 
@@ -184,89 +183,53 @@ class LanguageManager(private val plugin: FireworkWarsCorePlugin) {
         return getRawMessageString(message, language, true)
     }
 
-    private fun getMessage(message: Message, language: String?, fallbackOnDefaultLanguage: Boolean, vararg arguments: Component): Component {
+    private fun getMessage(message: Message, language: String?, fallbackOnDefaultLanguage: Boolean, vararg arguments: Any?): Component {
         val miniMessageString = checkNotNull(getRawMessageString(message, language, fallbackOnDefaultLanguage))
 
-        var result = miniMessage.deserialize(miniMessageString)
-
-        for (i in arguments.indices) {
-            result = result.replaceText(TextReplacementConfig.builder().matchLiteral("{$i}")
-                .replacement { _, _ -> arguments[i] }
-                .build())
+        val placeholders = arguments.mapIndexed { index, argument ->
+            when (argument) {
+                is Component -> Placeholder.component("{$index}", argument)
+                is String -> Placeholder.unparsed("{$index}", argument)
+                else -> Placeholder.unparsed("{$index}", argument.toString())
+            }
         }
 
-        return result
-    }
+        val tagResolver = TagResolver.resolver(*placeholders.toTypedArray())
 
-    fun getDefaultMessage(message: Message, vararg arguments: Component?): Component {
-        return getMessage(message, defaultLanguage, true, arguments)
+        return miniMessage.deserialize(miniMessageString, tagResolver)
     }
 
     fun getDefaultMessage(message: Message, vararg arguments: Any?): Component {
-        return getMessage(message, defaultLanguage, true, arguments)
-    }
-
-    fun getMessage(message: Message, language: String?, vararg arguments: Component?): Component {
-        return getMessage(message, language, true, *arguments)
-    }
-
-    fun getMessage(message: Message, language: String?, fallbackOnDefaultLanguage: Boolean, vararg arguments: Any?): Component {
-        return getMessage(message, language, fallbackOnDefaultLanguage, *toComponents(*arguments))
+        return getMessage(message, defaultLanguage, true, *arguments)
     }
 
     fun getMessage(message: Message, language: String?, vararg arguments: Any?): Component {
         return getMessage(message, language, true, *arguments)
     }
 
-    fun getMessage(message: Message, commandSender: CommandSender?, fallbackOnDefaultLanguage: Boolean, vararg arguments: Component?): Component {
-        return getMessage(message, getLanguage(commandSender), fallbackOnDefaultLanguage, *arguments)
-    }
-
-    fun getMessage(message: Message, commandSender: CommandSender?, vararg arguments: Component?): Component {
-        return getMessage(message, commandSender, true, *arguments)
-    }
-
     fun getMessage(message: Message, commandSender: CommandSender?, fallbackOnDefaultLanguage: Boolean, vararg arguments: Any?): Component {
-        return getMessage(message, commandSender, fallbackOnDefaultLanguage, *toComponents(*arguments))
+        return getMessage(message, getLanguage(commandSender), fallbackOnDefaultLanguage, *arguments)
     }
 
     fun getMessage(message: Message, commandSender: CommandSender?, vararg arguments: Any?): Component {
         return getMessage(message, commandSender, true, *arguments)
     }
 
-    fun getMessage(message: Message, uuid: UUID?, fallbackOnDefaultLanguage: Boolean, vararg arguments: Component?): Component {
-        return getMessage(message, getLanguage(uuid), fallbackOnDefaultLanguage, *arguments)
-    }
-
-    fun getMessage(message: Message, uuid: UUID?, vararg arguments: Component?): Component {
-        return getMessage(message, uuid, true, *arguments)
-    }
-
     fun getMessage(message: Message, uuid: UUID?, fallbackOnDefaultLanguage: Boolean, vararg arguments: Any?): Component {
-        return getMessage(message, uuid, fallbackOnDefaultLanguage, *toComponents(*arguments))
+        return getMessage(message, getLanguage(uuid), fallbackOnDefaultLanguage, *arguments)
     }
 
     fun getMessage(message: Message, uuid: UUID?, vararg arguments: Any?): Component {
         return getMessage(message, uuid, true, *arguments)
     }
 
-    fun getMessage(message: Message, playerProfile: PlayerProfile, fallbackOnDefaultLanguage: Boolean, vararg arguments: Component?): Component {
-        return getMessage(message, getLanguage(playerProfile), fallbackOnDefaultLanguage, *arguments)
-    }
-
-    fun getMessage(message: Message, playerProfile: PlayerProfile, vararg arguments: Component?): Component {
-        return getMessage(message, playerProfile, true, *arguments)
-    }
-
     fun getMessage(message: Message, playerProfile: PlayerProfile, fallbackOnDefaultLanguage: Boolean, vararg arguments: Any?): Component {
-        return getMessage(message, playerProfile, fallbackOnDefaultLanguage, *toComponents(*arguments))
+        return getMessage(message, getLanguage(playerProfile), fallbackOnDefaultLanguage, *arguments)
     }
 
     fun getMessage(message: Message, playerProfile: PlayerProfile, vararg arguments: Any?): Component {
         return getMessage(message, playerProfile, true, *arguments)
     }
-
-    // rolyPolyVole start
 
     fun getMessages(message: Message, commandSender: CommandSender?, vararg arguments: Any?): Array<Component> {
         val rawMessage = miniMessage.serialize(getMessage(message, commandSender, *arguments))
@@ -279,21 +242,9 @@ class LanguageManager(private val plugin: FireworkWarsCorePlugin) {
             .toTypedArray()
     }
 
-    // rolyPolyVole end
-
-    fun sendMessage(message: Message, commandSender: CommandSender, fallbackOnDefaultLanguage: Boolean, vararg arguments: Component?) {
-        commandSender.sendMessage(getMessage(
-            message, getLanguage(commandSender), fallbackOnDefaultLanguage, *arguments))
-    }
-
-    fun sendMessage(message: Message, commandSender: CommandSender, vararg arguments: Component?) {
-        commandSender.sendMessage(getMessage(
-            message, commandSender, true, *arguments))
-    }
-
     fun sendMessage(message: Message, commandSender: CommandSender, fallbackOnDefaultLanguage: Boolean, vararg arguments: Any?) {
         commandSender.sendMessage(getMessage(
-            message, commandSender, fallbackOnDefaultLanguage, *toComponents(*arguments)))
+            message, getLanguage(commandSender), fallbackOnDefaultLanguage, *arguments))
     }
 
     fun sendMessage(message: Message, commandSender: CommandSender, vararg arguments: Any?) {
@@ -301,59 +252,31 @@ class LanguageManager(private val plugin: FireworkWarsCorePlugin) {
             message, commandSender, true, *arguments))
     }
 
-    fun sendMessage(message: Message, uuid: UUID?, fallbackOnDefaultLanguage: Boolean, vararg arguments: Component?) {
-        requireNonNull(Bukkit.getPlayer(uuid!!))?.sendMessage(
-            getMessage(message, getLanguage(uuid), fallbackOnDefaultLanguage, *arguments))
-    }
-
-    fun sendMessage(message: Message, uuid: UUID?, vararg arguments: Component?) {
-        requireNonNull(Bukkit.getPlayer(uuid!!))?.sendMessage(
-            getMessage(message, uuid, true, *arguments))
-    }
-
     fun sendMessage(message: Message, uuid: UUID?, fallbackOnDefaultLanguage: Boolean, vararg arguments: Any?) {
-        requireNonNull(Bukkit.getPlayer(uuid!!))?.sendMessage(
-            getMessage(message, uuid, fallbackOnDefaultLanguage, *toComponents(*arguments)))
+        if (uuid == null) {
+            return
+        }
+
+        val player = plugin.server.getPlayer(uuid)
+        player?.sendMessage(getMessage(message, getLanguage(uuid), fallbackOnDefaultLanguage, *arguments))
     }
 
     fun sendMessage(message: Message, uuid: UUID?, vararg arguments: Any?) {
-        requireNonNull(Bukkit.getPlayer(uuid!!))?.sendMessage(
-            getMessage(message, uuid, true, *arguments))
-    }
+        if (uuid == null) {
+            return
+        }
 
-    fun sendMessage(message: Message, playerProfile: PlayerProfile, fallbackOnDefaultLanguage: Boolean, vararg arguments: Component?) {
-        requireNonNull(Bukkit.getPlayer(playerProfile.uuid))?.sendMessage(
-            getMessage(message, getLanguage(playerProfile), fallbackOnDefaultLanguage, *arguments))
-    }
-
-    fun sendMessage(message: Message, playerProfile: PlayerProfile, vararg arguments: Component?) {
-        requireNonNull(Bukkit.getPlayer(playerProfile.uuid))?.sendMessage(
-            getMessage(message, playerProfile, true, *arguments))
+        val player = plugin.server.getPlayer(uuid)
+        player?.sendMessage(getMessage(message, uuid, true, *arguments))
     }
 
     fun sendMessage(message: Message, playerProfile: PlayerProfile, fallbackOnDefaultLanguage: Boolean, vararg arguments: Any?) {
-        requireNonNull(Bukkit.getPlayer(playerProfile.uuid))?.sendMessage(
-            getMessage(message, playerProfile, fallbackOnDefaultLanguage, *toComponents(*arguments)))
+        val player = plugin.server.getPlayer(playerProfile.uuid)
+        player?.sendMessage(getMessage(message, playerProfile, fallbackOnDefaultLanguage, *arguments))
     }
 
     fun sendMessage(message: Message, playerProfile: PlayerProfile, vararg arguments: Any?) {
-        requireNonNull(Bukkit.getPlayer(playerProfile.uuid))?.sendMessage(
-            getMessage(message, playerProfile, true, *arguments))
-    }
-
-    fun toComponents(vararg objects: Any?): Array<Component> {
-        return objects.asSequence()
-            .filterNotNull()
-            .map { toComponent(it) }
-            .toList()
-            .toTypedArray()
-    }
-
-    fun toComponent(obj: Any): Component {
-        if (obj is Component) {
-            return obj
-        }
-
-        return Component.text(obj.toString())
+        val player = plugin.server.getPlayer(playerProfile.uuid)
+        player?.sendMessage(getMessage(message, playerProfile, true, *arguments))
     }
 }
