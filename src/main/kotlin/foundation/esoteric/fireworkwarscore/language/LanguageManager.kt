@@ -189,7 +189,7 @@ class LanguageManager(private val plugin: FireworkWarsCorePlugin) {
 
         val regex = Regex("\\{(\\d+)}")
 
-        val formattedString = rawString.replace(regex) { "#arg${it.groupValues[1]}" }
+        val formattedString = rawString.replace(regex) { "<#arg${it.groupValues[1]}>" }
 
         val placeholders = arguments.mapIndexed { index, argument ->
             when (argument) {
