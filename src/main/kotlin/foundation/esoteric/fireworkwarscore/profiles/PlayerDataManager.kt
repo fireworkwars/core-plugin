@@ -2,6 +2,7 @@ package foundation.esoteric.fireworkwarscore.profiles
 
 import com.google.gson.Gson
 import foundation.esoteric.fireworkwarscore.FireworkWarsCorePlugin
+import org.bukkit.OfflinePlayer
 import org.bukkit.entity.Player
 import org.jetbrains.annotations.Contract
 import java.io.File
@@ -107,5 +108,14 @@ class PlayerDataManager(private val plugin: FireworkWarsCorePlugin) {
 
     fun getPlayerProfile(player: Player): PlayerProfile {
         return getPlayerProfile(player, true)!!
+    }
+
+    @Contract("_, true -> !null")
+    fun getPlayerProfile(offlinePlayer: OfflinePlayer, createNewProfile: Boolean): PlayerProfile? {
+        return getPlayerProfile(offlinePlayer.uniqueId, createNewProfile)
+    }
+
+    fun getPlayerProfile(offlinePlayer: OfflinePlayer): PlayerProfile {
+        return getPlayerProfile(offlinePlayer, true)!!
     }
 }
