@@ -4,6 +4,7 @@ import foundation.esoteric.fireworkwarscore.language.LanguageManager
 import foundation.esoteric.fireworkwarscore.language.Message
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.minimessage.MiniMessage
+import org.bukkit.OfflinePlayer
 import org.bukkit.Sound
 import org.bukkit.entity.Player
 
@@ -14,6 +15,10 @@ fun Player.playSound(sound: Sound) {
 
 fun Player.sendMessage(message: Message, vararg args: Any?) {
     LanguageManager.globalInstance.sendMessage(message, this, *args)
+}
+
+fun OfflinePlayer.sendMessage(message: Message, vararg args: Any?) {
+    this.player?.sendMessage(message, *args)
 }
 
 fun Player.getMessage(message: Message, vararg args: Any?): Component {
