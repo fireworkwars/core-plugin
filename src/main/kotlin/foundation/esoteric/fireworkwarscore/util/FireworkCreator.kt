@@ -2,6 +2,8 @@ package foundation.esoteric.fireworkwarscore.util
 
 import org.bukkit.Color
 import org.bukkit.FireworkEffect
+import org.bukkit.Location
+import org.bukkit.entity.Firework
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.FireworkMeta
 import kotlin.random.Random
@@ -43,6 +45,17 @@ class FireworkCreator {
                 listOf(FireworkEffect.Type.BURST, FireworkEffect.Type.STAR).random(),
                 Random.nextBoolean(),
                 Random.nextBoolean())
+        }
+
+        @JvmStatic
+        fun sendSupplyDropFirework(location: Location, flightTicks: Int) {
+            val supplyDropFirework = randomSupplyDropFirework()
+            val meta = supplyDropFirework.itemMeta as FireworkMeta
+
+            location.world.spawn(location, Firework::class.java).apply {
+                this.fireworkMeta = meta
+                this.ticksToDetonate = flightTicks
+            }
         }
     }
 }
