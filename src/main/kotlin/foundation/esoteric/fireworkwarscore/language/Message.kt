@@ -72,6 +72,7 @@ enum class Message {
     LOBBY_SB_IP,
 
     // Firework Wars
+    ITEM_GIVEN,
     INVALID_ITEM,
 
     WOOL,
