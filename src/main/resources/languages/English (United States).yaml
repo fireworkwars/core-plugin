@@ -69,7 +69,7 @@ LOBBY_SB_FRIENDS: " Friends Online: <gray>{0}</gray>"
 LOBBY_SB_IP: " <aqua>{0}</aqua>"
 
 # Firework Wars
-ITEM_GIVEN: "<green>You have been given <yellow>{0}x</yellow> {1}!</green>"
+ITEM_GIVEN: "<green>You have been given:</green> <gray>{0}x</gray> {1}"
 INVALID_ITEM: "<red>That item doesn't exist!</red>"
 
 # Custom items
