@@ -105,7 +105,7 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
             val player = info.sender as Player
 
             val outgoingRequestUUIDs = friendManager.getOutgoingRequestUUIDs(player)
-            val playerNames = outgoingRequestUUIDs.mapNotNull { plugin.server.getPlayer(it)?.name }
+            val playerNames = outgoingRequestUUIDs.mapNotNull { playerDataManager.getPlayerProfile(it, false)?.username }
 
             return@strings playerNames.toTypedArray()
         })
@@ -116,7 +116,7 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
             val player = info.sender as Player
 
             val receivingRequestUUIDs = friendManager.getReceivingRequestUUIDs(player)
-            val playerNames = receivingRequestUUIDs.mapNotNull { plugin.server.getPlayer(it)?.name }
+            val playerNames = receivingRequestUUIDs.mapNotNull { playerDataManager.getPlayerProfile(it, false)?.username }
 
             return@strings playerNames.toTypedArray()
         })
@@ -202,6 +202,8 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
 
             friendManager.removeRequestData(sender = player, receiver = target)
             friendManager.removeRequestData(sender = target, receiver = player)
+
+            plugin.lobbyPluginData.updateScoreboards()
         } else {
             player.sendMessage(Message.FRIEND_REQUEST_SENT, targetProfile.formattedName())
             target.sendMessage(Message.FRIEND_REQUEST_FROM, profile.formattedName(), profile.username)
