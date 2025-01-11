@@ -274,6 +274,8 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
 
         player.sendMessage(Message.REMOVED_FRIEND, targetProfile.formattedName())
         target.sendMessage(Message.YOU_WERE_REMOVED_AS_FRIEND, profile.formattedName())
+
+        plugin.lobbyPluginData.updateScoreboards()
     }
 
     private fun removeFriend(player: Player, args: CommandArguments) {
