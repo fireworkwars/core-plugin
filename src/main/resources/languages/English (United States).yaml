@@ -219,7 +219,7 @@ NOT_IN_GAME: "<red>You are not in a game!</red>"
 
 # Scoreboards
 SB_TITLE: "<bold><color:#ff365e>Firework</color> <color:#00e0e0>Wars</color></bold>"
-SB_SEPARATOR: "<gray><bold><st>-------------------</st></bold></gray>"
+SB_SEPARATOR: "<gray><bold><st>--------------------</st></bold></gray>"
 
 SB_TEAM: " {0}: <green>{1}</green>"
 SB_OWN_TEAM: " {0}: <green>{1}</green> <gray>(You)</gray>"
