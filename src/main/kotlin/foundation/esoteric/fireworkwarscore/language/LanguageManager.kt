@@ -235,7 +235,7 @@ class LanguageManager(private val plugin: FireworkWarsCorePlugin) {
     fun getMessages(message: Message, commandSender: CommandSender?, vararg arguments: Any?): Array<Component> {
         val rawMessage = miniMessage.serialize(getMessage(message, commandSender, *arguments))
 
-        return rawMessage.split("\\n|<br>".toRegex())
+        return rawMessage.split("\\n|<br>|<newline>|<br/>|<newline/>".toRegex())
             .asSequence()
             .filter { it.isNotEmpty() }
             .map(miniMessage::deserialize)
