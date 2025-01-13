@@ -9,6 +9,7 @@ interface FireworkWarsPluginData {
     fun getBarracksArenas(): List<Arena>
     fun getTownArenas(): List<Arena>
     fun getVersionString(): String
+    fun hidePlayersInGames()
 }
 
 @Suppress("unused")
