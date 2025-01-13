@@ -232,6 +232,8 @@ SB_EVENT_CHEST_REFILL: " Chest refill in: <yellow>{0}</yellow>"
 SB_EVENT_CHEST_REFILL_SOON: " Chest refill in: <red>{0}</red>"
 SB_EVENT_ENDGAME: " Endgame in: <yellow>{0}</yellow>"
 SB_EVENT_ENDGAME_SOON: " Endgame in: <red>{0}</red>"
+SB_EVENT_WARDEN: " Warden spawns in: <yellow>{0}</yellow>"
+SB_EVENT_WARDEN_SOON: " Warden spawns in: <red>{0}</red>"
 SB_EVENT_GAME_END: " Game ends in: <yellow>{0}</yellow>"
 SB_EVENT_GAME_END_SOON: " Game ends in: <red>{0}</red>"
 
