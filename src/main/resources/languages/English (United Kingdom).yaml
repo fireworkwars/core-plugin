@@ -216,6 +216,7 @@ GAME_ALREADY_PLAYING: "<red>That arena already has a game ongoing!</red>"
 GAME_ALREADY_CONTAINS_PLAYER: "<red>You are already in this game!</red>"
 GAME_RELOADING: "<red>This game is currently reloading, please wait a bit.</red>"
 NOT_IN_GAME: "<red>You are not in a game!</red>"
+GAME_NOT_FOUND: "<red>Failed to find your last game. It may have ended.</red>"
 
 # Scoreboards
 SB_TITLE: "<bold><color:#ff365e>Firework</color> <color:#00e0e0>Wars</color></bold>"

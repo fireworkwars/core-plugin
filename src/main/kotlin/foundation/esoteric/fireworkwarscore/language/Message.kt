@@ -203,6 +203,7 @@ enum class Message {
     GAME_ALREADY_CONTAINS_PLAYER,
     GAME_RELOADING,
     NOT_IN_GAME,
+    GAME_NOT_FOUND,
 
     SB_TITLE,
     SB_SEPARATOR,
