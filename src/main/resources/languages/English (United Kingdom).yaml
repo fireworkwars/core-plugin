@@ -199,7 +199,7 @@ WARDEN_INJURED_YAP_1: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gra
 WARDEN_INJURED_YAP_2: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b> <dark_aqua>You are nothing but a mere mortal.</dark_aqua>"
 WARDEN_INJURED_YAP_3: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b> <dark_aqua>You are not worthy of my presence.</dark_aqua>"
 
-WARDEN_KILL_WHISPER: "<i><gray>In the distance, you hear blood splattering over the ground; A warden's kill can be heard from unusually far away.</gray></!i>"
+WARDEN_KILL_WHISPER: "<i><gray>In the distance, you hear blood splattering over the ground; A warden's kill can be heard from unusually far away.</gray></i>"
 
 WARDEN_KILL_1: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b> <dark_aqua>Pathetic.</dark_aqua>"
 WARDEN_KILL_2: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b> <dark_aqua>Weak.</dark_aqua>"
