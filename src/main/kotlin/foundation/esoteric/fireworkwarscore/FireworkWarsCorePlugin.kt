@@ -46,7 +46,6 @@ class FireworkWarsCorePlugin : JavaPlugin() {
 
     private val commandApiConfig = CommandAPIBukkitConfig(this)
 
-
     private val commands = mutableListOf<CommandAPICommand>()
     private val events = mutableListOf<Event>()
 

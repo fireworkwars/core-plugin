@@ -31,7 +31,7 @@ enum class Rank(val color: TextColor, private val prefixValue: String?, private 
     }
 
     fun updateTablist(player: Player) {
-        player.playerListName(formatPlayerName(player))
+        player.playerListName(this.formatPlayerName(player))
         player.playerListOrder = listOrder
     }
 
