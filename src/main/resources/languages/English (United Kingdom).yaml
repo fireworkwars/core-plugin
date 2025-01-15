@@ -16,12 +16,18 @@ FRIEND_REQUEST_DENIED: "<yellow>You have denied {0}'s friend request!</yellow>"
 FRIEND_REQUEST_DENIED_BY: "{0} <red>denied your friend request!</red>"
 FRIEND_REQUEST_EXPIRED: "<yellow>Your friend request to {0} has expired.</yellow>"
 FRIEND_REQUEST_FROM_EXPIRED: "<yellow>The friend request from {0} has expired.</yellow>"
+
 YOU_ARE_NOW_FRIENDS: "<green>You are now <aqua>friends</aqua> with {0}!</green>"
 REMOVED_FRIEND: "{0} <green>has been removed from your friend list!</green>"
 YOU_WERE_REMOVED_AS_FRIEND: "{0} <yellow>has removed you from their friend list!</yellow>"
+
+FRIEND_JOINED: "<dark_aqua>Friend ></dark_aqua> {0} <gray>joined</gray>"
+FRIEND_LEFT: "<dark_aqua>Friend ></dark_aqua> {0} <gray>left</gray>"
+
 FRIEND_LIST_SEPARATOR: "<gray><bold><st>-----------------------------------</st></bold></gray>"
 FRIEND_LIST_TITLE: "<aqua>=-=-=-=-=-=-= Your Friends =-=-=-=-=-=-=-=</aqua><newline/>"
 FRIEND_LIST_PAGING: "<newline/><aqua>=-=-=-=-=-={0} Page {1} of {2} {3}=-=-=-=-=-=-=</aqua>"
+
 FRIENDS_PARTY_CREATED: "<green>Your party has been created. An invite has been sent to all online friends!</green>"
 
 CANNOT_FRIEND_SELF: "<red>You can't friend yourself!</red>"
