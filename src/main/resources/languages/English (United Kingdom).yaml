@@ -56,7 +56,7 @@ WELCOME: "<gray>Welcome to <color:#ff365e>Firework</color> <color:#00e0e0>Wars</
 
 CURRENT_PLAYERS: "<!i><dark_gray>{0}/{1} players</dark_gray></!i>"
 NO_ARENAS_AVAILABLE: "<!i><red>Hmm...</red></!i>"
-NO_ARENAS_AVAILABLE_LORE: "<!i><gray>It seems there are no games available</gray></!i><newline/><!i><gray>right now. Try again shortly, this doesn't</gray></!i><newline/><!i><gray>usually happen.</gray></!i>"
+NO_ARENAS_AVAILABLE_LORE: "<!i><gray>It seems that there are no games</gray></!i><newline/><!i><gray>available right now.</gray></!i>"
 
 TABLIST_HEADER: "<bold><color:#ff365e>Firework</color> <color:#00e0e0>Wars</color></bold>"
 TABLIST_FOOTER: "<newline/><gray>{0}</gray><newline/><aqua>{1}</aqua>"
