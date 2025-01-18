@@ -47,6 +47,10 @@ CANNOT_BLOCK_SELF: "<red>You can't block yourself!</red>"
 PLAYER_ALREADY_BLOCKED: "<red>You have already blocked this player!</red>"
 PLAYER_NOT_BLOCKED: "<red>This player isn't blocked!</red>"
 
+SHOUT: "<bold><gold>SHOUT<bold><gold>"
+SHOUT_COOLDOWN: "<red>You can only shout once every {0} seconds!</red>"
+
+REQUIRES_GOLD_RANK: "<red>This feature requires the {0} rank!</red>"
 UNKNOWN_PLAYER: "<red>That player does not exist!</red>"
 
 STATUS_OFFLINE: "<red>is currently offline</red>"
