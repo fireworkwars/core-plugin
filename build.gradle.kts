@@ -5,7 +5,7 @@ import xyz.jpenilla.resourcefactory.bukkit.bukkitPluginYaml
 
 plugins {
     kotlin("jvm") version "2.1.0"
-    id("io.papermc.paperweight.userdev") version "1.7.3"
+    id("io.papermc.paperweight.userdev") version "2.0.0-beta.14"
     id("xyz.jpenilla.resource-factory-paper-convention") version "1.2.0"
     id("com.gradleup.shadow") version "8.3.5"
     id("maven-publish")
@@ -13,6 +13,8 @@ plugins {
 
 group = "foundation.esoteric"
 version = "1.0-SNAPSHOT"
+
+val paperApiVersion = "1.21.4"
 
 repositories {
     mavenCentral()
@@ -30,8 +32,8 @@ publishing {
             artifact(tasks.named("shadowJar").get()) {
                 classifier = null // Ensures it replaces the default JAR
             }
-            groupId = "foundation.esoteric"
-            version = "1.0-SNAPSHOT"
+            groupId = group as String
+            version = rootProject.version as String
         }
     }
 
@@ -44,9 +46,7 @@ publishing {
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.21.3-R0.1-SNAPSHOT")
-
-    paperweight.paperDevBundle("1.21.3-R0.1-SNAPSHOT")
+    paperweight.paperDevBundle("$paperApiVersion-R0.1-SNAPSHOT")
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.apache.commons:commons-compress:1.26.0")
@@ -112,7 +112,7 @@ paperPluginYaml {
 
     main = "foundation.esoteric.fireworkwarscore.FireworkWarsCorePlugin"
 
-    apiVersion = "1.21.3"
+    apiVersion = paperApiVersion
     description = project.description
 }
 
