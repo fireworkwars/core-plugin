@@ -29,9 +29,8 @@ class AllChatCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICom
 
         if (currentChannel != null) {
             messageManager.removeChannel(player.uniqueId)
-            player.sendMessage(Message.CHANNEL_EXPIRED)
-        } else {
-            player.sendMessage("You are not in a private message channel.")
         }
+
+        player.sendMessage(Message.SWITCHED_TO_ALL_CHAT)
     }
 }

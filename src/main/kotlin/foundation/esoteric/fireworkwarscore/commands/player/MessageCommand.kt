@@ -55,7 +55,7 @@ class MessageCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICom
 
     private fun onPlayerExecution(player: Player, args: CommandArguments) {
         val target = plugin.server.getPlayer(args[targetArgumentNodeName] as String)
-            ?: return player.sendMessage(Message.UNKNOWN_PLAYER)
+            ?: return player.sendMessage(Message.PLAYER_NOT_ONLINE)
 
         val message = args.getOrDefault(messageArgumentNodeName, "") as String
 
