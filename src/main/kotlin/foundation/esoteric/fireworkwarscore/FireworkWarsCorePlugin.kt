@@ -11,14 +11,18 @@ import foundation.esoteric.fireworkwarscore.commands.player.*
 import foundation.esoteric.fireworkwarscore.communication.FireworkWarsPluginData
 import foundation.esoteric.fireworkwarscore.communication.LobbyPluginData
 import foundation.esoteric.fireworkwarscore.config.PluginConfig
+import foundation.esoteric.fireworkwarscore.events.PlayerChatListener
 import foundation.esoteric.fireworkwarscore.events.PlayerLoseHungerListener
 import foundation.esoteric.fireworkwarscore.interfaces.Event
 import foundation.esoteric.fireworkwarscore.language.LanguageManager
+import foundation.esoteric.fireworkwarscore.managers.ChatChannelManager
 import foundation.esoteric.fireworkwarscore.managers.FriendManager
+import foundation.esoteric.fireworkwarscore.managers.PrivateMessageManager
 import foundation.esoteric.fireworkwarscore.maps.MapManager
 import foundation.esoteric.fireworkwarscore.profiles.PlayerDataManager
 import net.kyori.adventure.text.Component.text
 import net.kyori.adventure.text.minimessage.MiniMessage
+import org.bukkit.event.Listener
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.scheduler.BukkitTask
 
@@ -34,8 +38,12 @@ class FireworkWarsCorePlugin : JavaPlugin() {
 
     private val mapManager = MapManager(this)
 
+    val channelManager = ChatChannelManager(this)
     val friendManager: FriendManager = FriendManager(this)
+    val privateMessageManager = PrivateMessageManager(this)
+
     lateinit var friendCommand: FriendCommand
+    lateinit var messageCommand: MessageCommand
 
     val mm = MiniMessage.miniMessage()
 
@@ -95,6 +103,7 @@ class FireworkWarsCorePlugin : JavaPlugin() {
         CommandAPI.onEnable()
 
         this.friendCommand = FriendCommand(this)
+        this.messageCommand = MessageCommand(this)
 
         commands.add(ToggleDebugCommand(this))
         commands.add(ToggleBuildCommand(this))
@@ -102,6 +111,9 @@ class FireworkWarsCorePlugin : JavaPlugin() {
         commands.add(SetLanguageCommand(this))
         commands.add(SetRankCommand(this))
         commands.add(friendCommand)
+        commands.add(messageCommand)
+        commands.add(ReplyCommand(this))
+        commands.add(AllChatCommand(this))
         commands.add(BlockCommand(this))
         commands.add(LobbyCommand(this))
         commands.add(ShoutCommand(this))
@@ -112,6 +124,8 @@ class FireworkWarsCorePlugin : JavaPlugin() {
         logger.info("Registering global event listeners...")
 
         events.add(PlayerLoseHungerListener(this).apply { register() })
+        events.add(PlayerChatListener(this).apply { register() })
+        events.add(channelManager.apply { register() })
 
         logger.info("Finished registering global event listeners.")
         logger.info("Registered ${events.size} event listeners.")
@@ -128,6 +142,10 @@ class FireworkWarsCorePlugin : JavaPlugin() {
 
     fun runTaskLater(task: Runnable, delay: Long): BukkitTask {
         return server.scheduler.runTaskLater(this, task, delay)
+    }
+
+    fun registerEvent(event: Listener) {
+        server.pluginManager.registerEvents(event, this)
     }
 
     fun logLoudly(message: String, force: Boolean = false) {
