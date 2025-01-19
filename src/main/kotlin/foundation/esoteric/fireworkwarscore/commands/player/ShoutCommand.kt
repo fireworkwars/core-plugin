@@ -56,10 +56,10 @@ class ShoutCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComma
 
         plugin.server.onlinePlayers.forEach {
             val prefix = languageManager.getMessage(Message.SHOUT, it)
-            val rank = profile.rank.toFormattedText()
+            val name = profile.formattedName()
             val message = Component.text(": $messageArg", NamedTextColor.WHITE)
 
-            it.sendMessage(prefix.appendSpace().append(rank).append(message))
+            it.sendMessage(prefix.appendSpace().append(name).append(message))
         }
     }
 }
