@@ -47,11 +47,21 @@ CANNOT_BLOCK_SELF: "<red>You can't block yourself!</red>"
 PLAYER_ALREADY_BLOCKED: "<red>You have already blocked this player!</red>"
 PLAYER_NOT_BLOCKED: "<red>This player isn't blocked!</red>"
 
+MESSAGE_FROM: "<light_purple>From {0}</light_purple><gray>: {1}</gray>"
+MESSAGE_TO: "<light_purple>To {0}</light_purple><gray>: {1}</gray>"
+CHANNEL_CREATED: "<green>You have opened a channel with {0} for the next 5 minutes. Use <aqua><u><click:suggest_command:/allchat>/allchat</click></u></aqua> to leave.</green>"
+CHANNEL_EXPIRED: "<red>This channel has expired. You have been moved back to the all chat.</red>"
+CANNOT_MESSAGE_SELF: "<red>You can't message yourself!</red>"
+NO_ONE_TO_REPLY_TO: "<red>Nobody has messaged you recently!</red>"
+
+SWITCHED_TO_ALL_CHAT: "<green>You are now in the all chat!</green>"
+
 SHOUT: "<red><bold>SHOUT</bold></red>"
 SHOUT_COOLDOWN: "<red>You can only shout once every {0} seconds!</red>"
 
 REQUIRES_GOLD_RANK: "<red>This feature requires the {0} rank!</red>"
 UNKNOWN_PLAYER: "<red>That player does not exist!</red>"
+PLAYER_NOT_ONLINE: "<red>That player is not online!</red>"
 
 STATUS_OFFLINE: "<red>is currently offline</red>"
 STATUS_PLAYING: "<dark_aqua>is in a game</dark_aqua>"
