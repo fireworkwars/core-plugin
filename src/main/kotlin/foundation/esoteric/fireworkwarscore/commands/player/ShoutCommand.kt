@@ -8,8 +8,6 @@ import foundation.esoteric.fireworkwarscore.FireworkWarsCorePlugin
 import foundation.esoteric.fireworkwarscore.language.Message
 import foundation.esoteric.fireworkwarscore.profiles.Rank
 import foundation.esoteric.fireworkwarscore.util.sendMessage
-import net.kyori.adventure.text.Component
-import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.entity.Player
 import java.util.*
 
@@ -52,14 +50,10 @@ class ShoutCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComma
             cooldowns[player.uniqueId] = currentTick
         }
 
-        val messageArg = args[messageArgumentNodeName] as String
+        val message = args[messageArgumentNodeName] as String
 
         plugin.server.onlinePlayers.forEach {
-            val prefix = languageManager.getMessage(Message.SHOUT, it)
-            val name = profile.formattedName()
-            val message = Component.text(": $messageArg", NamedTextColor.WHITE)
-
-            it.sendMessage(prefix.appendSpace().append(name).append(message))
+            it.sendMessage(Message.SHOUT, profile.formattedName(), message)
         }
     }
 }
