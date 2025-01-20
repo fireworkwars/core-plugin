@@ -13,7 +13,6 @@ import java.util.*
 
 class ShoutCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICommand("shout") {
     private val playerDataManager = plugin.playerDataManager
-    private val languageManager = plugin.languageManager
 
     private val cooldowns = mutableMapOf<UUID, Int>()
     private val cooldownSeconds = 30
