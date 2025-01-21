@@ -24,8 +24,8 @@ YOU_WERE_REMOVED_AS_FRIEND: "{0} <yellow>has removed you from their friend list!
 FRIEND_JOINED: "<dark_aqua>Friend ></dark_aqua> {0} <gray>joined</gray>"
 FRIEND_LEFT: "<dark_aqua>Friend ></dark_aqua> {0} <gray>left</gray>"
 
-FRIEND_LIST_SEPARATOR: "<gray><bold><st>----------------------------</st></bold></gray>"
-FRIEND_LIST_TITLE: "{2} <dark_aqua>Friend List ({0}/{1})</dark_aqua> {3}"
+FRIEND_LIST_SEPARATOR: "<gray><bold><st>--------------------------------</st></bold></gray>"
+FRIEND_LIST_TITLE: "            {2} <dark_aqua>Friend List ({0}/{1})</dark_aqua> {3}"
 
 FRIENDS_PARTY_CREATED: "<green>Your party has been created. An invite has been sent to all online friends!</green>"
 
