@@ -284,7 +284,7 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
         return removeFriend(player, target)
     }
 
-    private fun listFriends(player: Player, args: CommandArguments) {
+    fun listFriends(player: Player, args: CommandArguments) {
         val pageArgument = args.getOrDefault(friendListPageArgumentNodeName, 1) as Int
 
         val profile = playerDataManager.getPlayerProfile(player)
