@@ -3,6 +3,7 @@ package foundation.esoteric.fireworkwarscore
 import dev.jorel.commandapi.CommandAPI
 import dev.jorel.commandapi.CommandAPIBukkitConfig
 import dev.jorel.commandapi.CommandAPICommand
+import foundation.esoteric.fireworkwarscore.commands.aliases.FriendListCommandAlias
 import foundation.esoteric.fireworkwarscore.commands.developer.GetListOrderInfo
 import foundation.esoteric.fireworkwarscore.commands.developer.ToggleBuildCommand
 import foundation.esoteric.fireworkwarscore.commands.developer.ToggleDebugCommand
@@ -111,6 +112,7 @@ class FireworkWarsCorePlugin : JavaPlugin() {
         commands.add(SetLanguageCommand(this))
         commands.add(SetRankCommand(this))
         commands.add(friendCommand)
+        commands.add(FriendListCommandAlias(this))
         CommandAPI.unregister("msg")
         commands.add(messageCommand)
         commands.add(ReplyCommand(this))
