@@ -25,7 +25,7 @@ FRIEND_JOINED: "<dark_aqua>Friend ></dark_aqua> {0} <gray>joined</gray>"
 FRIEND_LEFT: "<dark_aqua>Friend ></dark_aqua> {0} <gray>left</gray>"
 
 FRIEND_LIST_SEPARATOR: "<gray><bold><st>----------------------------</st></bold></gray>"
-FRIEND_LIST_TITLE: "<dark_aqua>{2} Friend List ({0}/{1}) {3}</dark_aqua>"
+FRIEND_LIST_TITLE: "{2} <dark_aqua>Friend List ({0}/{1})</dark_aqua> {3}"
 
 FRIENDS_PARTY_CREATED: "<green>Your party has been created. An invite has been sent to all online friends!</green>"
 
@@ -42,9 +42,13 @@ UNBLOCKED_PLAYER: "<green>You have unblocked {0}!</green>"
 YOU_BLOCKED_THAT_PLAYER: "<red>You have blocked this player!</red>"
 YOU_HAVE_BEEN_BLOCKED: "<red>You have been blocked by this player!</red>"
 
+BLOCKED_LIST_SEPARATOR: "<gray><bold><st>----------------------------</st></bold></gray>"
+BLOCKED_LIST_TITLE: "{2} <green>Blocked Players ({0}/{1})</green> {3}"
+
 CANNOT_BLOCK_SELF: "<red>You can't block yourself!</red>"
 PLAYER_ALREADY_BLOCKED: "<red>You have already blocked this player!</red>"
 PLAYER_NOT_BLOCKED: "<red>This player isn't blocked!</red>"
+YOU_HAVE_NO_BLOCKED_PLAYERS: "<yellow>You don't have any blocked players yet."
 
 MESSAGE_FROM: "<light_purple>From {0}</light_purple><gray>: {1}</gray>"
 MESSAGE_TO: "<light_purple>To {0}</light_purple><gray>: {1}</gray>"
