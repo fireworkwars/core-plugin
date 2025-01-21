@@ -5,7 +5,7 @@ import dev.jorel.commandapi.CommandPermission
 import dev.jorel.commandapi.arguments.Argument
 import dev.jorel.commandapi.arguments.ArgumentSuggestions
 import dev.jorel.commandapi.arguments.IntegerArgument
-import dev.jorel.commandapi.arguments.PlayerArgument
+import dev.jorel.commandapi.arguments.OfflinePlayerArgument
 import dev.jorel.commandapi.executors.CommandArguments
 import foundation.esoteric.fireworkwarscore.FireworkWarsCorePlugin
 import foundation.esoteric.fireworkwarscore.language.Message
@@ -17,6 +17,7 @@ import net.kyori.adventure.text.Component.text
 import net.kyori.adventure.text.event.ClickEvent
 import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.format.TextDecoration
+import org.bukkit.OfflinePlayer
 import org.bukkit.entity.Player
 import kotlin.math.ceil
 
@@ -65,8 +66,8 @@ class BlockCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComma
         this.register(plugin)
     }
 
-    private fun nonBlockedArgumentSupplier(): Argument<Player> {
-        return PlayerArgument(playerArgumentNodeName).replaceSuggestions(ArgumentSuggestions.strings { info ->
+    private fun nonBlockedArgumentSupplier(): Argument<OfflinePlayer> {
+        return OfflinePlayerArgument(playerArgumentNodeName).replaceSuggestions(ArgumentSuggestions.strings { info ->
             val player = info.sender as Player
             val profile = playerDataManager.getPlayerProfile(player)
 
@@ -82,8 +83,8 @@ class BlockCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComma
         })
     }
 
-    private fun blockedPlayersArgumentSupplier(): Argument<Player> {
-        return PlayerArgument(playerArgumentNodeName).replaceSuggestions(ArgumentSuggestions.strings { info ->
+    private fun blockedPlayersArgumentSupplier(): Argument<OfflinePlayer> {
+        return OfflinePlayerArgument(playerArgumentNodeName).replaceSuggestions(ArgumentSuggestions.strings { info ->
             val player = info.sender as Player
             val profile = playerDataManager.getPlayerProfile(player)
             val blockedPlayers = profile.blocked
@@ -99,7 +100,7 @@ class BlockCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComma
     }
 
     private fun blockPlayer(player: Player, args: CommandArguments) {
-        val target = args[playerArgumentNodeName] as Player?
+        val target = args[playerArgumentNodeName] as OfflinePlayer?
             ?: return player.sendMessage(Message.UNKNOWN_PLAYER)
 
         if (target.uniqueId == player.uniqueId) {
@@ -107,7 +108,8 @@ class BlockCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComma
         }
 
         val profile = playerDataManager.getPlayerProfile(player)
-        val targetProfile = playerDataManager.getPlayerProfile(target)
+        val targetProfile = playerDataManager.getPlayerProfile(target, false)
+            ?: return player.sendMessage(Message.UNKNOWN_PLAYER)
 
         if (profile.blocked.contains(target.uniqueId)) {
             return player.sendMessage(Message.PLAYER_ALREADY_BLOCKED)
@@ -126,11 +128,12 @@ class BlockCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComma
     }
 
     private fun unblockPlayer(player: Player, args: CommandArguments) {
-        val target = args[playerArgumentNodeName] as Player?
+        val target = args[playerArgumentNodeName] as OfflinePlayer?
             ?: return player.sendMessage(Message.UNKNOWN_PLAYER)
 
         val profile = playerDataManager.getPlayerProfile(player)
-        val targetProfile = playerDataManager.getPlayerProfile(target)
+        val targetProfile = playerDataManager.getPlayerProfile(target, false)
+            ?: return player.sendMessage(Message.UNKNOWN_PLAYER)
 
         if (!profile.blocked.contains(target.uniqueId)) {
             return player.sendMessage(Message.PLAYER_NOT_BLOCKED)
