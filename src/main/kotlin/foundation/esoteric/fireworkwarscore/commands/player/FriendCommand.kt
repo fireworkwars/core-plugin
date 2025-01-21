@@ -11,21 +11,26 @@ import foundation.esoteric.fireworkwarscore.FireworkWarsCorePlugin
 import foundation.esoteric.fireworkwarscore.language.Message
 import foundation.esoteric.fireworkwarscore.managers.FriendManager
 import foundation.esoteric.fireworkwarscore.profiles.PlayerDataManager
+import foundation.esoteric.fireworkwarscore.util.Util
 import foundation.esoteric.fireworkwarscore.util.getMessage
 import foundation.esoteric.fireworkwarscore.util.sendMessage
 import net.kyori.adventure.text.Component.text
+import net.kyori.adventure.text.event.ClickEvent
+import net.kyori.adventure.text.format.NamedTextColor
+import net.kyori.adventure.text.format.TextDecoration
 import org.bukkit.OfflinePlayer
 import org.bukkit.entity.Player
 import java.util.*
 import kotlin.math.ceil
-import kotlin.math.max
 
 class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICommand("friend") {
     private val playerDataManager: PlayerDataManager = plugin.playerDataManager
     private val friendManager: FriendManager = plugin.friendManager
 
     private val playerArgumentNodeName: String = "targetPlayer"
-    private val friendListPageArgumentNodeName: String = "page"
+    private val pageArgumentNodeName: String = "page"
+
+    private val playersPerPage = 8
 
     init {
         setRequirements { it is Player }
@@ -154,7 +159,7 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
     }
 
     private fun pageArgumentSupplier(): IntegerArgument {
-        return IntegerArgument(friendListPageArgumentNodeName)
+        return IntegerArgument(pageArgumentNodeName)
             .setOptional(true) as IntegerArgument
     }
 
@@ -285,7 +290,7 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
     }
 
     fun listFriends(player: Player, args: CommandArguments) {
-        val pageArgument = args.getOrDefault(friendListPageArgumentNodeName, 1) as Int
+        val pageArgument = args.getOrDefault(pageArgumentNodeName, 1) as Int
 
         val profile = playerDataManager.getPlayerProfile(player)
         val friends = profile.friends
@@ -294,17 +299,28 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
             return player.sendMessage(Message.YOU_HAVE_NO_FRIENDS)
         }
 
-        val friendsPerPage = 5
-        val totalPages = max(1, ceil(friends.size.toDouble() / friendsPerPage).toInt())
-        val page = Math.clamp(pageArgument.toLong(), 1, totalPages)
+        val totalPages = ceil(friends.size.toDouble() / playersPerPage).toInt()
+        val page = pageArgument.coerceIn(1, totalPages)
+        val friendsOnPage = Util.getPageItems(friends, page, playersPerPage)
 
-        val startIndex = (page - 1) * friendsPerPage
-        val endIndex = (startIndex + friendsPerPage).coerceAtMost(friends.size)
-        val friendsOnPage = friends.subList(startIndex, endIndex)
+        val previous = text("<<", NamedTextColor.GOLD).decorate(TextDecoration.BOLD)
+        val next = text(">>", NamedTextColor.GOLD).decorate(TextDecoration.BOLD)
+
+        if (page > 1) {
+            previous.clickEvent(ClickEvent.runCommand("/friend list ${page - 1}"))
+        }
+
+        if (page < totalPages) {
+            next.clickEvent(ClickEvent.runCommand("/friend list ${page + 1}"))
+        }
+
+        val separator = player.getMessage(Message.FRIEND_LIST_SEPARATOR)
+        val title = player.getMessage(Message.FRIEND_LIST_TITLE, page, totalPages, previous, next)
 
         val message = text()
-            .append(player.getMessage(Message.FRIEND_LIST_SEPARATOR)).appendNewline()
-            .append(player.getMessage(Message.FRIEND_LIST_TITLE)).appendNewline()
+            .append(separator).appendNewline()
+            .append(title).appendNewline()
+            .append(separator).appendNewline()
 
         friendsOnPage.forEach { uuid ->
             val friendProfile = playerDataManager.getPlayerProfile(uuid)
@@ -316,24 +332,7 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
                 .appendNewline()
         }
 
-        val prevText = if (page > 1) {
-            plugin.mm.deserialize(" <yellow><b><click:run_command:/friend list ${page - 1}><<")
-        } else {
-            plugin.mm.deserialize("<aqua>-=")
-        }
-
-        val nextText = if (page < totalPages) {
-            plugin.mm.deserialize(" <yellow><b><click:run_command:/friend list ${page + 1}>>")
-        } else {
-            plugin.mm.deserialize("<aqua>=-")
-        }
-
-        val pagingText = player.getMessage(
-            Message.FRIEND_LIST_PAGING, prevText, page, totalPages, nextText)
-
-        message.append(pagingText).appendNewline()
-        message.append(player.getMessage(Message.FRIEND_LIST_SEPARATOR))
-
+        message.append(separator)
         player.sendMessage(message)
     }
 
