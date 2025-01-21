@@ -4,18 +4,29 @@ import dev.jorel.commandapi.CommandAPICommand
 import dev.jorel.commandapi.CommandPermission
 import dev.jorel.commandapi.arguments.Argument
 import dev.jorel.commandapi.arguments.ArgumentSuggestions
+import dev.jorel.commandapi.arguments.IntegerArgument
 import dev.jorel.commandapi.arguments.PlayerArgument
 import dev.jorel.commandapi.executors.CommandArguments
 import foundation.esoteric.fireworkwarscore.FireworkWarsCorePlugin
 import foundation.esoteric.fireworkwarscore.language.Message
 import foundation.esoteric.fireworkwarscore.profiles.PlayerDataManager
+import foundation.esoteric.fireworkwarscore.util.Util
+import foundation.esoteric.fireworkwarscore.util.getMessage
 import foundation.esoteric.fireworkwarscore.util.sendMessage
+import net.kyori.adventure.text.Component.text
+import net.kyori.adventure.text.event.ClickEvent
+import net.kyori.adventure.text.format.NamedTextColor
+import net.kyori.adventure.text.format.TextDecoration
 import org.bukkit.entity.Player
+import kotlin.math.ceil
 
 class BlockCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICommand("block") {
     private val playerDataManager: PlayerDataManager = plugin.playerDataManager
 
     private val playerArgumentNodeName: String = "targetPlayer"
+    private val pageArgumentNodeName: String = "page"
+
+    private val playersPerPage = 5
 
     init {
         this.setRequirements { it is Player }
@@ -40,6 +51,15 @@ class BlockCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComma
                 .withFullDescription("Unblocks the specified player.")
                 .withArguments(this.blockedPlayersArgumentSupplier())
                 .executesPlayer(this::unblockPlayer)
+        )
+
+        this.withSubcommand(
+            CommandAPICommand("list")
+                .withPermission(CommandPermission.NONE)
+                .withShortDescription("List blocked players")
+                .withFullDescription("List all players you have blocked.")
+                .withArguments(this.pageArgumentSupplier())
+                .executesPlayer(this::listBlockedPlayers)
         )
 
         this.register(plugin)
@@ -71,6 +91,11 @@ class BlockCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComma
 
             return@strings playerNames.toTypedArray()
         })
+    }
+
+    private fun pageArgumentSupplier(): IntegerArgument {
+        return IntegerArgument(pageArgumentNodeName)
+            .setOptional(true) as IntegerArgument
     }
 
     private fun blockPlayer(player: Player, args: CommandArguments) {
@@ -114,5 +139,51 @@ class BlockCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComma
         profile.blocked.remove(target.uniqueId)
 
         player.sendMessage(Message.UNBLOCKED_PLAYER, targetProfile.formattedName())
+    }
+
+    private fun listBlockedPlayers(player: Player, args: CommandArguments) {
+        val pageArgument = args.getOrDefault(pageArgumentNodeName, 1) as Int
+
+        val profile = playerDataManager.getPlayerProfile(player)
+        val blocked = profile.blocked
+
+        if (blocked.isEmpty()) {
+            return player.sendMessage(Message.YOU_HAVE_NO_BLOCKED_PLAYERS)
+        }
+
+        val totalPages = ceil(blocked.size.toDouble() / playersPerPage).toInt()
+        val page = pageArgument.coerceIn(1, totalPages)
+        val blockedOnPage = Util.getPageItems(blocked, page, playersPerPage)
+
+        val previous = text("<<", NamedTextColor.AQUA).decorate(TextDecoration.BOLD)
+        val next = text(">>", NamedTextColor.AQUA).decorate(TextDecoration.BOLD)
+
+        if (page > 1) {
+            previous.clickEvent(ClickEvent.runCommand("/block list ${page - 1}"))
+        }
+
+        if (page < totalPages) {
+            next.clickEvent(ClickEvent.runCommand("/block list ${page + 1}"))
+        }
+
+        val separator = player.getMessage(Message.BLOCK_LIST_SEPARATOR)
+        val title = player.getMessage(Message.BLOCK_LIST_TITLE, page, totalPages, previous, next)
+
+        val message = text()
+            .append(separator).appendNewline()
+            .append(title).appendNewline()
+            .append(separator).appendNewline()
+
+        blockedOnPage.forEach { uuid ->
+            val blockedProfile = playerDataManager.getPlayerProfile(uuid)
+
+            message
+                .append(text("${blockedOnPage.indexOf(uuid) + 1}. ", NamedTextColor.GRAY))
+                .append(text(blockedProfile.username, NamedTextColor.YELLOW))
+                .appendNewline()
+        }
+
+        message.append(separator)
+        player.sendMessage(message)
     }
 }
