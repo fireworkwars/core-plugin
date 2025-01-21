@@ -48,7 +48,7 @@ BLOCK_LIST_TITLE: "{2} <green>Blocked Players ({0}/{1})</green> {3}"
 CANNOT_BLOCK_SELF: "<red>You can't block yourself!</red>"
 PLAYER_ALREADY_BLOCKED: "<red>You have already blocked this player!</red>"
 PLAYER_NOT_BLOCKED: "<red>This player isn't blocked!</red>"
-YOU_HAVE_NO_BLOCKED_PLAYERS: "<yellow>You don't have any blocked players yet."
+YOU_HAVE_NO_BLOCKED_PLAYERS: "<red>You don't have any blocked players yet.</red>"
 
 MESSAGE_FROM: "<light_purple>From {0}</light_purple><gray>: {1}</gray>"
 MESSAGE_TO: "<light_purple>To {0}</light_purple><gray>: {1}</gray>"
