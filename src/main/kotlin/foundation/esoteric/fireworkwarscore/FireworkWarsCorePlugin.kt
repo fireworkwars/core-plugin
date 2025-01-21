@@ -111,6 +111,7 @@ class FireworkWarsCorePlugin : JavaPlugin() {
         commands.add(SetLanguageCommand(this))
         commands.add(SetRankCommand(this))
         commands.add(friendCommand)
+        CommandAPI.unregister("msg")
         commands.add(messageCommand)
         commands.add(ReplyCommand(this))
         commands.add(AllChatCommand(this))
