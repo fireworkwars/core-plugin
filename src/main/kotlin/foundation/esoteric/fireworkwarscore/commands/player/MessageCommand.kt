@@ -1,5 +1,6 @@
 package foundation.esoteric.fireworkwarscore.commands.player
 
+import dev.jorel.commandapi.CommandAPI
 import dev.jorel.commandapi.CommandAPICommand
 import dev.jorel.commandapi.CommandPermission
 import dev.jorel.commandapi.arguments.Argument
@@ -22,6 +23,8 @@ class MessageCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICom
     private val playerDataManager = plugin.playerDataManager
 
     init {
+        CommandAPI.unregister("msg")
+
         this.setRequirements { it is Player }
         this.withPermission(CommandPermission.NONE)
 
