@@ -18,13 +18,13 @@ class BlockCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComma
     private val playerArgumentNodeName: String = "targetPlayer"
 
     init {
-        setRequirements { it is Player }
-        withPermission(CommandPermission.NONE)
+        this.setRequirements { it is Player }
+        this.withPermission(CommandPermission.NONE)
 
-        withShortDescription("All block-related commands")
-        withFullDescription("Add or remove players from your block list.")
+        this.withShortDescription("All block-related commands")
+        this.withFullDescription("Add or remove players from your block list.")
 
-        withSubcommand(
+        this.withSubcommand(
             CommandAPICommand("add")
                 .withPermission(CommandPermission.NONE)
                 .withShortDescription("Blocks a player")
@@ -33,7 +33,7 @@ class BlockCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComma
                 .executesPlayer(this::blockPlayer)
         )
 
-        withSubcommand(
+        this.withSubcommand(
             CommandAPICommand("remove")
                 .withPermission(CommandPermission.NONE)
                 .withShortDescription("Unblocks a player")
@@ -42,7 +42,7 @@ class BlockCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComma
                 .executesPlayer(this::unblockPlayer)
         )
 
-        register(plugin)
+        this.register(plugin)
     }
 
     private fun nonBlockedArgumentSupplier(): Argument<Player> {
