@@ -121,6 +121,9 @@ PLAYER_COMPASS_NO_ENEMY: "<red>No enemy was found.</red>"
 PLAYER_COMPASS_TRACKING_TARGET: "<green>Tracking target:</green> {0}"
 PLAYER_COMPASS_ACTIONBAR_INFO: "<green><bold>Target:</bold></green> {0} <dark_gray>||</dark_gray> <green><bold>Distance:</bold></green> <aqua>{1}m</aqua>"
 
+PLAYER_TELEPORTER: "<yellow>Player Teleporter</yellow>"
+PLAYER_TELEPORTER_LORE: "<gray>Teleport to and spectate players.</gray>"
+
 ENCHANTED_GOLDEN_APPLE: "<yellow>Enchanted Golden Apple</yellow>"
 ENCHANTED_GOLDEN_APPLE_LORE: "<gray>Extremely powerful healing.</gray>"
 
