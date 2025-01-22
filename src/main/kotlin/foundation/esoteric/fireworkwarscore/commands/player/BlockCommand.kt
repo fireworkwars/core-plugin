@@ -175,7 +175,7 @@ class BlockCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComma
         val message = text()
             .append(separator).appendNewline()
             .append(title).appendNewline()
-            .append(separator).appendNewline()
+            .appendNewline()
 
         blockedOnPage.forEach { uuid ->
             val blockedProfile = playerDataManager.getPlayerProfile(uuid)

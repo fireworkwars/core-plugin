@@ -320,7 +320,7 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
         val message = text()
             .append(separator).appendNewline()
             .append(title).appendNewline()
-            .append(separator).appendNewline()
+            .appendNewline()
 
         friendsOnPage.forEach { uuid ->
             val friendProfile = playerDataManager.getPlayerProfile(uuid)
