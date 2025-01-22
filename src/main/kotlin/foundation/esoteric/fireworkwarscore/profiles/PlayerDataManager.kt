@@ -87,6 +87,7 @@ class PlayerDataManager(private val plugin: FireworkWarsCorePlugin) {
                     username = plugin.server.getOfflinePlayer(uuid).name ?: "Unknown",
                     language = plugin.languageManager.defaultLanguage,
                     rank = Rank.NONE,
+                    stats = PlayerStats.default(),
                     achievements = mutableListOf(),
                     friends = mutableListOf(),
                     blocked = mutableListOf(),
