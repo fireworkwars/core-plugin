@@ -53,6 +53,7 @@ dependencies {
     implementation("dev.jorel:commandapi-bukkit-shade-mojang-mapped:9.7.0")
 
     api("fr.mrmicky:fastboard:2.1.3")
+    api("dev.triumphteam:triumph-gui:3.1.11")
 }
 
 val targetJavaVersion = 21
@@ -73,6 +74,7 @@ tasks {
         }
 
         relocate("fr.mrmicky.fastboard", "foundation.esoteric.fireworkwarscore.libs.fastboard")
+        relocate("dev.triumphteam.gui", "foundation.esoteric.fireworkwarscore.libs.gui")
 
         destinationDirectory.set(file("../firework-wars-plugin/run/plugins"))
     }
