@@ -25,6 +25,10 @@ fun Player.getMessage(message: Message, vararg args: Any?): Component {
     return LanguageManager.globalInstance.getMessage(message, this, *args)
 }
 
+fun OfflinePlayer.getMessage(message: Message, vararg args: Any?): Component {
+    return LanguageManager.globalInstance.getMessage(message, this.uniqueId, *args)
+}
+
 fun String.format(): Component {
     return MiniMessage.miniMessage().deserialize(this)
 }
