@@ -15,8 +15,11 @@ import foundation.esoteric.fireworkwarscore.util.*
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.TextDecoration
 import org.bukkit.Material
+import org.bukkit.NamespacedKey
 import org.bukkit.OfflinePlayer
 import org.bukkit.Sound
+import org.bukkit.attribute.Attribute
+import org.bukkit.attribute.AttributeModifier
 import org.bukkit.entity.Player
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.inventory.ItemFlag
@@ -84,7 +87,7 @@ class ProfileCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICom
             null,
             Message.PROFILE_WIN_LOSS_RATIO to stats.getWinLossRatio())
 
-        val kills = this.createItem(player, Material.DIAMOND_SWORD,
+        val kills = this.createItemWithoutAttribute(player, Material.DIAMOND_SWORD, Attribute.ATTACK_DAMAGE,
             Message.PROFILE_KILLS_TITLE,
             Message.PROFILE_TOTAL_KILLS to stats.kills,
             Message.PROFILE_TOTAL_DEATHS to stats.deaths,
@@ -165,6 +168,23 @@ class ProfileCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICom
 
     private fun createItem(player: Player, material: Material, title: Message, vararg text: Pair<Message, Any>?): GuiItem {
         return ItemBuilder.from(material)
+            .name(player.getMessage(title))
+            .lore(*text.map { this.getComponent(player, it) }.toTypedArray())
+            .flags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ADDITIONAL_TOOLTIP)
+            .asGuiItem()
+    }
+
+    private fun createItemWithoutAttribute(player: Player, material: Material, attribute: Attribute, title: Message, vararg text: Pair<Message, Any>?): GuiItem {
+        val itemStack = ItemStack(material)
+
+        itemStack.editMeta {
+            val key = NamespacedKey(plugin, "attribute")
+            val modifier = AttributeModifier(key, 1.0, AttributeModifier.Operation.ADD_NUMBER)
+
+            it.addAttributeModifier(attribute, modifier)
+        }
+
+        return ItemBuilder.from(itemStack)
             .name(player.getMessage(title))
             .lore(*text.map { this.getComponent(player, it) }.toTypedArray())
             .flags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ADDITIONAL_TOOLTIP)
