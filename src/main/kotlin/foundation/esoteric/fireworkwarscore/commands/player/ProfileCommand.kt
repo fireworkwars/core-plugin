@@ -52,6 +52,10 @@ class ProfileCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICom
     private fun onPlayerExecution(player: Player, args: CommandArguments) {
         val target = args.getOrDefault(targetArgumentNodeName, player) as OfflinePlayer
 
+        this.openProfileMenu(player, target)
+    }
+
+    fun openProfileMenu(player: Player, target: OfflinePlayer) {
         val targetProfile = playerDataManager.getPlayerProfile(target, false)
             ?: return player.sendMessage(Message.UNKNOWN_PLAYER)
 
