@@ -1,5 +1,6 @@
 package foundation.esoteric.fireworkwarscore.profiles
 
+import foundation.esoteric.fireworkwarscore.FireworkWarsCorePlugin
 import foundation.esoteric.fireworkwarscore.util.toFixed
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.event.ClickEvent
@@ -23,6 +24,23 @@ data class PlayerProfile(
     var firstJoinDate: Long = System.currentTimeMillis(),
     var lastSeenDate: Long = System.currentTimeMillis()
 ) {
+    companion object {
+        fun createDefault(uuid: UUID, plugin: FireworkWarsCorePlugin): PlayerProfile {
+            return PlayerProfile(
+                uuid = uuid,
+                username = plugin.server.getOfflinePlayer(uuid).name ?: "Unknown",
+                language = plugin.languageManager.defaultLanguage,
+                rank = Rank.NONE,
+                stats = PlayerStats.default(),
+                achievements = mutableListOf(),
+                friends = mutableListOf(),
+                blocked = mutableListOf(),
+                firstJoin = true,
+                firstJoinDate = System.currentTimeMillis(),
+                lastSeenDate = System.currentTimeMillis())
+        }
+    }
+
     fun formattedName(): Component {
         val component = rank.formatPlayerName(Component.text(username))
 

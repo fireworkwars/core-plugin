@@ -82,16 +82,7 @@ class PlayerDataManager(private val plugin: FireworkWarsCorePlugin) {
     fun getPlayerProfile(uuid: UUID, createNewProfile: Boolean): PlayerProfile? {
         return if (createNewProfile) {
             playerData.computeIfAbsent(uuid) {
-                PlayerProfile(
-                    uuid = uuid,
-                    username = plugin.server.getOfflinePlayer(uuid).name ?: "Unknown",
-                    language = plugin.languageManager.defaultLanguage,
-                    rank = Rank.NONE,
-                    stats = PlayerStats.default(),
-                    achievements = mutableListOf(),
-                    friends = mutableListOf(),
-                    blocked = mutableListOf(),
-                    firstJoin = true)
+                PlayerProfile.createDefault(uuid, plugin)
             }
         } else {
             playerData[uuid]
