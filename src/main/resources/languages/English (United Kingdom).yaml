@@ -22,7 +22,7 @@ PROFILE_CURRENTLY_ONLINE: "<!i><gray>Currently</gray> <green>Online</green></!i>
 
 PROFILE_GAMES_TITLE: "<!i><gold>Games</gold></!i>"
 PROFILE_TOTAL_GAMES: "<!i><gray>Total Games Played:</gray> <green>{0}</green></!i>"
-PROFILE_WIN_RATE: "<!i><gray>Win Rate:</gray> <green>{0}</green></!i>"
+PROFILE_WIN_RATE: "<!i><gray>Win Rate:</gray> <green>{0}%</green></!i>"
 PROFILE_CURRENT_WIN_STREAK: "<!i><gray>Current Winstreak:</gray> <green>{0}</green></!i>"
 PROFILE_HIGHEST_WIN_STREAK: "<!i><gray>Best Winstreak:</gray> <dark_aqua>{0}</dark_aqua></!i>"
 
