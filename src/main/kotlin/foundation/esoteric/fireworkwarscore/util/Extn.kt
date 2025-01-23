@@ -8,6 +8,8 @@ import org.bukkit.OfflinePlayer
 import org.bukkit.Sound
 import org.bukkit.entity.HumanEntity
 import org.bukkit.entity.Player
+import kotlin.math.pow
+import kotlin.math.round
 
 @Suppress("unused")
 fun Player.playSound(sound: Sound) {
@@ -46,4 +48,11 @@ fun Component.appendSpaceIfNotEmpty(): Component {
     } else {
         this
     }
+}
+
+fun Double.toFixed(places: Int): Double {
+    require(places >= 0) { "Decimal places must be non-negative" }
+
+    val factor = 10.0.pow(places)
+    return round(this * factor) / factor
 }
