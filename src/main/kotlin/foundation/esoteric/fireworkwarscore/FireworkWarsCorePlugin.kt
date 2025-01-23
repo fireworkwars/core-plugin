@@ -13,6 +13,7 @@ import foundation.esoteric.fireworkwarscore.communication.FireworkWarsPluginData
 import foundation.esoteric.fireworkwarscore.communication.LobbyPluginData
 import foundation.esoteric.fireworkwarscore.config.PluginConfig
 import foundation.esoteric.fireworkwarscore.events.PlayerChatListener
+import foundation.esoteric.fireworkwarscore.events.PlayerInteractListener
 import foundation.esoteric.fireworkwarscore.events.PlayerLoseHungerListener
 import foundation.esoteric.fireworkwarscore.interfaces.Event
 import foundation.esoteric.fireworkwarscore.language.LanguageManager
@@ -133,6 +134,7 @@ class FireworkWarsCorePlugin : JavaPlugin() {
 
         events.add(PlayerLoseHungerListener(this).apply { register() })
         events.add(PlayerChatListener(this).apply { register() })
+        events.add(PlayerInteractListener(this).apply { register() })
         events.add(channelManager.apply { register() })
 
         logger.info("Finished registering global event listeners.")
