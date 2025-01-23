@@ -3,6 +3,7 @@ package foundation.esoteric.fireworkwarscore.commands.player
 import dev.jorel.commandapi.CommandAPICommand
 import dev.jorel.commandapi.CommandPermission
 import dev.jorel.commandapi.arguments.Argument
+import dev.jorel.commandapi.arguments.ArgumentSuggestions
 import dev.jorel.commandapi.arguments.OfflinePlayerArgument
 import dev.jorel.commandapi.executors.CommandArguments
 import dev.triumphteam.gui.builder.item.ItemBuilder
@@ -46,7 +47,11 @@ class ProfileCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICom
     }
 
     private fun playerArgumentSupplier(): Argument<OfflinePlayer> {
-        return OfflinePlayerArgument(targetArgumentNodeName).setOptional(true)
+        return OfflinePlayerArgument(targetArgumentNodeName)
+            .replaceSuggestions(ArgumentSuggestions.strings {
+                plugin.server.onlinePlayers.map { it.name }.toTypedArray()
+            })
+            .setOptional(true)
     }
 
     private fun onPlayerExecution(player: Player, args: CommandArguments) {
