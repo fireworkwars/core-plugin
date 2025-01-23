@@ -98,7 +98,7 @@ class ProfileCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICom
             Message.PROFILE_ACHIEVEMENTS_TITLE,
             Message.PROFILE_ACHIEVEMENTS_UNLOCKED to targetProfile.achievements.size)
 
-        val friends = this.createItem(player, Material.BOOK,
+        val friends = this.createItem(player, Material.WRITABLE_BOOK,
             Message.PROFILE_FRIENDS_TITLE,
             Message.PROFILE_TOTAL_FRIENDS to targetProfile.friends.size)
 
@@ -151,6 +151,7 @@ class ProfileCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICom
             gui.setItem(31, unblock)
         }
 
+        gui.update()
     }
 
     private fun createHead(player: Player, target: OfflinePlayer, targetProfile: PlayerProfile): GuiItem {
@@ -188,6 +189,7 @@ class ProfileCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICom
             .asGuiItem()
     }
 
+    @Suppress("SameParameterValue")
     private fun createItemWithoutAttribute(player: Player, material: Material, attribute: Attribute, title: Message, vararg text: Pair<Message, Any>?): GuiItem {
         val itemStack = ItemStack(material)
 
