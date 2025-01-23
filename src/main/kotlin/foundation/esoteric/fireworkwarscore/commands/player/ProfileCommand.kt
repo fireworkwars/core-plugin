@@ -129,6 +129,9 @@ class ProfileCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICom
         val targetProfile = playerDataManager.getPlayerProfile(target, false)
             ?: return gui.close(player)
 
+        gui.setItem(30, addFriend)
+        gui.setItem(31, block)
+
         if (profile.friends.contains(targetProfile.uuid)) {
             gui.setItem(30, removeFriend)
         }
