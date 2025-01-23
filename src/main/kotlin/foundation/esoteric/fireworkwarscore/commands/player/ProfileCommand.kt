@@ -115,19 +115,30 @@ class ProfileCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICom
     }
 
     private fun refreshButtons(player: Player, target: OfflinePlayer, gui: Gui) {
-        val addFriend = this.createItem(player, Material.FEATHER, Message.PROFILE_ADD_FRIEND)
-        val block = this.createItem(player, Material.GUNPOWDER, Message.PROFILE_BLOCK)
-        val removeFriend = this.createItem(player, Material.REDSTONE, Message.PROFILE_REMOVE_FRIEND)
-        val unblock = this.createItem(player, Material.SUGAR, Message.PROFILE_UNBLOCK)
+        val profile = playerDataManager.getPlayerProfile(player)
+        val targetProfile = playerDataManager.getPlayerProfile(target, false)
+            ?: return gui.close(player)
+
+        val addFriend = this.createItem(player, Material.FEATHER,
+            Message.PROFILE_ADD_FRIEND,
+            Message.PROFILE_ADD_FRIEND_TEXT to targetProfile.formattedName())
+
+        val block = this.createItem(player, Material.GUNPOWDER,
+            Message.PROFILE_BLOCK,
+            Message.PROFILE_BLOCK_TEXT to targetProfile.formattedName())
+
+        val removeFriend = this.createItem(player, Material.REDSTONE,
+            Message.PROFILE_REMOVE_FRIEND,
+            Message.PROFILE_REMOVE_FRIEND_TEXT to targetProfile.formattedName())
+
+        val unblock = this.createItem(player, Material.SUGAR,
+            Message.PROFILE_UNBLOCK,
+            Message.PROFILE_UNBLOCK_TEXT to targetProfile.formattedName())
 
         addFriend.setAction(this.getRunCommandAction(CommandType.ADD_FRIEND, target, gui))
         removeFriend.setAction(this.getRunCommandAction(CommandType.REMOVE_FRIEND, target, gui))
         block.setAction(this.getRunCommandAction(CommandType.BLOCK, target, gui))
         unblock.setAction(this.getRunCommandAction(CommandType.UNBLOCK, target, gui))
-
-        val profile = playerDataManager.getPlayerProfile(player)
-        val targetProfile = playerDataManager.getPlayerProfile(target, false)
-            ?: return gui.close(player)
 
         gui.setItem(30, addFriend)
         gui.setItem(31, block)
