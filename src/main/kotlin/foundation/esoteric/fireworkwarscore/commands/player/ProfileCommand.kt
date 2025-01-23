@@ -11,17 +11,17 @@ import dev.triumphteam.gui.guis.GuiItem
 import foundation.esoteric.fireworkwarscore.FireworkWarsCorePlugin
 import foundation.esoteric.fireworkwarscore.language.Message
 import foundation.esoteric.fireworkwarscore.profiles.PlayerProfile
-import foundation.esoteric.fireworkwarscore.util.Util
-import foundation.esoteric.fireworkwarscore.util.format
-import foundation.esoteric.fireworkwarscore.util.getMessage
-import foundation.esoteric.fireworkwarscore.util.sendMessage
+import foundation.esoteric.fireworkwarscore.util.*
 import net.kyori.adventure.text.Component
 import org.bukkit.Material
 import org.bukkit.OfflinePlayer
+import org.bukkit.Sound
 import org.bukkit.entity.Player
+import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.SkullMeta
+import kotlin.Pair
 
 class ProfileCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICommand("profile") {
     private val playerDataManager = plugin.playerDataManager
@@ -59,6 +59,11 @@ class ProfileCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICom
             .title("${targetProfile.username}'s Profile".format())
             .rows(6)
             .create()
+
+        gui.setDefaultClickAction {
+            it.whoClicked.playSound(Sound.UI_BUTTON_CLICK)
+            it.isCancelled = true
+        }
 
         gui.filler.fill(ItemBuilder.from(Material.WHITE_STAINED_GLASS_PANE).asGuiItem())
         gui.filler.fillBetweenPoints(1, 0, 1, 8, ItemBuilder.from(Material.BLACK_STAINED_GLASS_PANE).asGuiItem())
@@ -110,6 +115,11 @@ class ProfileCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICom
         val unblock = this.createItem(player, Material.SUGAR,
             Message.PROFILE_UNBLOCK,
             Message.PROFILE_UNBLOCK_TEXT to targetProfile.username)
+
+        addFriend.setAction(this.getRunCommandAction(CommandType.ADD_FRIEND, target))
+        removeFriend.setAction(this.getRunCommandAction(CommandType.REMOVE_FRIEND, target))
+        block.setAction(this.getRunCommandAction(CommandType.BLOCK, target))
+        unblock.setAction(this.getRunCommandAction(CommandType.UNBLOCK, target))
 
         gui.setItem(4, head)
         gui.setItem(20, ivePlayedTheseGamesBefore)
@@ -173,5 +183,25 @@ class ProfileCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICom
     private fun getComponent(player: Player, pair: Pair<Message, Any>?): Component {
         return if (pair == null) Component.empty()
         else player.getMessage(pair.first, pair.second)
+    }
+
+    private fun getRunCommandAction(command: CommandType, target: OfflinePlayer): (event: InventoryClickEvent) -> Unit {
+        return {
+            val player = it.whoClicked as Player
+
+            when (command) {
+                CommandType.ADD_FRIEND -> plugin.friendCommand.addOrAcceptFriend(player, target)
+                CommandType.REMOVE_FRIEND -> plugin.friendCommand.removeFriend(player, target)
+                CommandType.BLOCK -> plugin.blockCommand.blockPlayer(player, target)
+                CommandType.UNBLOCK -> plugin.blockCommand.unblockPlayer(player, target)
+            }
+        }
+    }
+
+    private enum class CommandType {
+        ADD_FRIEND,
+        REMOVE_FRIEND,
+        BLOCK,
+        UNBLOCK
     }
 }
