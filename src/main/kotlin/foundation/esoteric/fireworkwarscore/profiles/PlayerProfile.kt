@@ -1,5 +1,6 @@
 package foundation.esoteric.fireworkwarscore.profiles
 
+import foundation.esoteric.fireworkwarscore.util.toFixed
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.event.ClickEvent
 import net.kyori.adventure.text.event.HoverEvent
@@ -57,17 +58,17 @@ data class PlayerStats(
     }
 
     fun getKillDeathRatio(): Double {
-        return if (deaths == 0) kills.toDouble()
-        else kills.toDouble() / deaths.toDouble()
+        return if (deaths == 0) kills.toDouble().toFixed(2)
+        else (kills.toDouble() / deaths.toDouble()).toFixed(2)
     }
 
     fun getWinLossRatio(): Double {
-        return if (losses == 0) wins.toDouble()
-        else wins.toDouble() / losses.toDouble()
+        return if (losses == 0) wins.toDouble().toFixed(2)
+        else (wins.toDouble() / losses.toDouble()).toFixed(2)
     }
 
     fun getWinPercentage(): Double {
         return if (gamesPlayed == 0) 0.0
-        else wins.toDouble() / gamesPlayed.toDouble() * 100
+        else (wins.toDouble() / gamesPlayed.toDouble() * 100).toFixed(2)
     }
 }
