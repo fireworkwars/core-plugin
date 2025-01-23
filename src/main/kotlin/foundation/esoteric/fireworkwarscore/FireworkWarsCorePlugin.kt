@@ -44,6 +44,7 @@ class FireworkWarsCorePlugin : JavaPlugin() {
     val privateMessageManager = PrivateMessageManager(this)
 
     lateinit var friendCommand: FriendCommand
+    lateinit var blockCommand: BlockCommand
     lateinit var messageCommand: MessageCommand
 
     val mm = MiniMessage.miniMessage()
@@ -104,6 +105,7 @@ class FireworkWarsCorePlugin : JavaPlugin() {
         CommandAPI.onEnable()
 
         this.friendCommand = FriendCommand(this)
+        this.blockCommand = BlockCommand(this)
         this.messageCommand = MessageCommand(this)
 
         commands.add(ToggleDebugCommand(this))
@@ -113,11 +115,13 @@ class FireworkWarsCorePlugin : JavaPlugin() {
         commands.add(SetRankCommand(this))
         commands.add(friendCommand)
         commands.add(FriendListCommandAlias(this))
+        commands.add(blockCommand)
+
         CommandAPI.unregister("msg")
+        
         commands.add(messageCommand)
         commands.add(ReplyCommand(this))
         commands.add(AllChatCommand(this))
-        commands.add(BlockCommand(this))
         commands.add(LobbyCommand(this))
         commands.add(ShoutCommand(this))
         commands.add(ProfileCommand(this))
