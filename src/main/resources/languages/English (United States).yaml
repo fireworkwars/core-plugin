@@ -31,7 +31,7 @@ PROFILE_TOTAL_WINS: "<!i><gray>Total Wins:</gray> <green>{0}</green></!i>"
 PROFILE_TOTAL_LOSSES: "<!i><gray>Total Losses:</gray> <red>{0}</red></!i>"
 PROFILE_WIN_LOSS_RATIO: "<!i><gray>WLR:</gray> <aqua>{0}</aqua></!i>"
 
-PROFILE_KILLS_TITLE: "<!i><aqua>Kills</aqua></!i>"
+PROFILE_KILLS_TITLE: "<!i><dark_purple>Kills</dark_purple></!i>"
 PROFILE_TOTAL_KILLS: "<!i><gray>Total Kills:</gray> <green>{0}</green></!i>"
 PROFILE_TOTAL_DEATHS: "<!i><gray>Total Deaths:</gray> <red>{0}</red></!i>"
 PROFILE_KILL_DEATH_RATIO: "<!i><gray>KDR:</gray> <aqua>{0}</aqua></!i>"
