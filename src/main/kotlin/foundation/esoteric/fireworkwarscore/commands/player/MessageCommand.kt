@@ -12,7 +12,7 @@ import foundation.esoteric.fireworkwarscore.language.Message
 import foundation.esoteric.fireworkwarscore.util.sendMessage
 import org.bukkit.entity.Player
 
-class MessageCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICommand("message") {
+class MessageCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICommand("msg") {
     private val channelExpiryTicks = 6000
 
     private val targetArgumentNodeName = "targetPlayer"
@@ -27,7 +27,7 @@ class MessageCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICom
 
         this.withShortDescription("Message a player")
         this.withFullDescription("Message a player and create a channel for 5 minutes")
-        this.withAliases("msg")
+        this.withAliases("message")
 
         this.withArguments(this.friendsArgumentSupplier(), this.messageArgumentSupplier())
         this.executesPlayer(this::onPlayerExecution)
