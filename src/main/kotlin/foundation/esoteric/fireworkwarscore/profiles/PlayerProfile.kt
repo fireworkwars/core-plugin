@@ -3,6 +3,7 @@ package foundation.esoteric.fireworkwarscore.profiles
 import foundation.esoteric.fireworkwarscore.FireworkWarsCorePlugin
 import foundation.esoteric.fireworkwarscore.util.toFixed
 import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.Component.text
 import net.kyori.adventure.text.event.ClickEvent
 import net.kyori.adventure.text.event.HoverEvent
 import net.kyori.adventure.text.format.NamedTextColor
@@ -42,10 +43,16 @@ data class PlayerProfile(
     }
 
     fun formattedName(): Component {
+        val text = rank.formatPlayerName(username)
+            .appendNewline()
+            .append(text("Click to view ", NamedTextColor.GRAY))
+            .append(rank.colorPlayerName(username))
+            .append(text("'s profile", NamedTextColor.GRAY))
+
         return rank
-            .formatPlayerName(Component.text(username))
+            .formatPlayerName(username)
             .clickEvent(ClickEvent.runCommand("/profile $username"))
-            .hoverEvent(HoverEvent.showText(Component.text("Click to view $username's profile", NamedTextColor.GRAY)))
+            .hoverEvent(HoverEvent.showText(text))
     }
 
     fun updateOwnTablist() {
