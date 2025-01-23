@@ -120,6 +120,7 @@ class FireworkWarsCorePlugin : JavaPlugin() {
         commands.add(BlockCommand(this))
         commands.add(LobbyCommand(this))
         commands.add(ShoutCommand(this))
+        commands.add(ProfileCommand(this))
 
         logger.info("Finished loading commands.")
         logger.info("Loaded ${commands.size} commands.")
