@@ -46,6 +46,7 @@ class FireworkWarsCorePlugin : JavaPlugin() {
     lateinit var friendCommand: FriendCommand
     lateinit var blockCommand: BlockCommand
     lateinit var messageCommand: MessageCommand
+    lateinit var profileCommand: ProfileCommand
 
     val mm = MiniMessage.miniMessage()
 
@@ -108,6 +109,7 @@ class FireworkWarsCorePlugin : JavaPlugin() {
         this.friendCommand = FriendCommand(this)
         this.blockCommand = BlockCommand(this)
         this.messageCommand = MessageCommand(this)
+        this.profileCommand = ProfileCommand(this)
 
         commands.add(ToggleDebugCommand(this))
         commands.add(ToggleBuildCommand(this))
@@ -122,7 +124,7 @@ class FireworkWarsCorePlugin : JavaPlugin() {
         commands.add(AllChatCommand(this))
         commands.add(LobbyCommand(this))
         commands.add(ShoutCommand(this))
-        commands.add(ProfileCommand(this))
+        commands.add(profileCommand)
 
         logger.info("Finished loading commands.")
         logger.info("Loaded ${commands.size} commands.")
