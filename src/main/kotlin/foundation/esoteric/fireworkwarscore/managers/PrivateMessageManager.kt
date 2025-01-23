@@ -1,17 +1,25 @@
 package foundation.esoteric.fireworkwarscore.managers
 
 import foundation.esoteric.fireworkwarscore.FireworkWarsCorePlugin
+import foundation.esoteric.fireworkwarscore.interfaces.Event
 import foundation.esoteric.fireworkwarscore.managers.ChatChannelManager.ChatChannel
+import org.bukkit.event.EventHandler
+import org.bukkit.event.EventPriority
+import org.bukkit.event.player.PlayerQuitEvent
 import org.bukkit.scheduler.BukkitTask
 import java.util.*
 
-class PrivateMessageManager(private val plugin: FireworkWarsCorePlugin) {
+class PrivateMessageManager(private val plugin: FireworkWarsCorePlugin) : Event {
     private val chatChannelManager = plugin.channelManager
 
     private val lastMessageFrom = mutableMapOf<UUID, UUID>()
     private val playerCurrentChannels = mutableMapOf<UUID, UUID>()
     private val currentChannelExpiryTasks = mutableMapOf<UUID, BukkitTask>()
     val playersWithExpiredChannel = mutableSetOf<UUID>()
+
+    override fun register() {
+        plugin.registerEvent(this)
+    }
 
     fun getLastMessageSender(player: UUID): UUID? {
         return lastMessageFrom[player]
@@ -56,5 +64,19 @@ class PrivateMessageManager(private val plugin: FireworkWarsCorePlugin) {
 
     fun cancelChannelExpiry(player: UUID) {
         currentChannelExpiryTasks[player]?.cancel()
+    }
+
+    @EventHandler(priority = EventPriority.LOW)
+    fun onPlayerQuit(event: PlayerQuitEvent) {
+        val player = event.player.uniqueId
+
+        this.removeLastMessageSender(player)
+        this.removeChannel(player)
+
+        playerCurrentChannels.forEach { (sender, receiver) ->
+            if (receiver == player) {
+                this.removeChannel(sender)
+            }
+        }
     }
 }

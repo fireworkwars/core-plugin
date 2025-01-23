@@ -13,7 +13,7 @@ import org.bukkit.event.Listener
 
 class PlayerChatListener(private val plugin: FireworkWarsCorePlugin) : Listener, Event {
     private val channelManager = plugin.channelManager
-    private val messageManager = plugin.privateMessageManager
+    private val privateMessageManager = plugin.privateMessageManager
 
     override fun register() {
         plugin.registerEvent(this)
@@ -33,8 +33,8 @@ class PlayerChatListener(private val plugin: FireworkWarsCorePlugin) : Listener,
     }
 
     private fun handleAllChat(event: AsyncChatEvent, player: Player) {
-        if (messageManager.playersWithExpiredChannel.contains(player.uniqueId)) {
-            messageManager.playersWithExpiredChannel.remove(player.uniqueId)
+        if (privateMessageManager.playersWithExpiredChannel.contains(player.uniqueId)) {
+            privateMessageManager.playersWithExpiredChannel.remove(player.uniqueId)
             event.isCancelled = true
 
             return player.sendMessage(Message.CHANNEL_EXPIRED)
@@ -42,7 +42,7 @@ class PlayerChatListener(private val plugin: FireworkWarsCorePlugin) : Listener,
     }
 
     private fun handleFriendChat(event: AsyncChatEvent, player: Player) {
-        val targetId = messageManager.getChannelRecipient(player.uniqueId)
+        val targetId = privateMessageManager.getChannelRecipient(player.uniqueId)
 
         if (targetId != null) {
             val target = plugin.server.getPlayer(targetId)
@@ -50,7 +50,7 @@ class PlayerChatListener(private val plugin: FireworkWarsCorePlugin) : Listener,
                 plugin.messageCommand.messagePlayer(player, target, event.signedMessage().message())
             } else {
                 player.sendMessage(Message.PLAYER_NOT_ONLINE)
-                messageManager.removeChannel(player.uniqueId)
+                privateMessageManager.removeChannel(player.uniqueId)
             }
         }
 
