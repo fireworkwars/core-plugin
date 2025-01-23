@@ -42,12 +42,10 @@ data class PlayerProfile(
     }
 
     fun formattedName(): Component {
-        val component = rank.formatPlayerName(Component.text(username))
-
-        component.clickEvent(ClickEvent.runCommand("/profile $username"))
-        component.hoverEvent(HoverEvent.showText(Component.text("Click to view $username's profile", NamedTextColor.GRAY)))
-
-        return component
+        return rank
+            .formatPlayerName(Component.text(username))
+            .clickEvent(ClickEvent.runCommand("/profile $username"))
+            .hoverEvent(HoverEvent.showText(Component.text("Click to view $username's profile", NamedTextColor.GRAY)))
     }
 
     fun updateOwnTablist() {
