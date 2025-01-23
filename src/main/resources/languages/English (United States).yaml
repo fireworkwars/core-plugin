@@ -16,6 +16,43 @@ TIME_MONTHS_AND_WEEKS: "<aqua>{0} month{1} and {2} week{3} ago</aqua>"
 TIME_YEARS: "<aqua>{0} year{1} ago</aqua>"
 TIME_YEARS_AND_MONTHS: "<aqua>{0} year{1} and {2} month{3} ago</aqua>"
 
+PROFILE_FIRST_JOIN: "<!i><dark_aqua>First joined {0}</dark_aqua></!i>"
+PROFILE_LAST_SEEN: "<!i><aqua>Last seen {0}</aqua></!i>"
+
+PROFILE_GAMES_TITLE: "<!i><gold>Games</gold></!i>"
+PROFILE_TOTAL_GAMES: "<!i><gray>Total Games Played:</gray> <green>{0}</green></!i>"
+PROFILE_WIN_RATE: "<!i><gray>Win Rate:</gray> <green>{0}</green></!i>"
+PROFILE_CURRENT_WIN_STREAK: "<!i><gray>Current Winstreak:</gray> <green>{0}</green></!i>"
+PROFILE_HIGHEST_WIN_STREAK: "<!i><gray>Best Winstreak:</gray> <dark_aqua>{0}</dark_aqua></!i>"
+
+PROFILE_WINS_TITLE: "<!i><blue>Wins</blue></!i>"
+PROFILE_TOTAL_WINS: "<!i><gray>Total Wins:</gray> <green>{0}</green></!i>"
+PROFILE_TOTAL_LOSSES: "<!i><gray>Total Losses:</gray> <red>{0}</red></!i>"
+PROFILE_WIN_LOSS_RATIO: "<!i><gray>WLR:</gray> <aqua>{0}</aqua></!i>"
+
+PROFILE_KILLS_TITLE: "<!i><red>Kills</red></!i>"
+PROFILE_TOTAL_KILLS: "<!i><gray>Total Kills:</gray> <green>{0}</green></!i>"
+PROFILE_TOTAL_DEATHS: "<!i><gray>Total Deaths:</gray> <red>{0}</red></!i>"
+PROFILE_KILL_DEATH_RATIO: "<!i><gray>KDR:</gray> <aqua>{0}</aqua></!i>"
+
+PROFILE_ACHIEVEMENTS_TITLE: "<!i><dark_aqua>Achievements</dark_aqua></!i>"
+PROFILE_ACHIEVEMENTS_UNLOCKED: "<!i><gray>Total Unlocked:</gray> <dark_green>{0}</dark_green></!i>"
+
+PROFILE_FRIENDS_TITLE: "<!i><yellow>Friends</yellow></!i>"
+PROFILE_TOTAL_FRIENDS: "<!i><gray>Total Friends:</gray> <aqua>{0}</aqua></!i>"
+
+PROFILE_ADD_FRIEND: "<!i><green>Add Friend</green></!i>"
+PROFILE_ADD_FRIEND_TEXT: "<!i><gray>Click to add friend!</gray></!i>"
+
+PROFILE_REMOVE_FRIEND: "<!i><red>Remove Friend</red></!i>"
+PROFILE_REMOVE_FRIEND_TEXT: "<!i><gray>Click to remove friend!</gray></!i>"
+
+PROFILE_BLOCK: "<!i><dark_gray>Block</dark_gray></!i>"
+PROFILE_BLOCK_TEXT: "<!i><gray>Click to block player!</gray></!i>"
+
+PROFILE_UNBLOCK: "<!i><aqua>Unblock</aqua></!i>"
+PROFILE_UNBLOCK_TEXT: "<!i><gray>Click to unblock player!</gray></!i>"
+
 GRANTED_RANK_SUCCESSFULLY: "<green>{0} has been granted a {1} rank!</green>"
 REVOKED_RANK_SUCCESSFULLY: "<green>{0}'s rank has been removed!</green>"
 RANK_GRANTED: "<green>You have been given a {0} rank!</green>"
