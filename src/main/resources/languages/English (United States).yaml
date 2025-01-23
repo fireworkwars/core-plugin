@@ -16,8 +16,9 @@ TIME_MONTHS_AND_WEEKS: "<aqua>{0} month{1} and {2} week{3} ago</aqua>"
 TIME_YEARS: "<aqua>{0} year{1} ago</aqua>"
 TIME_YEARS_AND_MONTHS: "<aqua>{0} year{1} and {2} month{3} ago</aqua>"
 
-PROFILE_FIRST_JOIN: "<!i><dark_aqua>First joined {0}</dark_aqua></!i>"
-PROFILE_LAST_SEEN: "<!i><aqua>Last seen {0}</aqua></!i>"
+PROFILE_FIRST_JOIN: "<!i><gray>First joined:</gray> <dark_aqua>{0}</dark_aqua></!i>"
+PROFILE_LAST_SEEN: "<!i><gray>Last seen:</gray> <aqua>{0}</aqua></!i>"
+PROFILE_CURRENTLY_ONLINE: "<!i><gray>Currently</gray> <green>Online</green></!i>"
 
 PROFILE_GAMES_TITLE: "<!i><gold>Games</gold></!i>"
 PROFILE_TOTAL_GAMES: "<!i><gray>Total Games Played:</gray> <green>{0}</green></!i>"
