@@ -100,45 +100,41 @@ class ProfileCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICom
             Message.PROFILE_FRIENDS_TITLE,
             Message.PROFILE_TOTAL_FRIENDS to targetProfile.friends.size)
 
-        val addFriend = this.createItem(player, Material.FEATHER,
-            Message.PROFILE_ADD_FRIEND,
-            Message.PROFILE_ADD_FRIEND_TEXT to targetProfile.username)
-
-        val block = this.createItem(player, Material.GUNPOWDER,
-            Message.PROFILE_BLOCK,
-            Message.PROFILE_BLOCK_TEXT to targetProfile.username)
-
-        val removeFriend = this.createItem(player, Material.REDSTONE,
-            Message.PROFILE_BLOCK,
-            Message.PROFILE_BLOCK_TEXT to targetProfile.username)
-
-        val unblock = this.createItem(player, Material.SUGAR,
-            Message.PROFILE_UNBLOCK,
-            Message.PROFILE_UNBLOCK_TEXT to targetProfile.username)
-
-        addFriend.setAction(this.getRunCommandAction(CommandType.ADD_FRIEND, target))
-        removeFriend.setAction(this.getRunCommandAction(CommandType.REMOVE_FRIEND, target))
-        block.setAction(this.getRunCommandAction(CommandType.BLOCK, target))
-        unblock.setAction(this.getRunCommandAction(CommandType.UNBLOCK, target))
-
         gui.setItem(4, head)
         gui.setItem(20, ivePlayedTheseGamesBefore)
         gui.setItem(21, wins)
         gui.setItem(22, kills)
         gui.setItem(23, achievements)
         gui.setItem(24, friends)
-        gui.setItem(29, addFriend)
-        gui.setItem(30, block)
+
+        this.refreshButtons(player, target, gui)
+
+        gui.open(player)
+    }
+
+    private fun refreshButtons(player: Player, target: OfflinePlayer, gui: Gui) {
+        val addFriend = this.createItem(player, Material.FEATHER, Message.PROFILE_ADD_FRIEND)
+        val block = this.createItem(player, Material.GUNPOWDER, Message.PROFILE_BLOCK)
+        val removeFriend = this.createItem(player, Material.REDSTONE, Message.PROFILE_REMOVE_FRIEND)
+        val unblock = this.createItem(player, Material.SUGAR, Message.PROFILE_UNBLOCK)
+
+        addFriend.setAction(this.getRunCommandAction(CommandType.ADD_FRIEND, target, gui))
+        removeFriend.setAction(this.getRunCommandAction(CommandType.REMOVE_FRIEND, target, gui))
+        block.setAction(this.getRunCommandAction(CommandType.BLOCK, target, gui))
+        unblock.setAction(this.getRunCommandAction(CommandType.UNBLOCK, target, gui))
+
+        val profile = playerDataManager.getPlayerProfile(player)
+        val targetProfile = playerDataManager.getPlayerProfile(target, false)
+            ?: return gui.close(player)
 
         if (profile.friends.contains(targetProfile.uuid)) {
-            gui.setItem(29, removeFriend)
+            gui.setItem(30, removeFriend)
         }
 
         if (profile.blocked.contains(targetProfile.uuid)) {
-            gui.setItem(30, unblock)
+            gui.setItem(31, unblock)
         }
 
-        gui.open(player)
     }
 
     private fun createHead(player: Player, target: OfflinePlayer, targetProfile: PlayerProfile): GuiItem {
@@ -190,7 +186,7 @@ class ProfileCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICom
         else player.getMessage(pair.first, pair.second)
     }
 
-    private fun getRunCommandAction(command: CommandType, target: OfflinePlayer): (event: InventoryClickEvent) -> Unit {
+    private fun getRunCommandAction(command: CommandType, target: OfflinePlayer, gui: Gui): (event: InventoryClickEvent) -> Unit {
         return {
             val player = it.whoClicked as Player
 
@@ -200,6 +196,8 @@ class ProfileCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICom
                 CommandType.BLOCK -> plugin.blockCommand.blockPlayer(player, target)
                 CommandType.UNBLOCK -> plugin.blockCommand.unblockPlayer(player, target)
             }
+
+            this.refreshButtons(player, target, gui)
         }
     }
 
