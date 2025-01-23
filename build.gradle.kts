@@ -12,7 +12,7 @@ plugins {
 }
 
 group = "foundation.esoteric"
-version = "1.0-SNAPSHOT"
+version = "0.1.0"
 
 val paperApiVersion = "1.21.4"
 
