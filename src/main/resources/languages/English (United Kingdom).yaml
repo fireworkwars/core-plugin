@@ -43,16 +43,16 @@ PROFILE_FRIENDS_TITLE: "<!i><yellow>Friends</yellow></!i>"
 PROFILE_TOTAL_FRIENDS: "<!i><gray>Total Friends:</gray> <aqua>{0}</aqua></!i>"
 
 PROFILE_ADD_FRIEND: "<!i><green>Add Friend</green></!i>"
-PROFILE_ADD_FRIEND_TEXT: "<!i><gray>Click to add friend!</gray></!i>"
+PROFILE_ADD_FRIEND_TEXT: "<!i><gray>Click to add {0} as a friend!</gray></!i>"
 
 PROFILE_REMOVE_FRIEND: "<!i><red>Remove Friend</red></!i>"
-PROFILE_REMOVE_FRIEND_TEXT: "<!i><gray>Click to remove friend!</gray></!i>"
+PROFILE_REMOVE_FRIEND_TEXT: "<!i><gray>Click to remove {0} as a friend!</gray></!i>"
 
 PROFILE_BLOCK: "<!i><dark_gray>Block</dark_gray></!i>"
-PROFILE_BLOCK_TEXT: "<!i><gray>Click to block player!</gray></!i>"
+PROFILE_BLOCK_TEXT: "<!i><gray>Click to block {0}!</gray></!i>"
 
 PROFILE_UNBLOCK: "<!i><aqua>Unblock</aqua></!i>"
-PROFILE_UNBLOCK_TEXT: "<!i><gray>Click to unblock player!</gray></!i>"
+PROFILE_UNBLOCK_TEXT: "<!i><gray>Click to unblock {0}!</gray></!i>"
 
 GRANTED_RANK_SUCCESSFULLY: "<green>{0} has been granted a {1} rank!</green>"
 REVOKED_RANK_SUCCESSFULLY: "<green>{0}'s rank has been removed!</green>"
