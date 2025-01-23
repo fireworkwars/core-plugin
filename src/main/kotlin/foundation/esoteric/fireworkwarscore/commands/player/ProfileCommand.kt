@@ -13,6 +13,7 @@ import foundation.esoteric.fireworkwarscore.language.Message
 import foundation.esoteric.fireworkwarscore.profiles.PlayerProfile
 import foundation.esoteric.fireworkwarscore.util.*
 import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.format.TextDecoration
 import org.bukkit.Material
 import org.bukkit.OfflinePlayer
 import org.bukkit.Sound
@@ -154,7 +155,7 @@ class ProfileCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICom
                     lore.add(player.getMessage(Message.PROFILE_LAST_SEEN, lastSeen))
                 }
 
-                it.customName(targetProfile.formattedName())
+                it.customName(targetProfile.formattedName().decoration(TextDecoration.ITALIC, false))
                 it.lore(lore)
             }
         }
