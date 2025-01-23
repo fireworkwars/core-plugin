@@ -6,11 +6,16 @@ import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.OfflinePlayer
 import org.bukkit.Sound
+import org.bukkit.entity.HumanEntity
 import org.bukkit.entity.Player
 
 @Suppress("unused")
 fun Player.playSound(sound: Sound) {
     this.playSound(this, sound, 1.0F, 1.0F)
+}
+
+fun HumanEntity.playSound(sound: Sound) {
+    (this as Player).playSound(sound)
 }
 
 fun Player.sendMessage(message: Message, vararg args: Any?) {
