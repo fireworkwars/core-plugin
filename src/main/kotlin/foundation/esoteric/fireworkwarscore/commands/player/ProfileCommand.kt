@@ -53,8 +53,6 @@ class ProfileCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICom
 
         val stats = targetProfile.stats
 
-        val profile = playerDataManager.getPlayerProfile(player)
-
         val gui = Gui.gui()
             .title("${targetProfile.username}'s Profile".format())
             .rows(6)
@@ -66,7 +64,7 @@ class ProfileCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICom
         }
 
         gui.filler.fill(ItemBuilder.from(Material.WHITE_STAINED_GLASS_PANE).asGuiItem())
-        gui.filler.fillBetweenPoints(1, 0, 1, 8, ItemBuilder.from(Material.BLACK_STAINED_GLASS_PANE).asGuiItem())
+        gui.filler.fillBetweenPoints(2, 0, 2, 9, ItemBuilder.from(Material.BLACK_STAINED_GLASS_PANE).asGuiItem())
 
         val head = this.createHead(player, target, targetProfile)
 
