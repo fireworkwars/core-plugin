@@ -103,6 +103,7 @@ class FireworkWarsCorePlugin : JavaPlugin() {
         logger.info("Loading commands...")
 
         CommandAPI.onEnable()
+        CommandAPI.unregister("msg")
 
         this.friendCommand = FriendCommand(this)
         this.blockCommand = BlockCommand(this)
@@ -116,9 +117,6 @@ class FireworkWarsCorePlugin : JavaPlugin() {
         commands.add(friendCommand)
         commands.add(FriendListCommandAlias(this))
         commands.add(blockCommand)
-
-        CommandAPI.unregister("msg")
-        
         commands.add(messageCommand)
         commands.add(ReplyCommand(this))
         commands.add(AllChatCommand(this))
