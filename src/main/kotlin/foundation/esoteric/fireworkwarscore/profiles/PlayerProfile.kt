@@ -1,6 +1,9 @@
 package foundation.esoteric.fireworkwarscore.profiles
 
 import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.event.ClickEvent
+import net.kyori.adventure.text.event.HoverEvent
+import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import java.util.*
@@ -20,7 +23,12 @@ data class PlayerProfile(
     var lastSeenDate: Long = System.currentTimeMillis()
 ) {
     fun formattedName(): Component {
-        return rank.formatPlayerName(Component.text(username))
+        val component = rank.formatPlayerName(Component.text(username))
+
+        component.clickEvent(ClickEvent.runCommand("/profile $username"))
+        component.hoverEvent(HoverEvent.showText(Component.text("Click to view $username's profile", NamedTextColor.GRAY)))
+
+        return component
     }
 
     fun updateOwnTablist() {
