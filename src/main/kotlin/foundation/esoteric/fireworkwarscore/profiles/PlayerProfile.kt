@@ -15,7 +15,9 @@ data class PlayerProfile(
     val achievements: MutableList<Any>,
     val friends: MutableList<UUID>,
     val blocked: MutableList<UUID>,
-    var firstJoin: Boolean = true
+    var firstJoin: Boolean = true,
+    var firstJoinDate: Long = System.currentTimeMillis(),
+    var lastSeenDate: Long = System.currentTimeMillis()
 ) {
     fun formattedName(): Component {
         return rank.formatPlayerName(Component.text(username))
@@ -36,11 +38,13 @@ data class PlayerStats(
     var totalDamageDealt: Double,
     var wins: Int,
     var losses: Int,
-    var gamesPlayed: Int
+    var gamesPlayed: Int,
+    var currentWinStreak: Int,
+    var highestWinStreak: Int
 ) {
     companion object {
         fun default(): PlayerStats {
-            return PlayerStats(0, 0, 0.0, 0, 0, 0)
+            return PlayerStats(0, 0, 0.0, 0, 0, 0, 0, 0)
         }
     }
 
