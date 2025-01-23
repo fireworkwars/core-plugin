@@ -152,11 +152,16 @@ class ProfileCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICom
                 val firstJoin = Util.formattedTimeDifference(targetProfile.firstJoinDate, System.currentTimeMillis(), player)
                 val lastSeen = Util.formattedTimeDifference(targetProfile.lastSeenDate, System.currentTimeMillis(), player)
 
+                val lore = mutableListOf(player.getMessage(Message.PROFILE_FIRST_JOIN, firstJoin))
+
+                if (target.isOnline) {
+                    lore.add(player.getMessage(Message.PROFILE_CURRENTLY_ONLINE))
+                } else {
+                    lore.add(player.getMessage(Message.PROFILE_LAST_SEEN, lastSeen))
+                }
+
                 it.customName(targetProfile.formattedName())
-                it.lore(listOf(
-                    player.getMessage(Message.PROFILE_FIRST_JOIN, firstJoin),
-                    player.getMessage(Message.PROFILE_LAST_SEEN, lastSeen),
-                ))
+                it.lore(lore)
             }
         }
 
