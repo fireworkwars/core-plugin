@@ -42,7 +42,7 @@ class BlockCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComma
                 .withShortDescription("Blocks a player")
                 .withFullDescription("Blocks the specified player.")
                 .withArguments(this.nonBlockedArgumentSupplier())
-                .executesPlayer(this::blockPlayer)
+                .executesPlayer(this::blockPlayerExecution)
         )
 
         this.withSubcommand(
@@ -51,7 +51,7 @@ class BlockCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComma
                 .withShortDescription("Unblocks a player")
                 .withFullDescription("Unblocks the specified player.")
                 .withArguments(this.blockedPlayersArgumentSupplier())
-                .executesPlayer(this::unblockPlayer)
+                .executesPlayer(this::unblockPlayerExecution)
         )
 
         this.withSubcommand(
@@ -99,10 +99,14 @@ class BlockCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComma
             .setOptional(true) as IntegerArgument
     }
 
-    private fun blockPlayer(player: Player, args: CommandArguments) {
+    private fun blockPlayerExecution(player: Player, args: CommandArguments) {
         val target = args[playerArgumentNodeName] as OfflinePlayer?
             ?: return player.sendMessage(Message.UNKNOWN_PLAYER)
 
+        this.blockPlayer(player, target)
+    }
+
+    fun blockPlayer(player: Player, target: OfflinePlayer) {
         if (target.uniqueId == player.uniqueId) {
             return player.sendMessage(Message.CANNOT_BLOCK_SELF)
         }
@@ -127,10 +131,14 @@ class BlockCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComma
         player.sendMessage(Message.BLOCKED_PLAYER, targetProfile.formattedName())
     }
 
-    private fun unblockPlayer(player: Player, args: CommandArguments) {
+    private fun unblockPlayerExecution(player: Player, args: CommandArguments) {
         val target = args[playerArgumentNodeName] as OfflinePlayer?
             ?: return player.sendMessage(Message.UNKNOWN_PLAYER)
 
+        this.unblockPlayer(player, target)
+    }
+
+    fun unblockPlayer(player: Player, target: OfflinePlayer) {
         val profile = playerDataManager.getPlayerProfile(player)
         val targetProfile = playerDataManager.getPlayerProfile(target, false)
             ?: return player.sendMessage(Message.UNKNOWN_PLAYER)
