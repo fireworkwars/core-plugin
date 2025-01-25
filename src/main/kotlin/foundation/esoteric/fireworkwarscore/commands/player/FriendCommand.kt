@@ -307,15 +307,15 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
         val page = pageArgument.coerceIn(1, totalPages)
         val friendsOnPage = Util.getPageItems(friends, page, playersPerPage)
 
-        val previous = text("<<", NamedTextColor.GOLD).decorate(TextDecoration.BOLD)
-        val next = text(">>", NamedTextColor.GOLD).decorate(TextDecoration.BOLD)
+        var previous = text("<<", NamedTextColor.GOLD).decorate(TextDecoration.BOLD)
+        var next = text(">>", NamedTextColor.GOLD).decorate(TextDecoration.BOLD)
 
         if (page > 1) {
-            previous.clickEvent(ClickEvent.runCommand("/friend list ${page - 1}"))
+            previous = previous.clickEvent(ClickEvent.runCommand("/friend list ${page - 1}"))
         }
 
         if (page < totalPages) {
-            next.clickEvent(ClickEvent.runCommand("/friend list ${page + 1}"))
+            next = next.clickEvent(ClickEvent.runCommand("/friend list ${page + 1}"))
         }
 
         val separator = player.getMessage(Message.FRIEND_LIST_SEPARATOR)
