@@ -54,9 +54,12 @@ PROFILE_BLOCK_TEXT: "<!i><gray>Click to block {0}!</gray></!i>"
 PROFILE_UNBLOCK: "<!i><aqua>Unblock</aqua></!i>"
 PROFILE_UNBLOCK_TEXT: "<!i><gray>Click to unblock {0}!</gray></!i>"
 
-LEADERBOARD_TITLE: "<yellow>ʟᴇᴀᴅᴇʀʙᴏᴀʀᴅ</yellow>"
-LEADERBOARD_TYPE: "<gray>{0}</gray>"
+LEADERBOARD_TITLE: "<gold>ʟᴇᴀᴅᴇʀʙᴏᴀʀᴅ</gold>"
+LEADERBOARD_SUBTITLE: "<gray>{0}</gray>"
 LEADERBOARD_ENTRY: "<dark_aqua>{0}.</dark_aqua> {1} <gray>-</gray> <green>{2}</green>"
+
+LEADERBOARD_TYPE_WINS: "Wins"
+LEADERBOARD_TYPE_KILLS: "Kills"
 
 GRANTED_RANK_SUCCESSFULLY: "<green>{0} has been granted a {1} rank!</green>"
 REVOKED_RANK_SUCCESSFULLY: "<green>{0}'s rank has been removed!</green>"
