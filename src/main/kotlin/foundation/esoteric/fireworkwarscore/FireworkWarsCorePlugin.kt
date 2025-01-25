@@ -7,6 +7,7 @@ import foundation.esoteric.fireworkwarscore.commands.aliases.FriendListCommandAl
 import foundation.esoteric.fireworkwarscore.commands.developer.GetListOrderInfo
 import foundation.esoteric.fireworkwarscore.commands.developer.ToggleBuildCommand
 import foundation.esoteric.fireworkwarscore.commands.developer.ToggleDebugCommand
+import foundation.esoteric.fireworkwarscore.commands.developer.ToggleGlobalChatCommand
 import foundation.esoteric.fireworkwarscore.commands.operator.SetRankCommand
 import foundation.esoteric.fireworkwarscore.commands.player.*
 import foundation.esoteric.fireworkwarscore.communication.FireworkWarsPluginData
@@ -53,6 +54,7 @@ class FireworkWarsCorePlugin : JavaPlugin() {
 
     var isDebugging = false
     var isBuildModeEnabled = false
+    var isGlobalChatEnabled = false
 
     private val commandApiConfig = CommandAPIBukkitConfig(this)
 
@@ -114,6 +116,7 @@ class FireworkWarsCorePlugin : JavaPlugin() {
 
         commands.add(ToggleDebugCommand(this))
         commands.add(ToggleBuildCommand(this))
+        commands.add(ToggleGlobalChatCommand(this))
         commands.add(GetListOrderInfo(this))
         commands.add(SetLanguageCommand(this))
         commands.add(SetRankCommand(this))
