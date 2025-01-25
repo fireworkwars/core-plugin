@@ -78,6 +78,10 @@ class PlayerDataManager(private val plugin: FireworkWarsCorePlugin) {
         }
     }
 
+    fun getAllProfiles(): Collection<PlayerProfile> {
+        return playerData.values
+    }
+
     @Contract("_, true -> !null")
     fun getPlayerProfile(uuid: UUID, createNewProfile: Boolean): PlayerProfile? {
         return if (createNewProfile) {
