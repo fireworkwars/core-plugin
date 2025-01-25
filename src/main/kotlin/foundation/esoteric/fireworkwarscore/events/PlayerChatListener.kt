@@ -19,6 +19,14 @@ class PlayerChatListener(private val plugin: FireworkWarsCorePlugin) : Listener,
         plugin.registerEvent(this)
     }
 
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    fun monitorPlayerChat(event: AsyncChatEvent) {
+        if (plugin.isGlobalChatEnabled) {
+            event.viewers().clear()
+            event.viewers().addAll(plugin.server.onlinePlayers)
+        }
+    }
+
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     fun onPlayerChat(event: AsyncChatEvent) {
         val player = event.player
