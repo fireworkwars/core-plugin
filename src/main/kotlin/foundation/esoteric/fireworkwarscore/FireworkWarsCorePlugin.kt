@@ -23,6 +23,7 @@ import foundation.esoteric.fireworkwarscore.managers.FriendManager
 import foundation.esoteric.fireworkwarscore.managers.PrivateMessageManager
 import foundation.esoteric.fireworkwarscore.maps.MapManager
 import foundation.esoteric.fireworkwarscore.profiles.PlayerDataManager
+import foundation.esoteric.fireworkwarscore.stats.StatResetScheduler
 import net.kyori.adventure.text.Component.text
 import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.event.Listener
@@ -49,6 +50,8 @@ class FireworkWarsCorePlugin : JavaPlugin() {
     lateinit var blockCommand: BlockCommand
     lateinit var messageCommand: MessageCommand
     lateinit var profileCommand: ProfileCommand
+
+    val statResetScheduler = StatResetScheduler(this)
 
     val mm = MiniMessage.miniMessage()
 
@@ -143,6 +146,13 @@ class FireworkWarsCorePlugin : JavaPlugin() {
         logger.info("Finished registering global event listeners.")
         logger.info("Registered ${events.size} event listeners.")
 
+        logger.info("Starting daily & weekly stat resetting scheduler...")
+
+        statResetScheduler.handleDailyReset()
+        statResetScheduler.handleWeeklyReset()
+
+        logger.info("Running stat resetting scheduler.")
+
         logger.info("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Firework Wars Core =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
         logger.info("End of logs for Firework Wars Core Plugin.")
         logger.info("Finished Firework Wars Core initialisation sequence.")
@@ -153,7 +163,7 @@ class FireworkWarsCorePlugin : JavaPlugin() {
         playerDataManager.save()
     }
 
-    fun runTaskLater(task: Runnable, delay: Long): BukkitTask {
+    fun runTaskLater(delay: Long, task: Runnable): BukkitTask {
         return server.scheduler.runTaskLater(this, task, delay)
     }
 
