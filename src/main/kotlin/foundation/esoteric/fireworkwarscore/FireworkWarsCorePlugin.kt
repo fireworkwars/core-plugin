@@ -148,8 +148,8 @@ class FireworkWarsCorePlugin : JavaPlugin() {
 
         logger.info("Starting daily & weekly stat resetting scheduler...")
 
-        statResetScheduler.handleDailyReset()
-        statResetScheduler.handleWeeklyReset()
+        statResetScheduler.scheduleDailyReset()
+        statResetScheduler.scheduleWeeklyReset()
 
         logger.info("Running stat resetting scheduler.")
 
