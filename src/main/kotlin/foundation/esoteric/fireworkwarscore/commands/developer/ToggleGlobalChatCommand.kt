@@ -23,7 +23,7 @@ class ToggleGlobalChatCommand(private val plugin: FireworkWarsCorePlugin) : Comm
         plugin.isGlobalChatEnabled = !plugin.isGlobalChatEnabled
 
         val status =
-            if (plugin.isDebugging) text("ENABLED").color(NamedTextColor.DARK_GREEN)
+            if (plugin.isGlobalChatEnabled) text("ENABLED").color(NamedTextColor.DARK_GREEN)
             else text("DISABLED").color(NamedTextColor.RED)
 
         player.sendMessage(
