@@ -8,7 +8,7 @@ import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.entity.Player
 import java.util.function.Predicate
 
-class ToggleGlobalChatCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICommand("toggleglobalchat") {
+class ToggleGlobalChatCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICommand("toggle-gc") {
     init {
         this.requirements = Predicate { it.isOp }
 
