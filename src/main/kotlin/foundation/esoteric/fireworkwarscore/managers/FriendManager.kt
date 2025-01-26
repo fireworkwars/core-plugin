@@ -20,10 +20,10 @@ class FriendManager(private val plugin: FireworkWarsCorePlugin) {
         outgoingRequests.computeIfAbsent(senderUuid) { mutableListOf() }.add(receiverUuid)
         receivingRequests.computeIfAbsent(receiverUuid) { mutableListOf() }.add(senderUuid)
 
-        val task = plugin.runTaskLater({
+        val task = plugin.runTaskLater(requestExpiryTime) {
             removeRequestData(sender, receiver)
             onExpire(sender, receiver)
-        }, requestExpiryTime)
+        }
 
         expiryTasks.computeIfAbsent(senderUuid) { mutableMapOf() } [receiverUuid] = task
     }

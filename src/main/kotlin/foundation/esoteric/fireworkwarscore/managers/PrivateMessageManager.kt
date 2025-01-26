@@ -57,9 +57,9 @@ class PrivateMessageManager(private val plugin: FireworkWarsCorePlugin) : Event 
     fun setChannelExpiry(player: UUID, expireTicks: Int) {
         currentChannelExpiryTasks[player]?.cancel()
 
-        this.currentChannelExpiryTasks[player] = plugin.runTaskLater({
+        this.currentChannelExpiryTasks[player] = plugin.runTaskLater(expireTicks.toLong()) {
             this.removeChannel(player)
-        }, expireTicks.toLong())
+        }
     }
 
     fun cancelChannelExpiry(player: UUID) {
