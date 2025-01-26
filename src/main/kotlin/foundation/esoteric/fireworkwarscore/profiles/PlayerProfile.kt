@@ -84,6 +84,17 @@ data class PlayerStats(
         }
     }
 
+    fun reset() {
+        this.kills = 0
+        this.deaths = 0
+        this.totalDamageDealt = 0.0
+        this.wins = 0
+        this.losses = 0
+        this.gamesPlayed = 0
+        this.currentWinStreak = 0
+        this.highestWinStreak = 0
+    }
+
     fun getKillDeathRatio(): Double {
         return if (deaths == 0) kills.toDouble().toFixed(2)
         else (kills.toDouble() / deaths.toDouble()).toFixed(2)
