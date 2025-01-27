@@ -54,11 +54,12 @@ PROFILE_BLOCK_TEXT: "<!i><gray>Click to block {0}!</gray></!i>"
 PROFILE_UNBLOCK: "<!i><aqua>Unblock</aqua></!i>"
 PROFILE_UNBLOCK_TEXT: "<!i><gray>Click to unblock {0}!</gray></!i>"
 
-LEADERBOARD_TITLE_WINS: "<yellow><bold>Leaderboard</bold></yellow>"
-LEADERBOARD_TITLE_KILLS: "<yellow><bold>Leaderboard</bold></yellow>"
+LEADERBOARD_TITLE_WINS: "<yellow><bold><u>Wins Leaderboard</u></bold></yellow>"
+LEADERBOARD_TITLE_KILLS: "<yellow><bold><u>Kills Leaderboard</u></bold></yellow>"
 
-LEADERBOARD_TYPE_WINS: "<gray>All-Time Wins</gray>"
-LEADERBOARD_TYPE_KILLS: "<gray>All-Time Kills</gray>"
+LEADERBOARD_TIME_DAILY: "<gray>Time: Daily</gray>"
+LEADERBOARD_TIME_WEEKLY: "<gray>Time: Weekly</gray>"
+LEADERBOARD_TIME_ALL_TIME: "<gray>Time: All Time</gray>"
 
 LEADERBOARD_ENTRY: "<dark_aqua>{0}.</dark_aqua> {1} <gray>-</gray> <green>{2}</green>"
 
@@ -67,7 +68,7 @@ LEADERBOARD_RESETS_IN_HOURS: "<gray>Resets in {0} hour{1}</gray>"
 LEADERBOARD_RESETS_IN_MINUTES: "<gray>Resets in {0} minute{1}</gray>"
 LEADERBOARD_NEVER_RESETS: "<gray>Never resets</gray>"
 
-GRANTED_RANK_SUCCESSFULLY: "<green>{0} has been granted a {1} rank!</green>"
+GRANTED_RANK_SUCCESSFULLY: "<green>{0} has been granted the {1} rank!</green>"
 REVOKED_RANK_SUCCESSFULLY: "<green>{0}'s rank has been removed!</green>"
 RANK_GRANTED: "<green>You have been given a {0} rank!</green>"
 RANK_REVOKED: "<green>Your rank has been removed!</green>"
