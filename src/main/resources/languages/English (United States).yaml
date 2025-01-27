@@ -63,6 +63,8 @@ LEADERBOARD_TIME_ALL_TIME: "<gray>Time: All Time</gray>"
 
 LEADERBOARD_ENTRY: "<dark_aqua>{0}.</dark_aqua> {1} <gray>-</gray> <green>{2}</green>"
 
+LEADERBOARD_LOADING: "<gray>Fetching data...</gray>"
+
 LEADERBOARD_RESETS_IN_DAYS: "<gray>Resets in {0} day{1}</gray>"
 LEADERBOARD_RESETS_IN_HOURS: "<gray>Resets in {0} hour{1}</gray>"
 LEADERBOARD_RESETS_IN_MINUTES: "<gray>Resets in {0} minute{1}</gray>"
