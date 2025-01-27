@@ -43,4 +43,12 @@ class StatResetScheduler(private val plugin: FireworkWarsCorePlugin) {
         plugin.config.set(nextDailyResetKey, nextWeeklyReset)
         plugin.saveConfig()
     }
+
+    fun getNextDailyReset(): Long {
+        return plugin.config.getLong(nextDailyResetKey) - System.currentTimeMillis()
+    }
+
+    fun getNextWeeklyReset(): Long {
+        return plugin.config.getLong(nextWeeklyResetKey) - System.currentTimeMillis()
+    }
 }
