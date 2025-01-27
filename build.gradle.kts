@@ -11,6 +11,9 @@ plugins {
     id("maven-publish")
 }
 
+val buildToMain = false
+val buildToLobby = true
+
 group = "foundation.esoteric"
 version = "0.2.0"
 
@@ -76,7 +79,11 @@ tasks {
         relocate("fr.mrmicky.fastboard", "foundation.esoteric.fireworkwarscore.libs.fastboard")
         relocate("dev.triumphteam.gui", "foundation.esoteric.fireworkwarscore.libs.gui")
 
-        destinationDirectory.set(file("../firework-wars-plugin/run/plugins"))
+        if (buildToMain) {
+            destinationDirectory.set(file("../firework-wars-plugin/run/plugins"))
+        } else if (buildToLobby) {
+            destinationDirectory.set(file("../firework-wars-lobby-plugin/run/plugins"))
+        }
     }
 
     build {
