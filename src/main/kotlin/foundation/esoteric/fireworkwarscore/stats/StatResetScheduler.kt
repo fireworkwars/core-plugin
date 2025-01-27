@@ -4,6 +4,7 @@ import foundation.esoteric.fireworkwarscore.FireworkWarsCorePlugin
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
+@Suppress("MemberVisibilityCanBePrivate")
 class StatResetScheduler(private val plugin: FireworkWarsCorePlugin) {
     private val executor = Executors.newScheduledThreadPool(1)
 
@@ -11,8 +12,7 @@ class StatResetScheduler(private val plugin: FireworkWarsCorePlugin) {
     private val nextWeeklyResetKey = "next-weekly-stat-reset"
 
     fun scheduleDailyReset() {
-        val nextReset = plugin.config.getLong(nextDailyResetKey)
-        val delay = (nextReset - System.currentTimeMillis()).coerceAtLeast(0)
+        val delay = this.getNextDailyReset()
 
         executor.scheduleAtFixedRate({
             plugin.playerDataManager.getAllProfiles().forEach {
@@ -29,8 +29,7 @@ class StatResetScheduler(private val plugin: FireworkWarsCorePlugin) {
     }
 
     fun scheduleWeeklyReset() {
-        val nextReset = plugin.config.getLong(nextWeeklyResetKey)
-        val delay = (nextReset - System.currentTimeMillis()).coerceAtLeast(0)
+        val delay = this.getNextWeeklyReset()
 
         executor.scheduleAtFixedRate({
             plugin.playerDataManager.getAllProfiles().forEach {
@@ -45,10 +44,12 @@ class StatResetScheduler(private val plugin: FireworkWarsCorePlugin) {
     }
 
     fun getNextDailyReset(): Long {
-        return plugin.config.getLong(nextDailyResetKey) - System.currentTimeMillis()
+        val difference = plugin.config.getLong(nextDailyResetKey) - System.currentTimeMillis()
+        return difference.coerceAtLeast(0)
     }
 
     fun getNextWeeklyReset(): Long {
-        return plugin.config.getLong(nextWeeklyResetKey) - System.currentTimeMillis()
+        val difference = plugin.config.getLong(nextWeeklyResetKey) - System.currentTimeMillis()
+        return difference.coerceAtLeast(0)
     }
 }
