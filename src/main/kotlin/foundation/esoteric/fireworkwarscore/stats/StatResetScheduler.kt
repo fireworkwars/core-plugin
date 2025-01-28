@@ -19,31 +19,41 @@ class StatResetScheduler(private val plugin: FireworkWarsCorePlugin) {
     }
 
     private fun scheduleDailyReset() {
-        val delay = this.getNextDailyReset()
-
         executor.scheduleAtFixedRate({
             plugin.playerDataManager.getAllProfiles().forEach {
-                plugin.runTaskLater(0) {
+                plugin.runTask {
                     it.dailyStats.reset()
                 }
             }
-        }, delay, 24, TimeUnit.HOURS)
 
-        val nextDailyReset = System.currentTimeMillis() + TimeUnit.DAYS.toMillis(1) + delay
-        plugin.config.set(nextDailyResetKey, nextDailyReset)
+            this.saveNextDailyResetDate()
+        }, this.getNextDailyReset(), 24, TimeUnit.HOURS)
     }
 
     private fun scheduleWeeklyReset() {
-        val delay = this.getNextWeeklyReset()
-
         executor.scheduleAtFixedRate({
             plugin.playerDataManager.getAllProfiles().forEach {
-                it.weeklyStats.reset()
+                plugin.runTask {
+                    it.weeklyStats.reset()
+                }
             }
-        }, delay, 7, TimeUnit.DAYS)
 
-        val nextWeeklyReset = System.currentTimeMillis() + TimeUnit.DAYS.toMillis(7) + delay
+            this.saveNextWeeklyResetDate()
+        }, this.getNextWeeklyReset(), 7, TimeUnit.DAYS)
+    }
+
+    private fun saveNextDailyResetDate() {
+        val nextDailyReset = System.currentTimeMillis() + TimeUnit.DAYS.toMillis(1)
+
+        plugin.config.set(nextDailyResetKey, nextDailyReset)
+        plugin.saveConfig()
+    }
+
+    private fun saveNextWeeklyResetDate() {
+        val nextWeeklyReset = System.currentTimeMillis() + TimeUnit.DAYS.toMillis(7)
+
         plugin.config.set(nextWeeklyResetKey, nextWeeklyReset)
+        plugin.saveConfig()
     }
 
     fun getNextDailyReset(): Long {
