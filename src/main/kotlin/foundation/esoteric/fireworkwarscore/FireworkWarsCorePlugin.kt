@@ -162,6 +162,10 @@ class FireworkWarsCorePlugin : JavaPlugin() {
         playerDataManager.save()
     }
 
+    fun runTask(task: Runnable) {
+        server.scheduler.runTask(this, task)
+    }
+
     fun runTaskLater(delay: Long, task: Runnable): BukkitTask {
         return server.scheduler.runTaskLater(this, task, delay)
     }
