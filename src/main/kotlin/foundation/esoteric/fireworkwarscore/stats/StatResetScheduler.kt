@@ -43,7 +43,7 @@ class StatResetScheduler(private val plugin: FireworkWarsCorePlugin) {
         }, delay, 7, TimeUnit.DAYS)
 
         val nextWeeklyReset = System.currentTimeMillis() + TimeUnit.DAYS.toMillis(7) + delay
-        plugin.config.set(nextDailyResetKey, nextWeeklyReset)
+        plugin.config.set(nextWeeklyResetKey, nextWeeklyReset)
     }
 
     fun getNextDailyReset(): Long {
