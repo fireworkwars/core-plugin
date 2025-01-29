@@ -10,6 +10,7 @@ import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import java.util.*
+import java.util.function.Consumer
 
 @Suppress("unused")
 data class PlayerProfile(
@@ -67,10 +68,10 @@ data class PlayerProfile(
         return friends.mapNotNull { Bukkit.getPlayer(it) }
     }
 
-    fun updateStats(update: (PlayerStats) -> Void) {
-        update(stats)
-        update(dailyStats)
-        update(weeklyStats)
+    fun updateStats(update: Consumer<PlayerStats>) {
+        update.accept(stats)
+        update.accept(dailyStats)
+        update.accept(weeklyStats)
     }
 }
 
