@@ -67,7 +67,7 @@ data class PlayerProfile(
         return friends.mapNotNull { Bukkit.getPlayer(it) }
     }
 
-    fun updateStats(update: (PlayerStats) -> Unit) {
+    fun updateStats(update: (PlayerStats) -> Void) {
         update(stats)
         update(dailyStats)
         update(weeklyStats)
