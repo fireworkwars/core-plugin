@@ -61,7 +61,7 @@ LEADERBOARD_TIME_DAILY: "<gray>Time: Daily</gray>"
 LEADERBOARD_TIME_WEEKLY: "<gray>Time: Weekly</gray>"
 LEADERBOARD_TIME_ALL_TIME: "<gray>Time: All Time</gray>"
 
-LEADERBOARD_ENTRY: " <dark_aqua>{0}.</dark_aqua> {1} <gray>-</gray> <green>{2}</green> "
+LEADERBOARD_ENTRY: " <dark_aqua>{0}.</dark_aqua> {1} <gray>-</gray> <green>{2}</green> {3}"
 
 LEADERBOARD_LOADING: "<gray>Fetching data...</gray>"
 
