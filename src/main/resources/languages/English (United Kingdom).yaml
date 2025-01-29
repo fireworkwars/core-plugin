@@ -54,14 +54,14 @@ PROFILE_BLOCK_TEXT: "<!i><gray>Click to block {0}!</gray></!i>"
 PROFILE_UNBLOCK: "<!i><aqua>Unblock</aqua></!i>"
 PROFILE_UNBLOCK_TEXT: "<!i><gray>Click to unblock {0}!</gray></!i>"
 
-LEADERBOARD_TITLE_WINS: "       <yellow><bold><u>Wins Leaderboard</u></bold></yellow>       "
-LEADERBOARD_TITLE_KILLS: "       <yellow><bold><u>Kills Leaderboard</u></bold></yellow>       "
+LEADERBOARD_TITLE_WINS: " <yellow><bold><u>Wins Leaderboard</u></bold></yellow> "
+LEADERBOARD_TITLE_KILLS: " <yellow><bold><u>Kills Leaderboard</u></bold></yellow> "
 
 LEADERBOARD_TIME_DAILY: "<gray>Time: Daily</gray>"
 LEADERBOARD_TIME_WEEKLY: "<gray>Time: Weekly</gray>"
 LEADERBOARD_TIME_ALL_TIME: "<gray>Time: All Time</gray>"
 
-LEADERBOARD_ENTRY: " <dark_aqua>{0}.</dark_aqua> {1} <gray>-</gray> <green>{2}</green> {3}"
+LEADERBOARD_ENTRY: " <dark_aqua>{0}.</dark_aqua> {1} <gray>-</gray> <green>{2}</green> "
 
 LEADERBOARD_LOADING: "<gray>Fetching data...</gray>"
 
