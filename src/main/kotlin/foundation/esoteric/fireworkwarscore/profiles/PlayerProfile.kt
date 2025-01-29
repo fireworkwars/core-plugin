@@ -66,6 +66,12 @@ data class PlayerProfile(
     fun getOnlineFriends(): List<Player> {
         return friends.mapNotNull { Bukkit.getPlayer(it) }
     }
+
+    fun updateStats(update: (PlayerStats) -> Unit) {
+        update(stats)
+        update(dailyStats)
+        update(weeklyStats)
+    }
 }
 
 data class PlayerStats(
