@@ -17,18 +17,18 @@ class SetRankCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICom
     private val playerDataManager = plugin.playerDataManager
 
     private val targetPlayerArgumentNodeName = "targetPlayer"
-    private val ranksArgumentNodeName = "ranks"
+    private val ranksArgumentNodeName = "rank"
 
     init {
-        setRequirements { it.isOp }
+        this.setRequirements { it.isOp }
 
-        withShortDescription("Set a player's rank")
-        withFullDescription("Set a player's rank")
-        withAliases("rank")
+        this.withShortDescription("Set a player's rank")
+        this.withFullDescription("Set a player's rank")
+        this.withAliases("rank")
 
-        withArguments(PlayerArgument(targetPlayerArgumentNodeName), getRanksArgument())
-        executesPlayer(this::onPlayerExecution)
-        register(plugin)
+        this.withArguments(PlayerArgument(targetPlayerArgumentNodeName), getRanksArgument())
+        this.executesPlayer(this::onPlayerExecution)
+        this.register(plugin)
     }
     
     private fun getRanksArgument(): Argument<String> {
