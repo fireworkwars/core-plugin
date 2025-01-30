@@ -11,7 +11,7 @@ plugins {
     id("maven-publish")
 }
 
-val buildToMain = true
+val buildToMain = false
 val buildToLobby = false
 
 group = "foundation.esoteric"
