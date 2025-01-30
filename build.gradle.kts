@@ -15,7 +15,7 @@ val buildToMain = true
 val buildToLobby = false
 
 group = "foundation.esoteric"
-version = "0.6.2"
+version = "1.0.0"
 
 val paperApiVersion = "1.21.4"
 
