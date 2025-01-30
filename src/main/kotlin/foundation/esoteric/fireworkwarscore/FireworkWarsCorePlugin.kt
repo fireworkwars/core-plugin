@@ -4,7 +4,6 @@ import dev.jorel.commandapi.CommandAPI
 import dev.jorel.commandapi.CommandAPIBukkitConfig
 import dev.jorel.commandapi.CommandAPICommand
 import foundation.esoteric.fireworkwarscore.commands.aliases.FriendListCommandAlias
-import foundation.esoteric.fireworkwarscore.commands.developer.GetListOrderInfo
 import foundation.esoteric.fireworkwarscore.commands.developer.ToggleBuildCommand
 import foundation.esoteric.fireworkwarscore.commands.developer.ToggleDebugCommand
 import foundation.esoteric.fireworkwarscore.commands.developer.ToggleGlobalChatCommand
@@ -120,7 +119,6 @@ class FireworkWarsCorePlugin : JavaPlugin() {
         commands.add(ToggleDebugCommand(this))
         commands.add(ToggleBuildCommand(this))
         commands.add(ToggleGlobalChatCommand(this))
-        commands.add(GetListOrderInfo(this))
         commands.add(SetLanguageCommand(this))
         commands.add(SetRankCommand(this))
         commands.add(friendCommand)
