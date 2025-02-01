@@ -4,10 +4,13 @@ import foundation.esoteric.fireworkwarscore.language.LanguageManager
 import foundation.esoteric.fireworkwarscore.language.Message
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.minimessage.MiniMessage
+import org.bukkit.Location
 import org.bukkit.OfflinePlayer
 import org.bukkit.Sound
+import org.bukkit.entity.Entity
 import org.bukkit.entity.HumanEntity
 import org.bukkit.entity.Player
+import org.bukkit.util.Vector
 import kotlin.math.pow
 import kotlin.math.round
 
@@ -55,4 +58,10 @@ fun Double.toFixed(places: Int): Double {
 
     val factor = 10.0.pow(places)
     return round(this * factor) / factor
+}
+
+fun Player.prepareAndTeleport(location: Location) {
+    this.passengers.forEach(Entity::remove)
+    this.velocity = Vector(0, 0, 0)
+    this.teleport(location)
 }
