@@ -21,6 +21,7 @@ class MapManager(private val plugin: FireworkWarsCorePlugin) {
 
     @Throws(IOException::class)
     fun saveMaps() {
+        logger.info("Saving Firework Wars maps...")
         logger.info("Deleting existing world folders...")
 
         FileUtils.deleteDirectory(File(defaultWorld))
