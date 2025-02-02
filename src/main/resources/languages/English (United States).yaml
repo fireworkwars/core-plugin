@@ -274,7 +274,7 @@ YOU_ARE_NOW_SPECTATOR: "<yellow>You are now a spectator!</yellow>"
 
 YOU_WIN: "<gold><bold>VICTORY</bold></gold>"
 YOU_LOSE: "<red><bold>GAME OVER</bold></red>"
-GAME_DRAWN: "<dark_gray><bold>DRAW</bold></dark_gray>"
+GAME_DRAWN: "<gray><bold>DRAW</bold></gray>"
 
 ARENA_JOIN: "<gray>{0}</gray> <yellow>has joined the game! (<aqua>{1}</aqua>/<aqua>{2}</aqua>)</yellow>"
 ARENA_LEAVE: "<gray>{0}</gray> <yellow>has left the game! (<aqua>{1}</aqua>/<aqua>{2}</aqua>)</yellow>"
