@@ -1,4 +1,7 @@
+update-maps-on-start: true
+
 default-language: English (United Kingdom)
+
 server-ip: quotes-custody.joinmc.link
 discord-invite: discord.gg/coming soon prob
 
