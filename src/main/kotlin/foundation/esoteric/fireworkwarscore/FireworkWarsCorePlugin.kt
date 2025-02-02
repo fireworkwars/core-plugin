@@ -29,7 +29,7 @@ import org.bukkit.event.Listener
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.scheduler.BukkitTask
 
-@Suppress("unused", "MemberVisibilityCanBePrivate")
+@Suppress("unused", "MemberVisibilityCanBePrivate", "UnstableApiUsage")
 class FireworkWarsCorePlugin : JavaPlugin() {
     lateinit var playerDataManager: PlayerDataManager
     lateinit var languageManager: LanguageManager
@@ -63,24 +63,12 @@ class FireworkWarsCorePlugin : JavaPlugin() {
     private val commands = mutableListOf<CommandAPICommand>()
     private val events = mutableListOf<Event>()
 
-    init {
+    override fun onLoad() {
         logger.info("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Firework Wars Core =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
         logger.info("This is the start of Firework Wars Core Plugin logs.")
-        @Suppress("UnstableApiUsage")
         logger.info("Info: v" + pluginMeta.version + " by " + pluginMeta.website)
         logger.info("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= End of Plugin Info =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
 
-        logger.info("Saving Firework Wars maps...")
-
-        mapManager.saveMaps()
-    }
-
-    override fun onLoad() {
-        CommandAPI.onLoad(commandApiConfig)
-    }
-
-    override fun onEnable() {
-        logger.info("Starting core initialisation sequence...")
         logger.info("Creating data folder...")
 
         dataFolder.mkdir()
@@ -92,6 +80,16 @@ class FireworkWarsCorePlugin : JavaPlugin() {
         this.pluginConfig = PluginConfig(this)
 
         logger.info("Successfully created data folder and loaded plugin data.")
+
+        if (pluginConfig.updateMaps) {
+            mapManager.saveMaps()
+        }
+
+        CommandAPI.onLoad(commandApiConfig)
+    }
+
+    override fun onEnable() {
+        logger.info("Starting core initialisation sequence...")
         logger.info("Loading player profiles...")
 
         this.playerDataManager = PlayerDataManager(this)
