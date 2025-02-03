@@ -1,9 +1,0 @@
-[submodule "src/main/resources/maps/barracks"]
-	path = src/main/resources/maps/barracks
-	url = https://github.com/fireworkwars/barracks-map.git
-[submodule "src/main/resources/maps/world"]
-	path = src/main/resources/maps/world
-	url = https://github.com/fireworkwars/lobby.git
-[submodule "src/main/resources/maps/town"]
-	path = src/main/resources/maps/town
-	url = https://github.com/fireworkwars/town-map.git
