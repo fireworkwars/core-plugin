@@ -11,6 +11,8 @@ plugins {
     id("maven-publish")
 }
 
+// build output location configuration
+// both false = build to build/libs
 val buildToMain = false
 val buildToLobby = false
 
@@ -18,12 +20,25 @@ group = "foundation.esoteric"
 version = "1.1.0"
 
 val paperApiVersion = "1.21.4"
+val targetJavaVersion = 21
+
+// authors
+val rolyPolyVole = "rolyPolyVole"
+val esotericEnderman = "Esoteric Enderman"
+
+// plugin yml
+val pluginName = "FireworkWarsCore"
+val pluginAuthors = listOf(rolyPolyVole, esotericEnderman)
+val pluginGithub = "https://github.com/fireworkwars/core-plugin"
+val mainClassPath = "$group.fireworkwarscore.FireworkWarsCorePlugin"
 
 repositories {
     mavenCentral()
+
     maven("https://repo.papermc.io/repository/maven-public/") {
         name = "papermc-repo"
     }
+
     maven("https://oss.sonatype.org/content/groups/public/") {
         name = "sonatype"
     }
@@ -58,8 +73,6 @@ dependencies {
     api("fr.mrmicky:fastboard:2.1.3")
     api("dev.triumphteam:triumph-gui:3.1.11")
 }
-
-val targetJavaVersion = 21
 
 kotlin {
     jvmToolchain(targetJavaVersion)
@@ -115,11 +128,11 @@ tasks {
 }
 
 paperPluginYaml {
-    name = "FireworkWarsCore"
-    authors = listOf("rolyPolyVole")
-    website = "https://github.com/EsotericFoundation/firework-wars-core-plugin"
+    name = pluginName
+    authors = pluginAuthors
+    website = pluginGithub
 
-    main = "foundation.esoteric.fireworkwarscore.FireworkWarsCorePlugin"
+    main = mainClassPath
 
     apiVersion = paperApiVersion
     description = project.description
