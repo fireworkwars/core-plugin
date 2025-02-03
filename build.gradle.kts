@@ -18,6 +18,7 @@ val buildToLobby = false
 
 group = "foundation.esoteric"
 version = "1.1.0"
+description = "Required dependencies & core functionality for a Firework Wars server."
 
 val paperApiVersion = "1.21.4"
 val targetJavaVersion = 21
@@ -129,13 +130,13 @@ tasks {
 
 paperPluginYaml {
     name = pluginName
+    description = project.description
     authors = pluginAuthors
     website = pluginGithub
 
-    main = mainClassPath
-
     apiVersion = paperApiVersion
-    description = project.description
+
+    main = mainClassPath
 }
 
 bukkitPluginYaml {
