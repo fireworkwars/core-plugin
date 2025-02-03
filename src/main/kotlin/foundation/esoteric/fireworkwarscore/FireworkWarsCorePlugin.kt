@@ -20,7 +20,6 @@ import foundation.esoteric.fireworkwarscore.language.LanguageManager
 import foundation.esoteric.fireworkwarscore.managers.ChatChannelManager
 import foundation.esoteric.fireworkwarscore.managers.FriendManager
 import foundation.esoteric.fireworkwarscore.managers.PrivateMessageManager
-import foundation.esoteric.fireworkwarscore.maps.MapManager
 import foundation.esoteric.fireworkwarscore.profiles.PlayerDataManager
 import foundation.esoteric.fireworkwarscore.stats.StatResetScheduler
 import net.kyori.adventure.text.Component.text
@@ -38,8 +37,6 @@ class FireworkWarsCorePlugin : JavaPlugin() {
     lateinit var lobbyPluginData: LobbyPluginData
 
     lateinit var pluginConfig: PluginConfig
-
-    private val mapManager = MapManager(this)
 
     val channelManager = ChatChannelManager(this)
     val friendManager: FriendManager = FriendManager(this)
@@ -69,6 +66,11 @@ class FireworkWarsCorePlugin : JavaPlugin() {
         logger.info("Info: v" + pluginMeta.version + " by " + pluginMeta.website)
         logger.info("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= End of Plugin Info =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
 
+        CommandAPI.onLoad(commandApiConfig)
+    }
+
+    override fun onEnable() {
+        logger.info("Starting core initialisation sequence...")
         logger.info("Creating data folder...")
 
         dataFolder.mkdir()
@@ -80,16 +82,6 @@ class FireworkWarsCorePlugin : JavaPlugin() {
         this.pluginConfig = PluginConfig(this)
 
         logger.info("Successfully created data folder and loaded plugin data.")
-
-        if (pluginConfig.updateMaps) {
-            mapManager.saveMaps()
-        }
-
-        CommandAPI.onLoad(commandApiConfig)
-    }
-
-    override fun onEnable() {
-        logger.info("Starting core initialisation sequence...")
         logger.info("Loading player profiles...")
 
         this.playerDataManager = PlayerDataManager(this)
