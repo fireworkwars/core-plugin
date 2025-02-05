@@ -28,6 +28,7 @@ class ToggleDebugCommand(private val plugin: FireworkWarsCorePlugin) : CommandAP
             else text("DISABLED").color(NamedTextColor.RED)
 
         player.sendMessage(
-            text("Debugging is now: ").color(NamedTextColor.GREEN).append(status))
+            text("Debugging is now: ").color(NamedTextColor.GREEN).append(status)
+        )
     }
 }

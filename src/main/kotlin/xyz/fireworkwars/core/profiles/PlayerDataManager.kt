@@ -1,10 +1,10 @@
 package xyz.fireworkwars.core.profiles
 
 import com.google.gson.GsonBuilder
-import xyz.fireworkwars.core.FireworkWarsCorePlugin
 import org.bukkit.OfflinePlayer
 import org.bukkit.entity.Player
 import org.jetbrains.annotations.Contract
+import xyz.fireworkwars.core.FireworkWarsCorePlugin
 import java.io.File
 import java.io.FileReader
 import java.io.FileWriter

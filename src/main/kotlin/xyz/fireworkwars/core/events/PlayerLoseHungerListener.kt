@@ -1,9 +1,9 @@
 package xyz.fireworkwars.core.events
 
-import xyz.fireworkwars.core.FireworkWarsCorePlugin
-import xyz.fireworkwars.core.interfaces.Event
 import org.bukkit.event.EventHandler
 import org.bukkit.event.entity.FoodLevelChangeEvent
+import xyz.fireworkwars.core.FireworkWarsCorePlugin
+import xyz.fireworkwars.core.interfaces.Event
 
 class PlayerLoseHungerListener(private val plugin: FireworkWarsCorePlugin) : Event {
     override fun register() {

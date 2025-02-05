@@ -45,31 +45,37 @@ class Util {
                 } else {
                     player.getMessage(Message.TIME_YEARS_AND_MONTHS, years, yearsPl, months, monthsPl)
                 }
+
                 months > 0 -> if (weeks == 0L) {
                     player.getMessage(Message.TIME_MONTHS, months, monthsPl)
                 } else {
                     player.getMessage(Message.TIME_MONTHS_AND_WEEKS, months, monthsPl, weeks, weeksPl)
                 }
+
                 weeks > 0 -> if (days == 0L) {
                     player.getMessage(Message.TIME_WEEKS, weeks, weeksPl)
                 } else {
                     player.getMessage(Message.TIME_WEEKS_AND_DAYS, weeks, weeksPl, days, daysPl)
                 }
+
                 days > 0 -> if (hours == 0L) {
                     player.getMessage(Message.TIME_DAYS, days, daysPl)
                 } else {
                     player.getMessage(Message.TIME_DAYS_AND_HOURS, days, daysPl, hours, hoursPl)
                 }
+
                 hours > 0 -> if (minutes == 0L) {
                     player.getMessage(Message.TIME_HOURS, hours, hoursPl)
                 } else {
                     player.getMessage(Message.TIME_HOURS_AND_MINUTES, hours, hoursPl, minutes, minutesPl)
                 }
+
                 minutes > 0 -> if (seconds == 0L) {
                     player.getMessage(Message.TIME_MINUTES, minutes, minutesPl)
                 } else {
                     player.getMessage(Message.TIME_MINUTES_AND_SECONDS, minutes, minutesPl, seconds, secondsPl)
                 }
+
                 else -> player.getMessage(Message.TIME_SECONDS)
             }
         }

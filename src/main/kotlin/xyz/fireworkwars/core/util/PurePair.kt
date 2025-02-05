@@ -4,10 +4,10 @@ import java.util.Comparator.comparingDouble
 import java.util.Comparator.comparingInt
 
 @Suppress("unused", "MemberVisibilityCanBePrivate")
-class PurePair<T: Any>(left: T, right: T) : Pair<T, T>(left, right) {
+class PurePair<T : Any>(left: T, right: T) : Pair<T, T>(left, right) {
     companion object {
         @JvmStatic
-        fun <T: Any> of(a: T, b: T): PurePair<T> {
+        fun <T : Any> of(a: T, b: T): PurePair<T> {
             return PurePair(a, b)
         }
     }

@@ -7,6 +7,12 @@ import dev.jorel.commandapi.arguments.ArgumentSuggestions
 import dev.jorel.commandapi.arguments.IntegerArgument
 import dev.jorel.commandapi.arguments.OfflinePlayerArgument
 import dev.jorel.commandapi.executors.CommandArguments
+import net.kyori.adventure.text.Component.text
+import net.kyori.adventure.text.event.ClickEvent
+import net.kyori.adventure.text.format.NamedTextColor
+import net.kyori.adventure.text.format.TextDecoration
+import org.bukkit.OfflinePlayer
+import org.bukkit.entity.Player
 import xyz.fireworkwars.core.FireworkWarsCorePlugin
 import xyz.fireworkwars.core.language.Message
 import xyz.fireworkwars.core.managers.FriendManager
@@ -14,12 +20,6 @@ import xyz.fireworkwars.core.profiles.PlayerDataManager
 import xyz.fireworkwars.core.util.Util
 import xyz.fireworkwars.core.util.getMessage
 import xyz.fireworkwars.core.util.sendMessage
-import net.kyori.adventure.text.Component.text
-import net.kyori.adventure.text.event.ClickEvent
-import net.kyori.adventure.text.format.NamedTextColor
-import net.kyori.adventure.text.format.TextDecoration
-import org.bukkit.OfflinePlayer
-import org.bukkit.entity.Player
 import java.util.*
 import kotlin.math.ceil
 
@@ -110,7 +110,8 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
             val player = info.sender as Player
 
             val outgoingRequestUUIDs = friendManager.getOutgoingRequestUUIDs(player)
-            val playerNames = outgoingRequestUUIDs.mapNotNull { playerDataManager.getPlayerProfile(it, false)?.username }
+            val playerNames =
+                outgoingRequestUUIDs.mapNotNull { playerDataManager.getPlayerProfile(it, false)?.username }
 
             return@strings playerNames.toTypedArray()
         })
@@ -121,7 +122,8 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
             val player = info.sender as Player
 
             val receivingRequestUUIDs = friendManager.getReceivingRequestUUIDs(player)
-            val playerNames = receivingRequestUUIDs.mapNotNull { playerDataManager.getPlayerProfile(it, false)?.username }
+            val playerNames =
+                receivingRequestUUIDs.mapNotNull { playerDataManager.getPlayerProfile(it, false)?.username }
 
             return@strings playerNames.toTypedArray()
         })

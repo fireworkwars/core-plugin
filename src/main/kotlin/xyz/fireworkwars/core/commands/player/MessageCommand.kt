@@ -7,10 +7,10 @@ import dev.jorel.commandapi.arguments.ArgumentSuggestions
 import dev.jorel.commandapi.arguments.GreedyStringArgument
 import dev.jorel.commandapi.arguments.StringArgument
 import dev.jorel.commandapi.executors.CommandArguments
+import org.bukkit.entity.Player
 import xyz.fireworkwars.core.FireworkWarsCorePlugin
 import xyz.fireworkwars.core.language.Message
 import xyz.fireworkwars.core.util.sendMessage
-import org.bukkit.entity.Player
 
 class MessageCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICommand("msg") {
     private val channelExpiryTicks = 6000

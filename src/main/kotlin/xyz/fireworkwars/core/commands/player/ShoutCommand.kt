@@ -4,11 +4,11 @@ import dev.jorel.commandapi.CommandAPICommand
 import dev.jorel.commandapi.CommandPermission
 import dev.jorel.commandapi.arguments.GreedyStringArgument
 import dev.jorel.commandapi.executors.CommandArguments
+import org.bukkit.entity.Player
 import xyz.fireworkwars.core.FireworkWarsCorePlugin
 import xyz.fireworkwars.core.language.Message
 import xyz.fireworkwars.core.profiles.Rank
 import xyz.fireworkwars.core.util.sendMessage
-import org.bukkit.entity.Player
 import java.util.*
 
 class ShoutCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICommand("shout") {

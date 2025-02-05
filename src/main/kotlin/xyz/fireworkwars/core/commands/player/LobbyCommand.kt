@@ -3,8 +3,8 @@ package xyz.fireworkwars.core.commands.player
 import dev.jorel.commandapi.CommandAPICommand
 import dev.jorel.commandapi.CommandPermission
 import dev.jorel.commandapi.executors.CommandArguments
-import xyz.fireworkwars.core.FireworkWarsCorePlugin
 import org.bukkit.entity.Player
+import xyz.fireworkwars.core.FireworkWarsCorePlugin
 
 class LobbyCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICommand("lobby") {
     init {

@@ -28,6 +28,7 @@ class ToggleBuildCommand(private val plugin: FireworkWarsCorePlugin) : CommandAP
             else text("DISABLED").color(NamedTextColor.RED)
 
         player.sendMessage(
-            text("Building Mode is now: ").color(NamedTextColor.GREEN).append(status))
+            text("Building Mode is now: ").color(NamedTextColor.GREEN).append(status)
+        )
     }
 }

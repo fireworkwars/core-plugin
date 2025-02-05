@@ -3,8 +3,8 @@ package xyz.fireworkwars.core.commands.aliases
 import dev.jorel.commandapi.CommandAPICommand
 import dev.jorel.commandapi.CommandPermission
 import dev.jorel.commandapi.executors.CommandArguments
-import xyz.fireworkwars.core.FireworkWarsCorePlugin
 import org.bukkit.entity.Player
+import xyz.fireworkwars.core.FireworkWarsCorePlugin
 
 class FriendListCommandAlias(private val plugin: FireworkWarsCorePlugin) : CommandAPICommand("friendlist") {
     init {

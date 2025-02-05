@@ -9,10 +9,6 @@ import dev.jorel.commandapi.executors.CommandArguments
 import dev.triumphteam.gui.builder.item.ItemBuilder
 import dev.triumphteam.gui.guis.Gui
 import dev.triumphteam.gui.guis.GuiItem
-import xyz.fireworkwars.core.FireworkWarsCorePlugin
-import xyz.fireworkwars.core.language.Message
-import xyz.fireworkwars.core.profiles.PlayerProfile
-import xyz.fireworkwars.core.util.*
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.TextDecoration
 import org.bukkit.Material
@@ -26,6 +22,10 @@ import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.SkullMeta
+import xyz.fireworkwars.core.FireworkWarsCorePlugin
+import xyz.fireworkwars.core.language.Message
+import xyz.fireworkwars.core.profiles.PlayerProfile
+import xyz.fireworkwars.core.util.*
 import kotlin.Pair
 
 class ProfileCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICommand("profile") {
@@ -81,35 +81,45 @@ class ProfileCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICom
 
         val head = this.createHead(player, target, targetProfile)
 
-        val ivePlayedTheseGamesBefore = this.createEnchantedItem(player, Material.FIREWORK_ROCKET,
+        val ivePlayedTheseGamesBefore = this.createEnchantedItem(
+            player, Material.FIREWORK_ROCKET,
             Message.PROFILE_GAMES_TITLE,
             Message.PROFILE_TOTAL_GAMES to stats.gamesPlayed,
             Message.PROFILE_WIN_RATE to stats.getWinPercentage(),
             null,
             Message.PROFILE_CURRENT_WIN_STREAK to stats.currentWinStreak,
-            Message.PROFILE_HIGHEST_WIN_STREAK to stats.highestWinStreak)
+            Message.PROFILE_HIGHEST_WIN_STREAK to stats.highestWinStreak
+        )
 
-        val wins = this.createEnchantedItem(player, Material.GOLD_INGOT,
+        val wins = this.createEnchantedItem(
+            player, Material.GOLD_INGOT,
             Message.PROFILE_WINS_TITLE,
             Message.PROFILE_TOTAL_WINS to stats.wins,
             Message.PROFILE_TOTAL_LOSSES to stats.losses,
             null,
-            Message.PROFILE_WIN_LOSS_RATIO to stats.getWinLossRatio())
+            Message.PROFILE_WIN_LOSS_RATIO to stats.getWinLossRatio()
+        )
 
-        val kills = this.createItemWithoutAttribute(player, Material.DIAMOND_SWORD, Attribute.ATTACK_DAMAGE,
+        val kills = this.createItemWithoutAttribute(
+            player, Material.DIAMOND_SWORD, Attribute.ATTACK_DAMAGE,
             Message.PROFILE_KILLS_TITLE,
             Message.PROFILE_TOTAL_KILLS to stats.kills,
             Message.PROFILE_TOTAL_DEATHS to stats.deaths,
             null,
-            Message.PROFILE_KILL_DEATH_RATIO to stats.getKillDeathRatio())
+            Message.PROFILE_KILL_DEATH_RATIO to stats.getKillDeathRatio()
+        )
 
-        val achievements = this.createEnchantedItem(player, Material.DIAMOND,
+        val achievements = this.createEnchantedItem(
+            player, Material.DIAMOND,
             Message.PROFILE_ACHIEVEMENTS_TITLE,
-            Message.PROFILE_ACHIEVEMENTS_UNLOCKED to targetProfile.achievements.size)
+            Message.PROFILE_ACHIEVEMENTS_UNLOCKED to targetProfile.achievements.size
+        )
 
-        val friends = this.createItem(player, Material.WRITABLE_BOOK,
+        val friends = this.createItem(
+            player, Material.WRITABLE_BOOK,
             Message.PROFILE_FRIENDS_TITLE,
-            Message.PROFILE_TOTAL_FRIENDS to targetProfile.friends.size)
+            Message.PROFILE_TOTAL_FRIENDS to targetProfile.friends.size
+        )
 
         gui.setItem(4, head)
         gui.setItem(20, ivePlayedTheseGamesBefore)
@@ -128,21 +138,29 @@ class ProfileCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICom
         val targetProfile = playerDataManager.getPlayerProfile(target, false)
             ?: return gui.close(player)
 
-        val addFriend = this.createItem(player, Material.FEATHER,
+        val addFriend = this.createItem(
+            player, Material.FEATHER,
             Message.PROFILE_ADD_FRIEND,
-            Message.PROFILE_ADD_FRIEND_TEXT to targetProfile.formattedName())
+            Message.PROFILE_ADD_FRIEND_TEXT to targetProfile.formattedName()
+        )
 
-        val block = this.createItem(player, Material.GUNPOWDER,
+        val block = this.createItem(
+            player, Material.GUNPOWDER,
             Message.PROFILE_BLOCK,
-            Message.PROFILE_BLOCK_TEXT to targetProfile.formattedName())
+            Message.PROFILE_BLOCK_TEXT to targetProfile.formattedName()
+        )
 
-        val removeFriend = this.createItem(player, Material.REDSTONE,
+        val removeFriend = this.createItem(
+            player, Material.REDSTONE,
             Message.PROFILE_REMOVE_FRIEND,
-            Message.PROFILE_REMOVE_FRIEND_TEXT to targetProfile.formattedName())
+            Message.PROFILE_REMOVE_FRIEND_TEXT to targetProfile.formattedName()
+        )
 
-        val unblock = this.createItem(player, Material.SUGAR,
+        val unblock = this.createItem(
+            player, Material.SUGAR,
             Message.PROFILE_UNBLOCK,
-            Message.PROFILE_UNBLOCK_TEXT to targetProfile.formattedName())
+            Message.PROFILE_UNBLOCK_TEXT to targetProfile.formattedName()
+        )
 
         addFriend.setAction(this.getRunCommandAction(CommandType.ADD_FRIEND, target, gui))
         removeFriend.setAction(this.getRunCommandAction(CommandType.REMOVE_FRIEND, target, gui))
@@ -171,8 +189,10 @@ class ProfileCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICom
                 it.owningPlayer = target
                 it.playerProfile = target.playerProfile
 
-                val firstJoin = Util.formattedTimeDifference(targetProfile.firstJoinDate, System.currentTimeMillis(), player)
-                val lastSeen = Util.formattedTimeDifference(targetProfile.lastSeenDate, System.currentTimeMillis(), player)
+                val firstJoin =
+                    Util.formattedTimeDifference(targetProfile.firstJoinDate, System.currentTimeMillis(), player)
+                val lastSeen =
+                    Util.formattedTimeDifference(targetProfile.lastSeenDate, System.currentTimeMillis(), player)
 
                 val lore = mutableListOf(player.getMessage(Message.PROFILE_FIRST_JOIN, firstJoin))
 
@@ -190,7 +210,12 @@ class ProfileCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICom
         return ItemBuilder.from(item).asGuiItem()
     }
 
-    private fun createItem(player: Player, material: Material, title: Message, vararg text: Pair<Message, Any>?): GuiItem {
+    private fun createItem(
+        player: Player,
+        material: Material,
+        title: Message,
+        vararg text: Pair<Message, Any>?
+    ): GuiItem {
         return ItemBuilder.from(material)
             .name(player.getMessage(title))
             .lore(*text.map { this.getComponent(player, it) }.toTypedArray())
@@ -199,7 +224,13 @@ class ProfileCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICom
     }
 
     @Suppress("SameParameterValue")
-    private fun createItemWithoutAttribute(player: Player, material: Material, attribute: Attribute, title: Message, vararg text: Pair<Message, Any>?): GuiItem {
+    private fun createItemWithoutAttribute(
+        player: Player,
+        material: Material,
+        attribute: Attribute,
+        title: Message,
+        vararg text: Pair<Message, Any>?
+    ): GuiItem {
         val itemStack = ItemStack(material)
 
         itemStack.editMeta {
@@ -216,7 +247,12 @@ class ProfileCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICom
             .asGuiItem()
     }
 
-    private fun createEnchantedItem(player: Player, material: Material, title: Message, vararg text: Pair<Message, Any>?): GuiItem {
+    private fun createEnchantedItem(
+        player: Player,
+        material: Material,
+        title: Message,
+        vararg text: Pair<Message, Any>?
+    ): GuiItem {
         return ItemBuilder.from(material)
             .name(player.getMessage(title))
             .lore(*text.map { this.getComponent(player, it) }.toTypedArray())
@@ -230,7 +266,11 @@ class ProfileCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICom
         else player.getMessage(pair.first, pair.second)
     }
 
-    private fun getRunCommandAction(command: CommandType, target: OfflinePlayer, gui: Gui): (event: InventoryClickEvent) -> Unit {
+    private fun getRunCommandAction(
+        command: CommandType,
+        target: OfflinePlayer,
+        gui: Gui
+    ): (event: InventoryClickEvent) -> Unit {
         return {
             val player = it.whoClicked as Player
 

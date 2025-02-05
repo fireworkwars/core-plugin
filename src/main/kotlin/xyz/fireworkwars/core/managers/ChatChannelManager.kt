@@ -1,10 +1,10 @@
 package xyz.fireworkwars.core.managers
 
-import xyz.fireworkwars.core.FireworkWarsCorePlugin
-import xyz.fireworkwars.core.interfaces.Event
 import org.bukkit.event.EventHandler
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerQuitEvent
+import xyz.fireworkwars.core.FireworkWarsCorePlugin
+import xyz.fireworkwars.core.interfaces.Event
 import java.util.*
 
 class ChatChannelManager(private val plugin: FireworkWarsCorePlugin) : Event {

@@ -1,11 +1,11 @@
 package xyz.fireworkwars.core.events
 
-import xyz.fireworkwars.core.FireworkWarsCorePlugin
-import xyz.fireworkwars.core.interfaces.Event
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.player.PlayerInteractAtEntityEvent
 import org.bukkit.inventory.EquipmentSlot
+import xyz.fireworkwars.core.FireworkWarsCorePlugin
+import xyz.fireworkwars.core.interfaces.Event
 
 class PlayerInteractListener(private val plugin: FireworkWarsCorePlugin) : Event {
     override fun register() {

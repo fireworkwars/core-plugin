@@ -1,7 +1,5 @@
 package xyz.fireworkwars.core.profiles
 
-import xyz.fireworkwars.core.FireworkWarsCorePlugin
-import xyz.fireworkwars.core.util.toFixed
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.Component.text
 import net.kyori.adventure.text.event.ClickEvent
@@ -9,6 +7,8 @@ import net.kyori.adventure.text.event.HoverEvent
 import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
+import xyz.fireworkwars.core.FireworkWarsCorePlugin
+import xyz.fireworkwars.core.util.toFixed
 import java.util.*
 import java.util.function.Consumer
 
@@ -43,7 +43,8 @@ data class PlayerProfile(
                 blocked = mutableListOf(),
                 firstJoin = true,
                 firstJoinDate = System.currentTimeMillis(),
-                lastSeenDate = System.currentTimeMillis())
+                lastSeenDate = System.currentTimeMillis()
+            )
         }
     }
 

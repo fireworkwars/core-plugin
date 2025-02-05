@@ -1,15 +1,15 @@
 package xyz.fireworkwars.core.events
 
-import xyz.fireworkwars.core.FireworkWarsCorePlugin
-import xyz.fireworkwars.core.interfaces.Event
-import xyz.fireworkwars.core.language.Message
-import xyz.fireworkwars.core.managers.ChatChannelManager
-import xyz.fireworkwars.core.util.sendMessage
 import io.papermc.paper.event.player.AsyncChatEvent
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
+import xyz.fireworkwars.core.FireworkWarsCorePlugin
+import xyz.fireworkwars.core.interfaces.Event
+import xyz.fireworkwars.core.language.Message
+import xyz.fireworkwars.core.managers.ChatChannelManager
+import xyz.fireworkwars.core.util.sendMessage
 
 class PlayerChatListener(private val plugin: FireworkWarsCorePlugin) : Listener, Event {
     private val channelManager = plugin.channelManager

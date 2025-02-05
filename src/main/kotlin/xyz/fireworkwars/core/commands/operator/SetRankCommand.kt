@@ -6,12 +6,12 @@ import dev.jorel.commandapi.arguments.ArgumentSuggestions
 import dev.jorel.commandapi.arguments.PlayerArgument
 import dev.jorel.commandapi.arguments.StringArgument
 import dev.jorel.commandapi.executors.CommandArguments
+import org.bukkit.command.CommandSender
+import org.bukkit.entity.Player
 import xyz.fireworkwars.core.FireworkWarsCorePlugin
 import xyz.fireworkwars.core.language.Message
 import xyz.fireworkwars.core.profiles.Rank
 import xyz.fireworkwars.core.util.sendMessage
-import org.bukkit.command.CommandSender
-import org.bukkit.entity.Player
 
 class SetRankCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICommand("set-rank") {
     private val playerDataManager = plugin.playerDataManager
@@ -30,7 +30,7 @@ class SetRankCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICom
         this.executesPlayer(this::onPlayerExecution)
         this.register(plugin)
     }
-    
+
     private fun getRanksArgument(): Argument<String> {
         val rankNames = Rank.entries.map { it.toString() }
         val suggestions = ArgumentSuggestions.strings<CommandSender>(*rankNames.toTypedArray())

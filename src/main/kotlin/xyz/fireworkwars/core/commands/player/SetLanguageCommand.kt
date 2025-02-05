@@ -8,10 +8,10 @@ import dev.jorel.commandapi.arguments.CustomArgument
 import dev.jorel.commandapi.arguments.CustomArgument.CustomArgumentException
 import dev.jorel.commandapi.arguments.GreedyStringArgument
 import dev.jorel.commandapi.executors.CommandArguments
-import xyz.fireworkwars.core.FireworkWarsCorePlugin
-import xyz.fireworkwars.core.language.Message
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
+import xyz.fireworkwars.core.FireworkWarsCorePlugin
+import xyz.fireworkwars.core.language.Message
 
 class SetLanguageCommand(plugin: FireworkWarsCorePlugin) : CommandAPICommand("set-language") {
     private val languageManager = plugin.languageManager
@@ -37,7 +37,8 @@ class SetLanguageCommand(plugin: FireworkWarsCorePlugin) : CommandAPICommand("se
 
             if (!languages.contains(selectedLanguage)) {
                 val errorMessage = languageManager.getMessage(
-                    Message.UNKNOWN_LANGUAGE, it.sender(), selectedLanguage)
+                    Message.UNKNOWN_LANGUAGE, it.sender(), selectedLanguage
+                )
 
                 throw CustomArgumentException.fromAdventureComponent(errorMessage)
             }

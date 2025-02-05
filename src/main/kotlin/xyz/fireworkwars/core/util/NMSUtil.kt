@@ -67,7 +67,10 @@ class NMSUtil {
         }
 
         @JvmStatic
-        fun getCollidingLivingEntities(entity: Entity, hitboxModifier: Consumer<AABB?>): List<org.bukkit.entity.LivingEntity> {
+        fun getCollidingLivingEntities(
+            entity: Entity,
+            hitboxModifier: Consumer<AABB?>
+        ): List<org.bukkit.entity.LivingEntity> {
             return getCollidingEntities(entity, hitboxModifier).stream()
                 .filter { org.bukkit.entity.LivingEntity::class.java.isInstance(it) }
                 .map { org.bukkit.entity.LivingEntity::class.java.cast(it) }

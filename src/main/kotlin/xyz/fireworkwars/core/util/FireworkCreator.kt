@@ -18,19 +18,21 @@ class FireworkCreator {
             amount: Int,
             type: FireworkEffect.Type = FireworkEffect.Type.BALL,
             flicker: Boolean = false,
-            trail: Boolean = false): ItemStack
-        {
+            trail: Boolean = false
+        ): ItemStack {
             val item = ItemStack(org.bukkit.Material.FIREWORK_ROCKET)
             val meta = item.itemMeta as FireworkMeta
 
             for (i in (1..amount)) {
-                meta.addEffect(FireworkEffect.builder()
-                    .withColor(Color.WHITE)
-                    .withFade(color)
-                    .with(type)
-                    .flicker(flicker)
-                    .trail(trail)
-                    .build())
+                meta.addEffect(
+                    FireworkEffect.builder()
+                        .withColor(Color.WHITE)
+                        .withFade(color)
+                        .with(type)
+                        .flicker(flicker)
+                        .trail(trail)
+                        .build()
+                )
             }
 
             item.itemMeta = meta
@@ -44,7 +46,8 @@ class FireworkCreator {
                 (1..4).random(),
                 listOf(FireworkEffect.Type.BURST, FireworkEffect.Type.STAR).random(),
                 Random.nextBoolean(),
-                Random.nextBoolean())
+                Random.nextBoolean()
+            )
         }
 
         @JvmStatic

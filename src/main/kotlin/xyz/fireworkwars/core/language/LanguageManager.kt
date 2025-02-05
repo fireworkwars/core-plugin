@@ -1,8 +1,5 @@
 package xyz.fireworkwars.core.language
 
-import xyz.fireworkwars.core.FireworkWarsCorePlugin
-import xyz.fireworkwars.core.file.FileUtil
-import xyz.fireworkwars.core.profiles.PlayerProfile
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.Bukkit
@@ -10,6 +7,9 @@ import org.bukkit.command.CommandSender
 import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.entity.Player
 import org.jetbrains.annotations.NotNull
+import xyz.fireworkwars.core.FireworkWarsCorePlugin
+import xyz.fireworkwars.core.file.FileUtil
+import xyz.fireworkwars.core.profiles.PlayerProfile
 import java.io.File
 import java.util.*
 import java.util.Objects.requireNonNull
@@ -181,7 +181,12 @@ class LanguageManager(private val plugin: FireworkWarsCorePlugin) {
         return getRawMessageString(message, language, true)
     }
 
-    private fun getMessage(message: Message, language: String?, fallbackOnDefaultLanguage: Boolean, vararg arguments: Any?): Component {
+    private fun getMessage(
+        message: Message,
+        language: String?,
+        fallbackOnDefaultLanguage: Boolean,
+        vararg arguments: Any?
+    ): Component {
         var rawString = getRawMessageString(message, language, fallbackOnDefaultLanguage)
             ?: throw IllegalArgumentException("Message not found: $message in language: $language")
 
@@ -208,7 +213,12 @@ class LanguageManager(private val plugin: FireworkWarsCorePlugin) {
         return getMessage(message, language, true, *arguments)
     }
 
-    fun getMessage(message: Message, commandSender: CommandSender?, fallbackOnDefaultLanguage: Boolean, vararg arguments: Any?): Component {
+    fun getMessage(
+        message: Message,
+        commandSender: CommandSender?,
+        fallbackOnDefaultLanguage: Boolean,
+        vararg arguments: Any?
+    ): Component {
         return getMessage(message, getLanguage(commandSender), fallbackOnDefaultLanguage, *arguments)
     }
 
@@ -216,7 +226,12 @@ class LanguageManager(private val plugin: FireworkWarsCorePlugin) {
         return getMessage(message, commandSender, true, *arguments)
     }
 
-    fun getMessage(message: Message, uuid: UUID?, fallbackOnDefaultLanguage: Boolean, vararg arguments: Any?): Component {
+    fun getMessage(
+        message: Message,
+        uuid: UUID?,
+        fallbackOnDefaultLanguage: Boolean,
+        vararg arguments: Any?
+    ): Component {
         return getMessage(message, getLanguage(uuid), fallbackOnDefaultLanguage, *arguments)
     }
 
@@ -224,7 +239,12 @@ class LanguageManager(private val plugin: FireworkWarsCorePlugin) {
         return getMessage(message, uuid, true, *arguments)
     }
 
-    fun getMessage(message: Message, playerProfile: PlayerProfile, fallbackOnDefaultLanguage: Boolean, vararg arguments: Any?): Component {
+    fun getMessage(
+        message: Message,
+        playerProfile: PlayerProfile,
+        fallbackOnDefaultLanguage: Boolean,
+        vararg arguments: Any?
+    ): Component {
         return getMessage(message, getLanguage(playerProfile), fallbackOnDefaultLanguage, *arguments)
     }
 
@@ -243,14 +263,25 @@ class LanguageManager(private val plugin: FireworkWarsCorePlugin) {
             .toTypedArray()
     }
 
-    fun sendMessage(message: Message, commandSender: CommandSender, fallbackOnDefaultLanguage: Boolean, vararg arguments: Any?) {
-        commandSender.sendMessage(getMessage(
-            message, getLanguage(commandSender), fallbackOnDefaultLanguage, *arguments))
+    fun sendMessage(
+        message: Message,
+        commandSender: CommandSender,
+        fallbackOnDefaultLanguage: Boolean,
+        vararg arguments: Any?
+    ) {
+        commandSender.sendMessage(
+            getMessage(
+                message, getLanguage(commandSender), fallbackOnDefaultLanguage, *arguments
+            )
+        )
     }
 
     fun sendMessage(message: Message, commandSender: CommandSender, vararg arguments: Any?) {
-        commandSender.sendMessage(getMessage(
-            message, commandSender, true, *arguments))
+        commandSender.sendMessage(
+            getMessage(
+                message, commandSender, true, *arguments
+            )
+        )
     }
 
     fun sendMessage(message: Message, uuid: UUID?, fallbackOnDefaultLanguage: Boolean, vararg arguments: Any?) {
@@ -271,7 +302,12 @@ class LanguageManager(private val plugin: FireworkWarsCorePlugin) {
         player?.sendMessage(getMessage(message, uuid, true, *arguments))
     }
 
-    fun sendMessage(message: Message, playerProfile: PlayerProfile, fallbackOnDefaultLanguage: Boolean, vararg arguments: Any?) {
+    fun sendMessage(
+        message: Message,
+        playerProfile: PlayerProfile,
+        fallbackOnDefaultLanguage: Boolean,
+        vararg arguments: Any?
+    ) {
         val player = plugin.server.getPlayer(playerProfile.uuid)
         player?.sendMessage(getMessage(message, playerProfile, fallbackOnDefaultLanguage, *arguments))
     }
