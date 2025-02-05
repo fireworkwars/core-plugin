@@ -90,8 +90,8 @@ tasks {
             exclude(dependency("org.jetbrains.kotlin:kotlin-reflect"))
         }
 
-        relocate("fr.mrmicky.fastboard", "foundation.esoteric.fireworkwarscore.libs.fastboard")
-        relocate("dev.triumphteam.gui", "foundation.esoteric.fireworkwarscore.libs.gui")
+        relocate("fr.mrmicky.fastboard", "xyz.fireworkwars.core.libs.fastboard")
+        relocate("dev.triumphteam.gui", "xyz.fireworkwars.core.libs.gui")
 
         if (buildToMain) {
             destinationDirectory.set(file("../firework-wars-plugin/run/plugins"))
