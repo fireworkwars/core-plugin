@@ -9,7 +9,7 @@ class FileManager(private val plugin: FireworkWarsCorePlugin) {
     @JvmOverloads
     fun saveFolderToResources(folderPath: String, replace: Boolean = true): File? {
         try {
-            xyz.fireworkwars.core.file.FileUtil.Companion.getAllFilePathsRecursively(folderPath)
+            FileUtil.getAllFilePathsRecursively(folderPath)
                 .forEach { plugin.saveResource(it, replace) }
 
             return File(plugin.dataPath.toString() + File.separator + folderPath)
