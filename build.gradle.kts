@@ -16,7 +16,7 @@ plugins {
 val buildToMain = false
 val buildToLobby = false
 
-group = "foundation.esoteric"
+group = "xyz.fireworkwars"
 version = "1.2.0"
 description = "Required dependencies & core functionality for a Firework Wars server."
 
@@ -31,7 +31,7 @@ val esotericEnderman = "Esoteric Enderman"
 val pluginName = "FireworkWarsCore"
 val pluginAuthors = listOf(rolyPolyVole, esotericEnderman)
 val pluginGithub = "https://github.com/fireworkwars/core-plugin"
-val mainClassPath = "$group.fireworkwarscore.FireworkWarsCorePlugin"
+val mainClassPath = "$group.core.FireworkWarsCorePlugin"
 
 repositories {
     mavenCentral()
