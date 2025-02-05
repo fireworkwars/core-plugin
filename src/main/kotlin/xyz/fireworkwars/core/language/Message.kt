@@ -1,9 +1,15 @@
 package xyz.fireworkwars.core.language
 
 enum class Message {
-    //Firework Wars Core
     SET_LANGUAGE_SUCCESSFULLY,
     UNKNOWN_LANGUAGE,
+
+    BUILD_MODE_STATUS,
+    DEBUG_MODE_STATUS,
+    GLOBAL_CHAT_STATUS,
+
+    ENABLED,
+    DISABLED,
 
     TIME_SECONDS,
     TIME_MINUTES,
@@ -142,7 +148,6 @@ enum class Message {
 
     COMING_SOON,
 
-    // Firework Wars Lobby
     PLAYER_JOINED_LOBBY,
     RANKED_PLAYER_JOINED_LOBBY,
     WELCOME,
@@ -161,7 +166,6 @@ enum class Message {
     LOBBY_SB_FRIENDS,
     LOBBY_SB_IP,
 
-    // Firework Wars
     ITEM_GIVEN,
     INVALID_ITEM,
 

@@ -2,6 +2,13 @@
 SET_LANGUAGE_SUCCESSFULLY: "<green>Successfully set your language to </green>{0}<green>!</green>"
 UNKNOWN_LANGUAGE: "<red>Unsupported or unknown language: '{0}'.</red>"
 
+BUILD_MODE_STATUS: "<green>Building mode is now: {0}</green>"
+DEBUG_MODE_STATUS: "<green>Debug mode is now: {0}</green>"
+GLOBAL_CHAT_STATUS: "<green>Global chat is now: {0}</green>"
+
+ENABLED: "<dark_green>ENABLED</dark_green>"
+DISABLED: "<red>DISABLED</red>"
+
 TIME_SECONDS: "<aqua>A few seconds ago</aqua>"
 TIME_MINUTES: "<aqua>{0} minute{1} ago</aqua>"
 TIME_MINUTES_AND_SECONDS: "<aqua>{0} minute{1}, {2} second{3} ago</aqua>"
