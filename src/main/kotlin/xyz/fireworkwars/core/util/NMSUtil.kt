@@ -29,18 +29,16 @@ class NMSUtil {
 
         @JvmStatic
         fun sendPacket(player: Player, packetCreator: Function<ServerPlayer?, Packet<ClientGamePacketListener?>?>) {
-            val serverPlayer: ServerPlayer = toNMSEntity(player)
+            val serverPlayer: ServerPlayer = this.toNMSEntity(player)
             serverPlayer.connection.send(packetCreator.apply(serverPlayer)!!)
         }
 
         @JvmStatic
         fun sendEntityAdd(player: Player, entity: org.bukkit.entity.Entity) {
-            val nmsEntity: Entity = toNMSEntity(entity)
+            val nmsEntity: Entity = this.toNMSEntity(entity)
 
-            sendPacket(player) {
-                ClientboundAddEntityPacket(
-                    nmsEntity, nmsEntity.id, BlockPos(nmsEntity.blockX, nmsEntity.blockY, nmsEntity.blockZ)
-                )
+            this.sendPacket(player) {
+                ClientboundAddEntityPacket(nmsEntity, nmsEntity.id, BlockPos(nmsEntity.blockX, nmsEntity.blockY, nmsEntity.blockZ))
             }
         }
 
@@ -67,11 +65,8 @@ class NMSUtil {
         }
 
         @JvmStatic
-        fun getCollidingLivingEntities(
-            entity: Entity,
-            hitboxModifier: Consumer<AABB?>
-        ): List<org.bukkit.entity.LivingEntity> {
-            return getCollidingEntities(entity, hitboxModifier).stream()
+        fun getCollidingLivingEntities(entity: Entity, hitboxModifier: Consumer<AABB?>): List<org.bukkit.entity.LivingEntity> {
+            return this.getCollidingEntities(entity, hitboxModifier).stream()
                 .filter { org.bukkit.entity.LivingEntity::class.java.isInstance(it) }
                 .map { org.bukkit.entity.LivingEntity::class.java.cast(it) }
                 .toList()

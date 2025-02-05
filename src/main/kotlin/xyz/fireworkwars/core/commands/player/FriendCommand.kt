@@ -33,14 +33,14 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
     private val playersPerPage = 8
 
     init {
-        setRequirements { it is Player }
-        withPermission(CommandPermission.NONE)
+        this.setRequirements { it is Player }
+        this.withPermission(CommandPermission.NONE)
 
-        withShortDescription("All friend-related commands")
-        withFullDescription("Add, remove, view and manage your friends.")
-        withAliases("f")
+        this.withShortDescription("All friend-related commands")
+        this.withFullDescription("Add, remove, view and manage your friends.")
+        this.withAliases("f")
 
-        withSubcommand(
+        this.withSubcommand(
             CommandAPICommand("add")
                 .withPermission(CommandPermission.NONE)
                 .withShortDescription("Adds a player as a friend")
@@ -49,7 +49,7 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
                 .executesPlayer(this::addOrAcceptFriendExecution)
         )
 
-        withSubcommand(
+        this.withSubcommand(
             CommandAPICommand("cancel")
                 .withPermission(CommandPermission.NONE)
                 .withShortDescription("Cancels a friend request")
@@ -58,7 +58,7 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
                 .executesPlayer(this::cancelFriendRequest)
         )
 
-        withSubcommand(
+        this.withSubcommand(
             CommandAPICommand("accept")
                 .withPermission(CommandPermission.NONE)
                 .withShortDescription("Accepts a friend request")
@@ -67,7 +67,7 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
                 .executesPlayer(this::acceptFriend)
         )
 
-        withSubcommand(
+        this.withSubcommand(
             CommandAPICommand("deny")
                 .withPermission(CommandPermission.NONE)
                 .withShortDescription("Denies a friend request")
@@ -76,7 +76,7 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
                 .executesPlayer(this::denyFriend)
         )
 
-        withSubcommand(
+        this.withSubcommand(
             CommandAPICommand("remove")
                 .withPermission(CommandPermission.NONE)
                 .withShortDescription("Removes a friend")
@@ -85,7 +85,7 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
                 .executesPlayer(this::removeFriendExecution)
         )
 
-        withSubcommand(
+        this.withSubcommand(
             CommandAPICommand("list")
                 .withPermission(CommandPermission.NONE)
                 .withShortDescription("Lists your friends")
@@ -94,7 +94,7 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
                 .executesPlayer(this::listFriends)
         )
 
-        withSubcommand(
+        this.withSubcommand(
             CommandAPICommand("party")
                 .withPermission(CommandPermission.NONE)
                 .withShortDescription("Create a friend party")
@@ -102,7 +102,7 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
                 .executesPlayer(this::createParty)
         )
 
-        register(plugin)
+        this.register(plugin)
     }
 
     private fun outgoingRequestsArgumentSupplier(): Argument<OfflinePlayer> {

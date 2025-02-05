@@ -7,7 +7,7 @@ import xyz.fireworkwars.core.interfaces.Event
 
 class PlayerLoseHungerListener(private val plugin: FireworkWarsCorePlugin) : Event {
     override fun register() {
-        plugin.server.pluginManager.registerEvents(this, plugin)
+        plugin.registerEvent(this)
     }
 
     @EventHandler

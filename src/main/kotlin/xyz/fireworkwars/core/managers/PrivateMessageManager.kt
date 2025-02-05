@@ -34,6 +34,7 @@ class PrivateMessageManager(private val plugin: FireworkWarsCorePlugin) : Event 
         this.lastMessageFrom[player] = lastMessaged
     }
 
+    @Suppress("MemberVisibilityCanBePrivate")
     fun removeLastMessageSender(player: UUID) {
         lastMessageFrom.remove(player)
     }

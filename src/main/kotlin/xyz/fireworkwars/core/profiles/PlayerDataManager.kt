@@ -25,7 +25,7 @@ class PlayerDataManager(private val plugin: FireworkWarsCorePlugin) {
         get() = playerData.size
 
     init {
-        loadProfiles()
+        this.loadProfiles()
     }
 
     private fun loadProfiles() {
@@ -53,7 +53,7 @@ class PlayerDataManager(private val plugin: FireworkWarsCorePlugin) {
                 continue
             }
 
-            playerData[playerUuid] = profile
+            this.playerData[playerUuid] = profile
         }
     }
 
@@ -94,24 +94,24 @@ class PlayerDataManager(private val plugin: FireworkWarsCorePlugin) {
     }
 
     fun getPlayerProfile(uuid: UUID): PlayerProfile {
-        return getPlayerProfile(uuid, true)!!
+        return this.getPlayerProfile(uuid, true)!!
     }
 
     @Contract("_, true -> !null")
     fun getPlayerProfile(player: Player, createNewProfile: Boolean): PlayerProfile? {
-        return getPlayerProfile(player.uniqueId, createNewProfile)
+        return this.getPlayerProfile(player.uniqueId, createNewProfile)
     }
 
     fun getPlayerProfile(player: Player): PlayerProfile {
-        return getPlayerProfile(player, true)!!
+        return this.getPlayerProfile(player, true)!!
     }
 
     @Contract("_, true -> !null")
     fun getPlayerProfile(offlinePlayer: OfflinePlayer, createNewProfile: Boolean): PlayerProfile? {
-        return getPlayerProfile(offlinePlayer.uniqueId, createNewProfile)
+        return this.getPlayerProfile(offlinePlayer.uniqueId, createNewProfile)
     }
 
     fun getPlayerProfile(offlinePlayer: OfflinePlayer): PlayerProfile {
-        return getPlayerProfile(offlinePlayer, true)!!
+        return this.getPlayerProfile(offlinePlayer, true)!!
     }
 }

@@ -21,18 +21,18 @@ class PurePair<T : Any>(left: T, right: T) : Pair<T, T>(left, right) {
     }
 
     fun minInt(intSupplier: (T) -> Int): T {
-        return min(comparingInt(intSupplier))
+        return this.min(comparingInt(intSupplier))
     }
 
     fun maxInt(intSupplier: (T) -> Int): T {
-        return max(comparingInt(intSupplier))
+        return this.max(comparingInt(intSupplier))
     }
 
     fun minDouble(doubleSupplier: (T) -> Double): T {
-        return min(comparingDouble(doubleSupplier))
+        return this.min(comparingDouble(doubleSupplier))
     }
 
     fun maxDouble(doubleSupplier: (T) -> Double): T {
-        return max(comparingDouble(doubleSupplier))
+        return this.max(comparingDouble(doubleSupplier))
     }
 }

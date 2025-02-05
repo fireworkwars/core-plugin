@@ -8,15 +8,15 @@ import xyz.fireworkwars.core.FireworkWarsCorePlugin
 
 class LobbyCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICommand("lobby") {
     init {
-        setRequirements { it is Player }
-        withPermission(CommandPermission.NONE)
+        this.setRequirements { it is Player }
+        this.withPermission(CommandPermission.NONE)
 
-        withShortDescription("Return to the lobby")
-        withFullDescription("Return to the lobby")
-        withAliases("l", "hub")
+        this.withShortDescription("Return to the lobby")
+        this.withFullDescription("Return to the lobby")
+        this.withAliases("l", "hub")
 
-        executesPlayer(this::onPlayerExecution)
-        register(plugin)
+        this.executesPlayer(this::onPlayerExecution)
+        this.register(plugin)
     }
 
     @Suppress("UNUSED_PARAMETER")

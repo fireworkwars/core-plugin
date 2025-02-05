@@ -25,7 +25,7 @@ class FriendManager(private val plugin: FireworkWarsCorePlugin) {
         receivingRequests.computeIfAbsent(receiverUuid) { mutableListOf() }.add(senderUuid)
 
         val task = plugin.runTaskLater(requestExpiryTime) {
-            removeRequestData(sender, receiver)
+            this.removeRequestData(sender, receiver)
             onExpire(sender, receiver)
         }
 
@@ -33,8 +33,8 @@ class FriendManager(private val plugin: FireworkWarsCorePlugin) {
     }
 
     fun hasMutualRequests(player1: OfflinePlayer, player2: OfflinePlayer): Boolean {
-        return getOutgoingRequestUUIDs(player1).contains(player2.uniqueId) &&
-                getOutgoingRequestUUIDs(player2).contains(player1.uniqueId)
+        return this.getOutgoingRequestUUIDs(player1).contains(player2.uniqueId) &&
+               this.getOutgoingRequestUUIDs(player2).contains(player1.uniqueId)
     }
 
     fun getOutgoingRequestUUIDs(player: OfflinePlayer): List<UUID> {

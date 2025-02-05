@@ -19,16 +19,16 @@ class SetLanguageCommand(plugin: FireworkWarsCorePlugin) : CommandAPICommand("se
     private val languageArgumentNodeName = "language"
 
     init {
-        setRequirements { it is Player }
-        withPermission(CommandPermission.NONE)
+        this.setRequirements { it is Player }
+        this.withPermission(CommandPermission.NONE)
 
-        withShortDescription("Set your language")
-        withFullDescription("Set your language, changing the language of the server messages & texts.")
-        withAliases("lang")
+        this.withShortDescription("Set your language")
+        this.withFullDescription("Set your language, changing the language of the server messages & texts.")
+        this.withAliases("lang")
 
-        withArguments(getLanguageArgument().includeSuggestions(getLanguageSuggestions()))
-        executesPlayer(this::onPlayerExecution)
-        register(plugin)
+        this.withArguments(getLanguageArgument().includeSuggestions(getLanguageSuggestions()))
+        this.executesPlayer(this::onPlayerExecution)
+        this.register(plugin)
     }
 
     private fun getLanguageArgument(): Argument<String?> {
@@ -36,9 +36,8 @@ class SetLanguageCommand(plugin: FireworkWarsCorePlugin) : CommandAPICommand("se
             val selectedLanguage = it.currentInput()
 
             if (!languages.contains(selectedLanguage)) {
-                val errorMessage = languageManager.getMessage(
-                    Message.UNKNOWN_LANGUAGE, it.sender(), selectedLanguage
-                )
+                val errorMessage = languageManager.getMessage(Message.UNKNOWN_LANGUAGE,
+                    it.sender(), selectedLanguage)
 
                 throw CustomArgumentException.fromAdventureComponent(errorMessage)
             }
@@ -53,8 +52,8 @@ class SetLanguageCommand(plugin: FireworkWarsCorePlugin) : CommandAPICommand("se
 
     private fun onPlayerExecution(player: Player, arguments: CommandArguments) {
         val selectedLanguage = arguments[languageArgumentNodeName] as String?
-        languageManager.setLanguage(player, selectedLanguage)
 
+        languageManager.setLanguage(player, selectedLanguage)
         languageManager.sendMessage(Message.SET_LANGUAGE_SUCCESSFULLY, player, selectedLanguage)
     }
 }

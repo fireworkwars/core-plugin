@@ -34,8 +34,8 @@ class FileUtil {
         fun getAllFilePathsRecursively(folderPath: String): List<String> {
             val paths: MutableList<String> = ArrayList()
 
-            for (resourceFilePath in getFilePathsInFolder(folderPath)) {
-                val subFiles = getAllFilePathsRecursively(resourceFilePath)
+            for (resourceFilePath in this.getFilePathsInFolder(folderPath)) {
+                val subFiles = this.getAllFilePathsRecursively(resourceFilePath)
 
                 if (subFiles.isEmpty()) {
                     paths.add(resourceFilePath)
