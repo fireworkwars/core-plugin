@@ -166,15 +166,15 @@ class BlockCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComma
         val page = pageArgument.coerceIn(1, totalPages)
         val blockedOnPage = Util.getPageItems(blocked, page, playersPerPage)
 
-        val previous = text("<<", NamedTextColor.AQUA).decorate(TextDecoration.BOLD)
-        val next = text(">>", NamedTextColor.AQUA).decorate(TextDecoration.BOLD)
+        var previous = text("<<", NamedTextColor.AQUA).decorate(TextDecoration.BOLD)
+        var next = text(">>", NamedTextColor.AQUA).decorate(TextDecoration.BOLD)
 
         if (page > 1) {
-            previous.clickEvent(ClickEvent.runCommand("/block list ${page - 1}"))
+            previous = previous.clickEvent(ClickEvent.runCommand("/block list ${page - 1}"))
         }
 
         if (page < totalPages) {
-            next.clickEvent(ClickEvent.runCommand("/block list ${page + 1}"))
+            next = next.clickEvent(ClickEvent.runCommand("/block list ${page + 1}"))
         }
 
         val separator = player.getMessage(Message.BLOCK_LIST_SEPARATOR)
