@@ -214,7 +214,7 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
             friendManager.removeRequestData(sender = player, receiver = target)
             friendManager.removeRequestData(sender = target, receiver = player)
 
-            plugin.lobbyPluginData.updateScoreboards()
+            plugin.lobbyServiceProvider.updateScoreboards()
         } else {
             player.sendMessage(Message.FRIEND_REQUEST_SENT, targetProfile.formattedName())
             target.sendMessage(Message.FRIEND_REQUEST_FROM, profile.formattedName(), profile.username)
@@ -292,7 +292,7 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
         player.sendMessage(Message.REMOVED_FRIEND, targetProfile.formattedName())
         target.sendMessage(Message.YOU_WERE_REMOVED_AS_FRIEND, profile.formattedName())
 
-        plugin.lobbyPluginData.updateScoreboards()
+        plugin.lobbyServiceProvider.updateScoreboards()
     }
 
     fun listFriends(player: Player, args: CommandArguments) {
@@ -355,7 +355,7 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
             return Message.STATUS_OFFLINE
         }
 
-        if (plugin.lobbyPluginData.isLobby(player!!.world)) {
+        if (plugin.lobbyServiceProvider.isLobby(player!!.world)) {
             return Message.STATUS_IN_LOBBY
         }
 

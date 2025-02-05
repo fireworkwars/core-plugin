@@ -21,6 +21,6 @@ class LobbyCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComma
 
     @Suppress("UNUSED_PARAMETER")
     private fun onPlayerExecution(player: Player, args: CommandArguments) {
-        plugin.fireworkWarsPluginData.getArenaLeaveCommand().executeLeaveForPlayer(player)
+        plugin.fireworkWarsServiceProvider.getArenaLeaveExecutor().executeLeaveForPlayer(player)
     }
 }

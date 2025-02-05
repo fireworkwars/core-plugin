@@ -5,7 +5,7 @@ import org.bukkit.World
 import org.bukkit.entity.Player
 
 @Suppress("unused")
-interface LobbyPluginData {
+interface LobbyServiceProvider {
     fun getLobbySpawn(): Location
     fun isLobby(world: World): Boolean
     fun updateScoreboards()
