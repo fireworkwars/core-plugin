@@ -2,10 +2,10 @@ package xyz.fireworkwars.core.commands.developer
 
 import dev.jorel.commandapi.CommandAPICommand
 import dev.jorel.commandapi.executors.CommandArguments
-import xyz.fireworkwars.core.FireworkWarsCorePlugin
 import net.kyori.adventure.text.Component.text
 import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.entity.Player
+import xyz.fireworkwars.core.FireworkWarsCorePlugin
 import java.util.function.Predicate
 
 class ToggleDebugCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICommand("toggle-debug") {
@@ -19,6 +19,7 @@ class ToggleDebugCommand(private val plugin: FireworkWarsCorePlugin) : CommandAP
         this.register(plugin)
     }
 
+    @Suppress("UNUSED_PARAMETER")
     private fun executesPlayer(player: Player, args: CommandArguments) {
         plugin.isDebugging = !plugin.isDebugging
 

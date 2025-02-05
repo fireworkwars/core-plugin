@@ -3,12 +3,12 @@ package xyz.fireworkwars.core.commands.player
 import dev.jorel.commandapi.CommandAPICommand
 import dev.jorel.commandapi.CommandPermission
 import dev.jorel.commandapi.executors.CommandArguments
+import org.bukkit.entity.Player
 import xyz.fireworkwars.core.FireworkWarsCorePlugin
 import xyz.fireworkwars.core.language.Message
 import xyz.fireworkwars.core.util.sendMessage
-import org.bukkit.entity.Player
 
-class AllChatCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICommand("allchat") {
+class AllChatCommand(plugin: FireworkWarsCorePlugin) : CommandAPICommand("allchat") {
     private val messageManager = plugin.privateMessageManager
 
     init {
@@ -24,6 +24,7 @@ class AllChatCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPICom
         this.register(plugin)
     }
 
+    @Suppress("UNUSED_PARAMETER")
     private fun onPlayerExecution(player: Player, args: CommandArguments) {
         val currentChannel = messageManager.getChannelRecipient(player.uniqueId)
 

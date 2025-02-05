@@ -1,12 +1,12 @@
 package xyz.fireworkwars.core.managers
 
-import xyz.fireworkwars.core.FireworkWarsCorePlugin
-import xyz.fireworkwars.core.interfaces.Event
-import xyz.fireworkwars.core.managers.ChatChannelManager.ChatChannel
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.player.PlayerQuitEvent
 import org.bukkit.scheduler.BukkitTask
+import xyz.fireworkwars.core.FireworkWarsCorePlugin
+import xyz.fireworkwars.core.interfaces.Event
+import xyz.fireworkwars.core.managers.ChatChannelManager.ChatChannel
 import java.util.*
 
 class PrivateMessageManager(private val plugin: FireworkWarsCorePlugin) : Event {
@@ -62,6 +62,7 @@ class PrivateMessageManager(private val plugin: FireworkWarsCorePlugin) : Event 
         }
     }
 
+    @Suppress("unused")
     fun cancelChannelExpiry(player: UUID) {
         currentChannelExpiryTasks[player]?.cancel()
     }

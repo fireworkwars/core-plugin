@@ -60,6 +60,7 @@ fun Double.toFixed(places: Int): Double {
     return round(this * factor) / factor
 }
 
+@Suppress("unused")
 fun Player.prepareAndTeleport(location: Location) {
     this.passengers.forEach(Entity::remove)
     this.velocity = Vector(0, 0, 0)
