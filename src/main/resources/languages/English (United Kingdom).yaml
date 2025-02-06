@@ -9,6 +9,10 @@ GLOBAL_CHAT_STATUS: "<green>Global chat is now: {0}</green>"
 ENABLED: "<dark_green>ENABLED</dark_green>"
 DISABLED: "<red>DISABLED</red>"
 
+YOU_HAVE_BEEN_HEALED: "<green>You have been healed!</green>"
+INVENTORY_RESET: "<green>Inventory reset!</green>"
+PERFECT_HORSE_SPAWNED: "<green>Perfect horse spawned!</green>"
+
 TIME_SECONDS: "<aqua>A few seconds ago</aqua>"
 TIME_MINUTES: "<aqua>{0} minute{1} ago</aqua>"
 TIME_MINUTES_AND_SECONDS: "<aqua>{0} minute{1}, {2} second{3} ago</aqua>"
