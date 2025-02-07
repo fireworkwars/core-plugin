@@ -16,7 +16,7 @@ class PlayerInteractListener(private val plugin: FireworkWarsCorePlugin) : Event
     fun onPlayerRightClick(event: PlayerInteractAtEntityEvent) {
         val player = event.player
 
-        if (!plugin.lobbyServiceProvider.isLobby(player.world)) {
+        if (!plugin.lobbyHook.isLobby(player.world)) {
             return
         }
 
