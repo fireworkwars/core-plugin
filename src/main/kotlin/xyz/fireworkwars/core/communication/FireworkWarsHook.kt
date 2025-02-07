@@ -3,13 +3,13 @@ package xyz.fireworkwars.core.communication
 import org.bukkit.entity.Player
 
 @Suppress("unused")
-interface FireworkWarsServiceProvider {
+interface FireworkWarsHook {
     fun getArenaJoinExecutor(): ArenaJoinExecutor
     fun getArenaLeaveExecutor(): ArenaLeaveExecutor
     fun getBarracksArenas(): List<LiveArenaData>
     fun getTownArenas(): List<LiveArenaData>
     fun getVersionString(): String
-    fun hidePlayersBetweenDifferentGames()
+    fun resyncPlayerVisibility()
     fun isInPlayingGame(player: Player): Boolean
 
     interface ArenaJoinExecutor {

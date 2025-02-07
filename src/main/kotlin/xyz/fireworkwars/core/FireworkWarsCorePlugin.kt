@@ -14,8 +14,8 @@ import xyz.fireworkwars.core.commands.developer.ToggleDebugCommand
 import xyz.fireworkwars.core.commands.developer.ToggleGlobalChatCommand
 import xyz.fireworkwars.core.commands.operator.SetRankCommand
 import xyz.fireworkwars.core.commands.player.*
-import xyz.fireworkwars.core.communication.FireworkWarsServiceProvider
-import xyz.fireworkwars.core.communication.LobbyServiceProvider
+import xyz.fireworkwars.core.communication.FireworkWarsHook
+import xyz.fireworkwars.core.communication.LobbyHook
 import xyz.fireworkwars.core.config.PluginConfig
 import xyz.fireworkwars.core.events.PlayerChatListener
 import xyz.fireworkwars.core.events.PlayerInteractListener
@@ -33,8 +33,8 @@ class FireworkWarsCorePlugin : JavaPlugin() {
     lateinit var playerDataManager: PlayerDataManager
     lateinit var languageManager: LanguageManager
 
-    lateinit var fireworkWarsServiceProvider: FireworkWarsServiceProvider
-    lateinit var lobbyServiceProvider: LobbyServiceProvider
+    lateinit var fireworkWarsHook: FireworkWarsHook
+    lateinit var lobbyHook: LobbyHook
 
     lateinit var pluginConfig: PluginConfig
 
