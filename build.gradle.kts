@@ -13,7 +13,7 @@ plugins {
 
 // build output location configuration
 // both false = build to build/libs
-val buildToMain = true
+val buildToMain = false
 val buildToLobby = false
 
 group = "xyz.fireworkwars"
