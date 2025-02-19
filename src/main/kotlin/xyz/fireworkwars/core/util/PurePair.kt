@@ -3,7 +3,7 @@ package xyz.fireworkwars.core.util
 import java.util.Comparator.comparingDouble
 import java.util.Comparator.comparingInt
 
-@Suppress("unused", "MemberVisibilityCanBePrivate")
+@Suppress("unused")
 class PurePair<T : Any>(left: T, right: T) : Pair<T, T>(left, right) {
     companion object {
         @JvmStatic
