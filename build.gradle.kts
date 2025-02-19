@@ -23,15 +23,22 @@ description = "Required dependencies & core functionality for a Firework Wars se
 val paperApiVersion = "1.21.4"
 val targetJavaVersion = 21
 
-// authors
-val rolyPolyVole = "rolyPolyVole"
-val esotericEnderman = "Esoteric Enderman"
-
-// plugin yml
-val pluginName = "FireworkWarsCore"
-val pluginAuthors = listOf(rolyPolyVole, esotericEnderman)
-val pluginGithub = "https://github.com/fireworkwars/core-plugin"
 val mainClassPath = "$group.core.FireworkWarsCorePlugin"
+
+paperPluginYaml {
+    name = project.name
+    description = project.description
+    authors = listOf("Esoteric Foundation", "rolyPolyVole", "Esoteric Enderman")
+    website = "https://github.com/fireworkwars/core-plugin"
+
+    apiVersion = paperApiVersion
+
+    main = mainClassPath
+}
+
+bukkitPluginYaml {
+    load = BukkitPluginYaml.PluginLoadOrder.STARTUP
+}
 
 repositories {
     mavenCentral()
@@ -126,19 +133,4 @@ tasks {
     processResources {
         filteringCharset = Charsets.UTF_8.name()
     }
-}
-
-paperPluginYaml {
-    name = pluginName
-    description = project.description
-    authors = pluginAuthors
-    website = pluginGithub
-
-    apiVersion = paperApiVersion
-
-    main = mainClassPath
-}
-
-bukkitPluginYaml {
-    load = BukkitPluginYaml.PluginLoadOrder.STARTUP
 }
