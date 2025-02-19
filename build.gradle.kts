@@ -20,13 +20,15 @@ group = "xyz.fireworkwars"
 version = "1.4.3"
 description = "Required dependencies & core functionality for a Firework Wars server."
 
+val pluginName = "FireworkWarsCore"
+
 val paperApiVersion = "1.21.4"
 val targetJavaVersion = 21
 
 val mainClassPath = "$group.core.FireworkWarsCorePlugin"
 
 paperPluginYaml {
-    name = project.name
+    name = pluginName
     description = project.description
     authors = listOf("Esoteric Foundation", "rolyPolyVole", "Esoteric Enderman")
     website = "https://github.com/fireworkwars/core-plugin"
