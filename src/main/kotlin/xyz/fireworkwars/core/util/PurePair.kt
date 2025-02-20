@@ -2,6 +2,8 @@ package xyz.fireworkwars.core.util
 
 import java.util.Comparator.comparingDouble
 import java.util.Comparator.comparingInt
+import java.util.function.ToDoubleFunction
+import java.util.function.ToIntFunction
 
 @Suppress("unused")
 class PurePair<T : Any>(left: T, right: T) : Pair<T, T>(left, right) {
@@ -20,19 +22,19 @@ class PurePair<T : Any>(left: T, right: T) : Pair<T, T>(left, right) {
         return if (comparator.compare(left, right) >= 0) left else right
     }
 
-    fun minInt(intSupplier: (T) -> Int): T {
+    fun minInt(intSupplier: ToIntFunction<T>): T {
         return this.min(comparingInt(intSupplier))
     }
 
-    fun maxInt(intSupplier: (T) -> Int): T {
+    fun maxInt(intSupplier: ToIntFunction<T>): T {
         return this.max(comparingInt(intSupplier))
     }
 
-    fun minDouble(doubleSupplier: (T) -> Double): T {
+    fun minDouble(doubleSupplier: ToDoubleFunction<T>): T {
         return this.min(comparingDouble(doubleSupplier))
     }
 
-    fun maxDouble(doubleSupplier: (T) -> Double): T {
+    fun maxDouble(doubleSupplier: ToDoubleFunction<T>): T {
         return this.max(comparingDouble(doubleSupplier))
     }
 }
