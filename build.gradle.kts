@@ -17,7 +17,7 @@ val buildToMain = false
 val buildToLobby = false
 
 group = "xyz.fireworkwars"
-version = "1.4.3"
+version = "1.4.4"
 description = "Required dependencies & core functionality for a Firework Wars server."
 
 val pluginName = "FireworkWarsCore"
