@@ -310,6 +310,8 @@ enum class Message {
     NOT_IN_GAME,
     GAME_NOT_FOUND,
 
+    GAME_NOT_STARTING,
+
     SB_TITLE,
     SB_SEPARATOR,
 
