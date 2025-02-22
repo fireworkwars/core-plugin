@@ -259,7 +259,7 @@ GAME_STARTED: "<yellow>The game has started!</yellow>"
 COUNTDOWN_CANCELLED: "<red>Start cancelled!</red>"
 
 YOU_ARE_ON_TEAM: "<yellow>YOU ARE</yellow>"
-TEAM_ELIMINATED: "{0}<yellow> has been eliminated!</yellow>"
+TEAM_ELIMINATED: "</newline><red><b>TEAM ELIMINATED > </b></red>{0}<yellow> has been eliminated!</yellow></newline>"
 
 PLAYER_KILLED_BY_DISCONNECTION: "{0} <gray>died because they disconnected.</gray>"
 PLAYER_RECONNECTED_AS_SPECTATOR: "{0} <gray>reconnected as a spectator.</gray>"
