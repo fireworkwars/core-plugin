@@ -140,7 +140,7 @@ NO_ONE_TO_REPLY_TO: "<red>Nobody has messaged you recently!</red>"
 SWITCHED_TO_ALL_CHAT: "<green>You are now in the all chat!</green>"
 
 SHOUT: "<red><bold>SHOUT</bold></red> {0}<white>: {1}</white>"
-SHOUT_COOLDOWN: "<red>You can only shout once every {0} seconds!</red>"
+SHOUT_COOLDOWN: "<red>You can shout again in {0} seconds!</red>"
 
 REQUIRES_GOLD_RANK: "<red>This feature requires the {0} rank!</red>"
 UNKNOWN_PLAYER: "<red>That player does not exist!</red>"
