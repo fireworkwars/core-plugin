@@ -16,4 +16,15 @@ class CooldownManager(private val plugin: JavaPlugin, private val cooldownTicks:
     fun setCooldown(uuid: UUID) {
         cooldowns[uuid] = plugin.server.currentTick
     }
+
+    fun removeCooldown(uuid: UUID) {
+        cooldowns.remove(uuid)
+    }
+
+    fun remainingCooldownTicks(uuid: UUID): Int {
+        val lastUse = cooldowns[uuid] ?: return 0
+        val currentTick = plugin.server.currentTick
+
+        return (lastUse + cooldownTicks) - currentTick
+    }
 }
