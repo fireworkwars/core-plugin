@@ -1,35 +1,33 @@
 package xyz.fireworkwars.core.managers
 
+import org.apache.logging.log4j.util.BiConsumer
 import org.bukkit.OfflinePlayer
-import org.bukkit.scheduler.BukkitTask
 import xyz.fireworkwars.core.FireworkWarsCorePlugin
+import xyz.fireworkwars.core.util.ExpiryManager
 import java.util.*
 
-class FriendManager(private val plugin: FireworkWarsCorePlugin) {
+class FriendManager(plugin: FireworkWarsCorePlugin) {
     private val requestExpiryTime = 6000L
+    private val expiryManager = ExpiryManager(plugin, requestExpiryTime)
 
     private val outgoingRequests: MutableMap<UUID, MutableList<UUID>> = mutableMapOf()
     private val receivingRequests: MutableMap<UUID, MutableList<UUID>> = mutableMapOf()
 
-    private val expiryTasks: MutableMap<UUID, MutableMap<UUID, BukkitTask>> = mutableMapOf()
-
-    fun addFriendRequest(
-        sender: OfflinePlayer,
-        receiver: OfflinePlayer,
-        onExpire: (OfflinePlayer, OfflinePlayer) -> Unit
-    ) {
+    fun addFriendRequest(sender: OfflinePlayer, receiver: OfflinePlayer, onExpire: BiConsumer<OfflinePlayer, OfflinePlayer>) {
         val senderUuid = sender.uniqueId
         val receiverUuid = receiver.uniqueId
 
         outgoingRequests.computeIfAbsent(senderUuid) { mutableListOf() }.add(receiverUuid)
         receivingRequests.computeIfAbsent(receiverUuid) { mutableListOf() }.add(senderUuid)
 
-        val task = plugin.runTaskLater(requestExpiryTime) {
+        expiryManager.addExpiryTask(this.getId(sender, receiver)) {
             this.removeRequestData(sender, receiver)
-            onExpire(sender, receiver)
+            onExpire.accept(sender, receiver)
         }
+    }
 
-        expiryTasks.computeIfAbsent(senderUuid) { mutableMapOf() }[receiverUuid] = task
+    fun hasRequest(sender: OfflinePlayer, receiver: OfflinePlayer): Boolean {
+        return this.getOutgoingRequestUUIDs(sender).contains(receiver.uniqueId)
     }
 
     fun hasMutualRequests(player1: OfflinePlayer, player2: OfflinePlayer): Boolean {
@@ -51,6 +49,10 @@ class FriendManager(private val plugin: FireworkWarsCorePlugin) {
 
         outgoingRequests[senderUuid]?.remove(receiverUuid)
         receivingRequests[receiverUuid]?.remove(senderUuid)
-        expiryTasks[senderUuid]?.remove(receiverUuid)?.cancel()
+        expiryManager.removeExpiryTask(this.getId(sender, receiver))
+    }
+
+    private fun getId(sender: OfflinePlayer, receiver: OfflinePlayer): String {
+        return "${sender.uniqueId}-${receiver.uniqueId}"
     }
 }
