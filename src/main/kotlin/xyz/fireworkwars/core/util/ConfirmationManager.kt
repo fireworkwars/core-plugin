@@ -2,6 +2,7 @@ package xyz.fireworkwars.core.util
 
 import java.util.*
 
+@Suppress("unused")
 class ConfirmationManager {
     private val confirmed = mutableListOf<UUID>()
 

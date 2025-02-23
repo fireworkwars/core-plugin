@@ -3,6 +3,7 @@ package xyz.fireworkwars.core.util
 import org.bukkit.plugin.java.JavaPlugin
 import java.util.*
 
+@Suppress("unused")
 class CooldownManager(private val plugin: JavaPlugin, private val cooldownTicks: Int) {
     private val cooldowns = mutableMapOf<UUID, Int>()
 
