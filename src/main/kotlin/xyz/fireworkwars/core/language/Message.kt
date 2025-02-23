@@ -310,6 +310,7 @@ enum class Message {
     GAME_RELOADING,
     NOT_IN_GAME,
     GAME_NOT_FOUND,
+    ARE_YOU_SURE_YOU_WANT_TO_LEAVE,
 
     GAME_NOT_STARTING,
 

@@ -328,6 +328,7 @@ GAME_ALREADY_CONTAINS_PLAYER: "<red>You are already in this game!</red>"
 GAME_RELOADING: "<red>This game is currently reloading, please wait a bit.</red>"
 NOT_IN_GAME: "<red>You are not in a game!</red>"
 GAME_NOT_FOUND: "<red>Failed to find your last game. It may have ended.</red>"
+ARE_YOU_SURE_YOU_WANT_TO_LEAVE: "<yellow>Are you sure you want to quit? Run the command again to confirm.</yellow>"
 
 # Force Start Command
 GAME_NOT_STARTING: "<red>This game is not in a starting phase!</red>"
