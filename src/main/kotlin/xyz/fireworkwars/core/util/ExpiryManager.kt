@@ -3,7 +3,7 @@ package xyz.fireworkwars.core.util
 import org.bukkit.scheduler.BukkitTask
 import xyz.fireworkwars.core.FireworkWarsCorePlugin
 
-class ExpiryManager(private val plugin: FireworkWarsCorePlugin, private val expiryDuration: Long) {
+class ExpiryManager(private val plugin: JavaPlugin, private val expiryDuration: Long) {
     private val expiryTasks: MutableMap<String, BukkitTask> = mutableMapOf()
 
     fun addExpiryTask(id: String, onExpire: Runnable) {
