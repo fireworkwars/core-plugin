@@ -64,5 +64,6 @@ fun Double.toFixed(places: Int): Double {
 fun Player.prepareAndTeleport(location: Location) {
     this.passengers.forEach(Entity::remove)
     this.velocity = Vector(0, 0, 0)
+    this.fallDistance = 0.0F
     this.teleport(location)
 }
