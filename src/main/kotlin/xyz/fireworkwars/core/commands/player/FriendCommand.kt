@@ -199,6 +199,10 @@ class FriendCommand(private val plugin: FireworkWarsCorePlugin) : CommandAPIComm
             return player.sendMessage(Message.YOU_HAVE_BEEN_BLOCKED)
         }
 
+        if (friendManager.hasRequest(player, target)) {
+            return player.sendMessage(Message.FRIEND_REQUEST_ALREADY_SENT, targetProfile.formattedName())
+        }
+
         friendManager.addFriendRequest(player, target) { sender, receiver ->
             sender.sendMessage(Message.FRIEND_REQUEST_EXPIRED, targetProfile.formattedName())
             receiver.sendMessage(Message.FRIEND_REQUEST_FROM_EXPIRED, profile.formattedName())
