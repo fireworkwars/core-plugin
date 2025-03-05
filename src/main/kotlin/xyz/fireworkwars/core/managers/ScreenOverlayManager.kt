@@ -7,17 +7,17 @@ import org.bukkit.World
 import org.bukkit.entity.Display
 import org.bukkit.entity.Player
 import org.bukkit.entity.TextDisplay
+import org.bukkit.plugin.Plugin
 import org.bukkit.scheduler.BukkitRunnable
 import org.bukkit.scheduler.BukkitTask
 import org.joml.Matrix4f
 import org.joml.Quaternionf
-import xyz.fireworkwars.core.FireworkWarsCorePlugin
 import xyz.fireworkwars.core.util.toMinecraft
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 
 @Suppress("unused")
-class ScreenOverlayManager(private val plugin: FireworkWarsCorePlugin) {
+class ScreenOverlayManager(private val plugin: Plugin) {
     private val activeOverlays = ConcurrentHashMap<UUID, OverlayData>()
     private var updateTask: BukkitTask? = null
     private var isEnabled = false
@@ -158,7 +158,7 @@ class ScreenOverlayManager(private val plugin: FireworkWarsCorePlugin) {
         }
     }
 
-    private class OverlayRunnable(private val plugin: FireworkWarsCorePlugin, private val manager: ScreenOverlayManager) : BukkitRunnable() {
+    private class OverlayRunnable(private val plugin: Plugin, private val manager: ScreenOverlayManager) : BukkitRunnable() {
         fun start(): BukkitTask {
             return this.runTaskTimer(plugin, 0L, 1L)
         }
