@@ -8,7 +8,11 @@ import org.bukkit.Sound
 import org.bukkit.entity.Entity
 import org.bukkit.entity.HumanEntity
 import org.bukkit.entity.Player
+import org.bukkit.util.Transformation
 import org.bukkit.util.Vector
+import org.joml.Matrix4f
+import org.joml.Quaternionf
+import org.joml.Vector3f
 import xyz.fireworkwars.core.language.LanguageManager
 import xyz.fireworkwars.core.language.Message
 import kotlin.math.pow
@@ -66,4 +70,14 @@ fun Player.prepareAndTeleport(location: Location) {
     this.velocity = Vector(0, 0, 0)
     this.fallDistance = 0.0F
     this.teleport(location)
+}
+
+fun Matrix4f.toMinecraft(): Transformation {
+    val position = Vector3f()
+    val rotation = Quaternionf()
+    val scale = Vector3f()
+    this.getTranslation(position)
+    this.getUnnormalizedRotation(rotation)
+    this.getScale(scale)
+    return Transformation(position, rotation, scale, rotation)
 }
