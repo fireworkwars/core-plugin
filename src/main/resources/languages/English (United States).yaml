@@ -316,7 +316,7 @@ DEATH_CRUSHED: "<gray>{0} was crushed by a falling block.</gray>"
 DEATH_CRUSHED_FIGHTING_AGAINST: "<gray>{0} was crushed by a falling block while fighting {1}.</gray>"
 DEATH_WORLD_BORDER: "<gray>{0} got lost outside the world border.</gray>"
 DEATH_WORLD_BORDER_FIGHTING_AGAINST: "<gray>{0} got lost outside the world border while fighting {1}.</gray>"
-DEATH_KILLED_SELF: "<gray>{0} didn't want to live anymore.<gray>"
+DEATH_KILLED_SELF: "<gray>{0} didn't want to live anymore.</gray>"
 DEATH_UNKNOWN: "<gray>{0} died of unknown circumstances.</gray>"
 DEATH_UNKNOWN_FIGHTING_AGAINST: "<gray>{0} died to unknown reasons, but {1} is to blame.</gray>"
 
