@@ -80,7 +80,7 @@ class ScreenOverlayManager(private val plugin: Plugin) {
                 iterator.remove()
             } ?: continue
 
-            overlayData.updateLocationAndColor(player.eyeLocation)
+            overlayData.updateLocationAndColor(player.eyeLocation.toVector().toLocation(player.world))
             overlayData.updatePanels { player.showEntity(plugin, it) }
         }
     }
