@@ -80,7 +80,8 @@ class ScreenOverlayManager(private val plugin: Plugin) {
                 iterator.remove()
             } ?: continue
 
-            overlayData.update(player.eyeLocation)
+            overlayData.updateLocationAndColor(player.eyeLocation)
+            overlayData.updatePanels { player.showEntity(plugin, it) }
         }
     }
 
@@ -103,38 +104,44 @@ class ScreenOverlayManager(private val plugin: Plugin) {
         var color: Color = initialColor
 
         private val panels: List<TextDisplay>
-        private val transforms: List<Matrix4f>
+        private val transformations: List<Matrix4f>
 
         init {
-            this.transforms = this.createTransformations()
+            this.transformations = this.createTransformations()
             this.panels = this.createPanels(initialWorld)
+        }
+
+        fun updatePanels(update: (TextDisplay) -> Unit) {
+            panels.forEach(update)
         }
 
         private fun createTransformations(): List<Matrix4f> {
             val size = 2.5f
+
             val baseTransformation = Matrix4f()
-                .translate(-0.1f + 0.5f, -0.5f + 0.5f, 0f)
-                .scale(8.0f, 4.0f, 1f)
+                .translate(-0.1f + 0.5f, -0.5f + 0.5f, 0.0f)
+                .scale(8.0f, 4.0f, 1.0f)
 
             val sides = listOf(
-                Quaternionf(), // Front
-                Quaternionf().rotateY(Math.PI.toFloat() / 2), // Right
-                Quaternionf().rotateY(Math.PI.toFloat()), // Back
-                Quaternionf().rotateY(-Math.PI.toFloat() / 2), // Left
-                Quaternionf().rotateX(Math.PI.toFloat() / 2), // Top
-                Quaternionf().rotateX(-Math.PI.toFloat() / 2)) // Bottom
+                Quaternionf(),
+                Quaternionf().rotateY(Math.PI.toFloat() / 2 * 1),
+                Quaternionf().rotateY(Math.PI.toFloat() / 2 * 2),
+                Quaternionf().rotateY(Math.PI.toFloat() / 2 * 3),
+
+                Quaternionf().rotateX(Math.PI.toFloat() / 2),
+                Quaternionf().rotateX(-Math.PI.toFloat() / 2))
 
             return sides.map {
                 Matrix4f()
                     .rotate(it)
-                    .scale(size, size, 1f)
+                    .scale(size, size, 1.0f)
                     .translate(-0.5f, -0.5f, -size / 2)
                     .mul(baseTransformation)
             }
         }
 
         private fun createPanels(world: World): List<TextDisplay> {
-            return transforms.map {
+            return transformations.map {
                 world.spawn(Location(world, 0.0, 0.0, 0.0), TextDisplay::class.java).apply {
                     this.text(Component.space())
                     this.brightness = Display.Brightness(15, 15)
@@ -142,11 +149,12 @@ class ScreenOverlayManager(private val plugin: Plugin) {
                     this.backgroundColor = color
                     this.teleportDuration = 1
                     this.transformation = it.toMinecraft()
+                    this.isVisibleByDefault = false
                 }
             }
         }
 
-        fun update(eyeLocation: Location) {
+        fun updateLocationAndColor(eyeLocation: Location) {
             panels.forEach {
                 it.teleport(eyeLocation)
                 it.backgroundColor = color
