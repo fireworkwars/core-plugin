@@ -80,6 +80,7 @@ class ScreenOverlayManager(private val plugin: Plugin) {
                 iterator.remove()
             } ?: continue
 
+            // Remove yaw/pitch
             overlayData.updateLocationAndColor(player.eyeLocation.toVector().toLocation(player.world))
             overlayData.updatePanels { player.showEntity(plugin, it) }
         }
@@ -122,14 +123,16 @@ class ScreenOverlayManager(private val plugin: Plugin) {
                 .translate(-0.1f + 0.5f, -0.5f + 0.5f, 0.0f)
                 .scale(8.0f, 4.0f, 1.0f)
 
-            val sides = listOf(
-                Quaternionf(),
-                Quaternionf().rotateY(Math.PI.toFloat() / 2 * 1),
-                Quaternionf().rotateY(Math.PI.toFloat() / 2 * 2),
-                Quaternionf().rotateY(Math.PI.toFloat() / 2 * 3),
+            // Divide by 4 because quaternion rotating is goofy
 
-                Quaternionf().rotateX(Math.PI.toFloat() / 2),
-                Quaternionf().rotateX(-Math.PI.toFloat() / 2))
+            val sides = listOf(
+                Quaternionf(), // Rotate by 0 degrees
+                Quaternionf().rotateY(Math.PI.toFloat() / 4 * 1), // Rotate by 90 degrees
+                Quaternionf().rotateY(Math.PI.toFloat() / 4 * 2), // Rotate by 180 degrees
+                Quaternionf().rotateY(Math.PI.toFloat() / 4 * 3), // Rotate by 270 degrees
+
+                Quaternionf().rotateX(Math.PI.toFloat() / 4), // Rotate by 90 degrees
+                Quaternionf().rotateX(-Math.PI.toFloat() / 4)) // Rotate by -90 degrees
 
             return sides.map {
                 Matrix4f()
