@@ -12,7 +12,6 @@ import org.bukkit.scheduler.BukkitRunnable
 import org.bukkit.scheduler.BukkitTask
 import org.joml.Matrix4f
 import org.joml.Quaternionf
-import xyz.fireworkwars.core.util.toMinecraft
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 
@@ -149,7 +148,7 @@ class ScreenOverlayManager(private val plugin: Plugin) {
                     this.isSeeThrough = true
                     this.backgroundColor = color
                     this.teleportDuration = 1
-                    this.transformation = it.toMinecraft()
+                    this.setTransformationMatrix(it)
                     this.isVisibleByDefault = false
                 }
             }
