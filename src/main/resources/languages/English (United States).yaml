@@ -205,9 +205,9 @@ PLAYER_COMPASS_ACTIONBAR_INFO: "<green><bold>Target:</bold></green> {0} <dark_gr
 PLAYER_TELEPORTER: "<yellow>Player Teleporter</yellow>"
 PLAYER_TELEPORTER_LORE: "<gray>Teleport to and spectate players.</gray>"
 PLAYER_TELEPORTER_MENU_TITLE: "<black>Player Teleporter</black>"
-PLAYER_TELEPORTER_PLAYER_HEALTH: "<gray>Health:</gray> <red>{0}❤</red>"
-PLAYER_TELEPORTER_CLICK_TO_SPECTATE: "<yellow>Left click to spectate</yellow>"
-PLAYER_TELEPORTER_CLICK_TO_TELEPORT: "<yellow>Right click to teleport</yellow>"
+PLAYER_TELEPORTER_PLAYER_HEALTH: "<!i><gray>Health:</gray> <red>{0}❤</red></!i>"
+PLAYER_TELEPORTER_CLICK_TO_SPECTATE: "<!i><yellow>Left click to spectate</yellow></!i>"
+PLAYER_TELEPORTER_CLICK_TO_TELEPORT: "<!i><yellow>Right click to teleport</yellow></!i>"
 
 ENCHANTED_GOLDEN_APPLE: "<yellow>Enchanted Golden Apple</yellow>"
 ENCHANTED_GOLDEN_APPLE_LORE: "<gray>Extremely powerful healing.</gray>"
