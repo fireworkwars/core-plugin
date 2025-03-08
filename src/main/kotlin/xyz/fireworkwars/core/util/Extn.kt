@@ -71,15 +71,3 @@ fun Player.prepareAndTeleport(location: Location) {
     this.fallDistance = 0.0F
     this.teleport(location)
 }
-
-fun Matrix4f.toMinecraft(): Transformation {
-    val position = Vector3f()
-    val rotation = Quaternionf()
-    val scale = Vector3f()
-
-    this.getTranslation(position)
-    this.getUnnormalizedRotation(rotation)
-    this.getScale(scale)
-
-    return Transformation(position, rotation, scale, rotation)
-}
