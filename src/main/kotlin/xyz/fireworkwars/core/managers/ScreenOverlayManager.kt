@@ -117,27 +117,24 @@ class ScreenOverlayManager(private val plugin: Plugin) {
         }
 
         private fun createTransformations(): List<Matrix4f> {
-            val size = 2.5f
-
             val baseTransformation = Matrix4f()
                 .translate(-0.1f + 0.5f, -0.5f + 0.5f, 0.0f)
                 .scale(8.0f, 4.0f, 1.0f)
 
-            // Divide by 4 because quaternion rotating is goofy
+            return listOf(
+                Quaternionf(),
+                Quaternionf().rotateY(Math.PI.toFloat() / 2 * 1),
+                Quaternionf().rotateY(Math.PI.toFloat() / 2 * 2),
+                Quaternionf().rotateY(Math.PI.toFloat() / 2 * 3),
 
-            val sides = listOf(
-                Quaternionf(), // Rotate by 0 degrees
-                Quaternionf().rotateY(Math.PI.toFloat() / 4 * 1), // Rotate by 90 degrees
-                Quaternionf().rotateY(Math.PI.toFloat() / 4 * 2), // Rotate by 180 degrees
-                Quaternionf().rotateY(Math.PI.toFloat() / 4 * 3), // Rotate by 270 degrees
+                Quaternionf().rotateX(Math.PI.toFloat() / 2),
+                Quaternionf().rotateX(-Math.PI.toFloat() / 2)
+            ).map {
+                val size = 2.5f
 
-                Quaternionf().rotateX(Math.PI.toFloat() / 4), // Rotate by 90 degrees
-                Quaternionf().rotateX(-Math.PI.toFloat() / 4)) // Rotate by -90 degrees
-
-            return sides.map {
                 Matrix4f()
                     .rotate(it)
-                    .scale(size, size, 1.0f)
+                    .scale(size, size, 1f)
                     .translate(-0.5f, -0.5f, -size / 2)
                     .mul(baseTransformation)
             }
@@ -148,6 +145,7 @@ class ScreenOverlayManager(private val plugin: Plugin) {
                 world.spawn(Location(world, 0.0, 0.0, 0.0), TextDisplay::class.java).apply {
                     this.text(Component.space())
                     this.brightness = Display.Brightness(15, 15)
+                    this.billboard = Display.Billboard.FIXED
                     this.isSeeThrough = true
                     this.backgroundColor = color
                     this.teleportDuration = 1
