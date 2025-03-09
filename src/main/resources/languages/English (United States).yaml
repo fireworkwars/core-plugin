@@ -324,32 +324,32 @@ ARENA_JOIN: "<gray>{0}</gray> <yellow>has joined the game! (<aqua>{1}</aqua>/<aq
 ARENA_LEAVE: "<gray>{0}</gray> <yellow>has left the game! (<aqua>{1}</aqua>/<aqua>{2}</aqua>)</yellow>"
 
 # Warden Messages
-WARDEN_INTRODUCTION_1: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b> <dark_aqua>A thousand years of slumber gone unbroken...</dark_aqua>"
-WARDEN_INTRODUCTION_2: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b> <dark_aqua>A thousand years of peace, rest, and bliss...</dark_aqua>"
-WARDEN_INTRODUCTION_3: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b> <dark_aqua>Until the Great <red>Firework War</red> began...</dark_aqua>"
-WARDEN_INTRODUCTION_4: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b> <dark_aqua>You have awakened me...</dark_aqua>"
+WARDEN_INTRODUCTION_1: "<b><dark_gray>[{0}]</dark_gray></b> <dark_aqua>A thousand years of slumber gone unbroken...</dark_aqua>"
+WARDEN_INTRODUCTION_2: "<b><dark_gray>[{0}]</dark_gray></b> <dark_aqua>A thousand years of peace, rest, and bliss...</dark_aqua>"
+WARDEN_INTRODUCTION_3: "<b><dark_gray>[{0}]</dark_gray></b> <dark_aqua>Until the Great <red>Firework War</red> began...</dark_aqua>"
+WARDEN_INTRODUCTION_4: "<b><dark_gray>[{0}]</dark_gray></b> <dark_aqua>You have awakened me...</dark_aqua>"
 
-WARDEN_TARGET_PLAYER: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b> <dark_aqua>{0}... enjoy your last moments.</dark_aqua>"
-WARDEN_TARGET_PLAYER_WITH_WRATH: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b> <dark_aqua>{0}... Maybe one day you will learn to fear the <color:#1336aa>Warden's Wrath</color>.</dark_aqua>"
+WARDEN_TARGET_PLAYER: "<b><dark_gray>[{0}]</dark_gray></b> <dark_aqua>{0}... enjoy your last moments.</dark_aqua>"
+WARDEN_TARGET_PLAYER_WITH_WRATH: "<b><dark_gray>[{0}]</dark_gray></b> <dark_aqua>{0}... Maybe one day you will learn to fear the <color:#1336aa>Warden's Wrath</color>.</dark_aqua>"
 
-WARDEN_YAP_1: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b> <dark_aqua>I am the consequence of your actions.</dark_aqua>"
-WARDEN_YAP_2: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b> <dark_aqua>This is what you have brought upon yourselves. The only possible resolution of this war is death and destruction.</dark_aqua>"
-WARDEN_YAP_3: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b> <dark_aqua>The chaos you have sown will be your undoing.</dark_aqua>"
-WARDEN_YAP_4: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b> <dark_aqua>I can sense the souls... fading as this war draws to a close.</dark_aqua>"
-WARDEN_YAP_5: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b> <dark_aqua>I mark the end of this war... and the end of all life.</dark_aqua>"
+WARDEN_YAP_1: "<b><dark_gray>[{0}]</dark_gray></b> <dark_aqua>I am the consequence of your actions.</dark_aqua>"
+WARDEN_YAP_2: "<b><dark_gray>[{0}]</dark_gray></b> <dark_aqua>This is what you have brought upon yourselves. The only possible resolution of this war is death and destruction.</dark_aqua>"
+WARDEN_YAP_3: "<b><dark_gray>[{0}]</dark_gray></b> <dark_aqua>The chaos you have sown will be your undoing.</dark_aqua>"
+WARDEN_YAP_4: "<b><dark_gray>[{0}]</dark_gray></b> <dark_aqua>I can sense the souls... fading as this war draws to a close.</dark_aqua>"
+WARDEN_YAP_5: "<b><dark_gray>[{0}]</dark_gray></b> <dark_aqua>I mark the end of this war... and the end of all life.</dark_aqua>"
 
-WARDEN_INJURED_YAP_1: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b> <dark_aqua>You think you can defeat me? You are mistaken.</dark_aqua>"
-WARDEN_INJURED_YAP_2: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b> <dark_aqua>You are nothing but a mere mortal.</dark_aqua>"
-WARDEN_INJURED_YAP_3: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b> <dark_aqua>You are not worthy of my presence.</dark_aqua>"
+WARDEN_INJURED_YAP_1: "<b><dark_gray>[{0}]</dark_gray></b> <dark_aqua>You think you can defeat me? You are mistaken.</dark_aqua>"
+WARDEN_INJURED_YAP_2: "<b><dark_gray>[{0}]</dark_gray></b> <dark_aqua>You are nothing but a mere mortal.</dark_aqua>"
+WARDEN_INJURED_YAP_3: "<b><dark_gray>[{0}]</dark_gray></b> <dark_aqua>You are not worthy of my presence.</dark_aqua>"
 
 WARDEN_KILL_WHISPER: "<i><gray>In the distance, you hear blood splattering over the ground; A warden's kill can be heard from unusually far away.</gray></i>"
 
-WARDEN_KILL_1: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b> <dark_aqua>Pathetic.</dark_aqua>"
-WARDEN_KILL_2: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b> <dark_aqua>Weak.</dark_aqua>"
-WARDEN_KILL_3: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b> <dark_aqua>Fools.</dark_aqua>"
+WARDEN_KILL_1: "<b><dark_gray>[{0}]</dark_gray></b> <dark_aqua>Pathetic.</dark_aqua>"
+WARDEN_KILL_2: "<b><dark_gray>[{0}]</dark_gray></b> <dark_aqua>Weak.</dark_aqua>"
+WARDEN_KILL_3: "<b><dark_gray>[{0}]</dark_gray></b> <dark_aqua>Fools.</dark_aqua>"
 
-WARDEN_HALF_HEALTH: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b> <dark_aqua>A god does not fear death...</dark_aqua>"
-WARDEN_DEFEATED: "<b><dark_gray>[<dark_red>The Warden</dark_red>]</dark_gray></b> <dark_aqua>You have defeated me... but the war rages on.</dark_aqua>"
+WARDEN_HALF_HEALTH: "<b><dark_gray>[{0}]</dark_gray></b> <dark_aqua>A god does not fear death...</dark_aqua>"
+WARDEN_DEFEATED: "<b><dark_gray>[{0}]</dark_gray></b> <dark_aqua>You have defeated me... but the war rages on.</dark_aqua>"
 
 # Arena Command
 NOT_IN_LOBBY: "<red>You are not in a lobby!</red>"
