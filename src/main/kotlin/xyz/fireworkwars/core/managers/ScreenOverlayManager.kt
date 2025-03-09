@@ -5,6 +5,7 @@ import org.bukkit.Color
 import org.bukkit.Location
 import org.bukkit.World
 import org.bukkit.entity.Display
+import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
 import org.bukkit.entity.TextDisplay
 import org.bukkit.plugin.Plugin
@@ -79,8 +80,16 @@ class ScreenOverlayManager(private val plugin: Plugin) {
                 iterator.remove()
             } ?: continue
 
+            val spectatorTarget = player.spectatorTarget
+
+            val location = if (spectatorTarget is LivingEntity) {
+                spectatorTarget.eyeLocation.toVector().toLocation(player.world)
+            } else {
+                player.eyeLocation.toVector().toLocation(player.world)
+            }
+
             // Remove yaw/pitch
-            overlayData.updateLocationAndColor(player.eyeLocation.toVector().toLocation(player.world))
+            overlayData.updateLocationAndColor(location)
             overlayData.updatePanels { player.showEntity(plugin, it) }
         }
     }
