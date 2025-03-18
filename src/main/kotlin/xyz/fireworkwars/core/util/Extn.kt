@@ -1,14 +1,13 @@
 package xyz.fireworkwars.core.util
 
-import io.papermc.paper.entity.TeleportFlag
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.Location
 import org.bukkit.OfflinePlayer
 import org.bukkit.Sound
+import org.bukkit.entity.Entity
 import org.bukkit.entity.HumanEntity
 import org.bukkit.entity.Player
-import org.bukkit.event.player.PlayerTeleportEvent
 import org.bukkit.util.Vector
 import xyz.fireworkwars.core.language.LanguageManager
 import xyz.fireworkwars.core.language.Message
@@ -63,7 +62,8 @@ fun Double.toFixed(places: Int): Double {
 
 @Suppress("unused")
 fun Player.prepareAndTeleport(location: Location) {
+    passengers.forEach(Entity::remove)
     this.velocity = Vector(0, 0, 0)
     this.fallDistance = 0.0F
-    this.teleport(location, PlayerTeleportEvent.TeleportCause.PLUGIN, TeleportFlag.EntityState.RETAIN_PASSENGERS)
+    this.teleport(location)
 }
