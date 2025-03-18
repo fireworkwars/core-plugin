@@ -287,6 +287,8 @@ YOU_ARE_NOW_SPECTATOR: "<yellow>You are now a spectator!</yellow>"
 YOU_WIN: "<gold><bold>VICTORY</bold></gold>"
 YOU_LOSE: "<red><bold>GAME OVER</bold></red>"
 GAME_DRAWN: "<gray><bold>DRAW</bold></gray>"
+GAME_DRAWN_BY_STALEMATE: "<dark_gray>by stalemate</dark_gray>"
+GAME_DRAWN_BY_MUTUAL_DESTRUCTION: "<dark_gray>by mutual destruction</dark_gray>"
 
 DEATH_SHOT_BY: "<gray>{0} was shot by {1}.</gray>"
 DEATH_SHOT_BY_WITH_ITEM: "<gray>{0} was shot by {1} with {2}.</gray>"
