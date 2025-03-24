@@ -60,22 +60,22 @@ class FireworkCreator {
         }
 
         @JvmStatic
-        fun sendSupplyDropFirework(location: Location, flightTicks: Int) {
+        fun sendSupplyDropFirework(location: Location, flightTicks: Int): Firework {
             val supplyDropFirework = this.randomSupplyDropFirework()
             val meta = supplyDropFirework.itemMeta as FireworkMeta
 
-            location.world.spawn(location, Firework::class.java).apply {
+            return location.world.spawn(location, Firework::class.java).apply {
                 this.fireworkMeta = meta
                 this.ticksToDetonate = flightTicks
             }
         }
 
         @JvmStatic
-        fun sendLobbyFirework(location: Location, flightTicks: Int) {
+        fun sendLobbyFirework(location: Location, flightTicks: Int): Firework {
             val lobbyFirework = this.randomLobbyFirework()
             val meta = lobbyFirework.itemMeta as FireworkMeta
 
-            location.world.spawn(location, Firework::class.java).apply {
+            return location.world.spawn(location, Firework::class.java).apply {
                 this.fireworkMeta = meta
                 this.ticksToDetonate = flightTicks
             }
