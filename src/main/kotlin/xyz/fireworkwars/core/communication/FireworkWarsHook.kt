@@ -1,5 +1,6 @@
 package xyz.fireworkwars.core.communication
 
+import org.bukkit.Color
 import org.bukkit.entity.Player
 
 @Suppress("unused")
@@ -11,6 +12,7 @@ interface FireworkWarsHook {
     fun getVersionString(): String
     fun resyncPlayerVisibility()
     fun isInPlayingGame(player: Player): Boolean
+    fun getTeamPlayerColor(player: Player): Color
 
     interface ArenaJoinExecutor {
         fun executeJoinForPlayer(player: Player, arenaNumber: Int)
