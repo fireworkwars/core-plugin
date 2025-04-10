@@ -22,12 +22,10 @@ import xyz.fireworkwars.core.events.PlayerInteractListener
 import xyz.fireworkwars.core.events.PlayerLoseHungerListener
 import xyz.fireworkwars.core.interfaces.Event
 import xyz.fireworkwars.core.language.LanguageManager
-import xyz.fireworkwars.core.managers.ChatChannelManager
-import xyz.fireworkwars.core.managers.FriendManager
-import xyz.fireworkwars.core.managers.GameManager
-import xyz.fireworkwars.core.managers.PrivateMessageManager
+import xyz.fireworkwars.core.managers.*
 import xyz.fireworkwars.core.profiles.PlayerDataManager
 import xyz.fireworkwars.core.stats.StatResetScheduler
+import kotlin.math.log
 
 @Suppress("unused", "MemberVisibilityCanBePrivate", "UnstableApiUsage")
 class FireworkWarsCorePlugin : JavaPlugin() {
@@ -42,7 +40,7 @@ class FireworkWarsCorePlugin : JavaPlugin() {
     val channelManager = ChatChannelManager(this)
     val friendManager: FriendManager = FriendManager(this)
     val privateMessageManager = PrivateMessageManager(this)
-
+    val playerVelocityManager = PlayerVelocityManager(this)
     val globalGameManager = GameManager(this)
 
     lateinit var friendCommand: FriendCommand
@@ -99,6 +97,11 @@ class FireworkWarsCorePlugin : JavaPlugin() {
         logger.info("Finished initialising language manager.")
         logger.info("Loaded ${languageManager.totalMessages} messages across ${languageManager.totalLanguages} languages.")
 
+        logger.info("Initialising player velocity manager...")
+
+        playerVelocityManager.init()
+
+        logger.info("Finished initialising player velocity manager.")
         logger.info("Loading commands...")
 
         CommandAPI.onEnable()
@@ -159,6 +162,10 @@ class FireworkWarsCorePlugin : JavaPlugin() {
 
     fun runTaskLater(delay: Long, task: Runnable): BukkitTask {
         return server.scheduler.runTaskLater(this, task, delay)
+    }
+
+    fun runTaskTimer(delay: Long, interval: Long, task: Runnable): BukkitTask {
+        return server.scheduler.runTaskTimer(this, task, delay, interval)
     }
 
     fun registerEvent(event: Listener) {
