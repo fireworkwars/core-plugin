@@ -24,6 +24,7 @@ import xyz.fireworkwars.core.interfaces.Event
 import xyz.fireworkwars.core.language.LanguageManager
 import xyz.fireworkwars.core.managers.ChatChannelManager
 import xyz.fireworkwars.core.managers.FriendManager
+import xyz.fireworkwars.core.managers.GameManager
 import xyz.fireworkwars.core.managers.PrivateMessageManager
 import xyz.fireworkwars.core.profiles.PlayerDataManager
 import xyz.fireworkwars.core.stats.StatResetScheduler
@@ -41,6 +42,8 @@ class FireworkWarsCorePlugin : JavaPlugin() {
     val channelManager = ChatChannelManager(this)
     val friendManager: FriendManager = FriendManager(this)
     val privateMessageManager = PrivateMessageManager(this)
+
+    val globalGameManager = GameManager(this)
 
     lateinit var friendCommand: FriendCommand
     lateinit var blockCommand: BlockCommand
