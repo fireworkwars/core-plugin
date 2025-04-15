@@ -12,7 +12,6 @@ interface FireworkWarsHook {
     fun getVersionString(): String
     fun resyncPlayerVisibility()
     fun isInPlayingGame(player: Player): Boolean
-    fun getTeamPlayerColor(player: Player): Color
 
     interface ArenaJoinExecutor {
         fun executeJoinForPlayer(player: Player, arenaNumber: Int)
