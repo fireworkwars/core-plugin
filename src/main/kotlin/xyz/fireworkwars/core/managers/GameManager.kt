@@ -5,6 +5,7 @@ import xyz.fireworkwars.core.FireworkWarsCorePlugin
 import xyz.fireworkwars.core.interfaces.GamePlayer
 import java.util.function.Function
 
+@Suppress("unused")
 class GameManager(private val plugin: FireworkWarsCorePlugin) {
     private val gamePlayerSources = mutableListOf<Function<Player, GamePlayer?>>()
 
