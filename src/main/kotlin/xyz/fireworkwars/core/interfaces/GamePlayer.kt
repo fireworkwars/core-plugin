@@ -10,9 +10,9 @@ import org.bukkit.entity.Player
  */
 @Suppress("unused")
 interface GamePlayer {
-    fun bukkitPlayer(): Player
-    fun getColor(): Color
-    fun getColoredName(): Component
-    fun getWoolMaterial(): Material
+    fun bukkitPlayer(): Player?
+    fun getColor(): Color?
+    fun getColoredName(): Component?
+    fun getWoolMaterial(): Material?
     fun getGame(): Game
 }
