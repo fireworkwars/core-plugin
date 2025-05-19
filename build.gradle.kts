@@ -5,7 +5,7 @@ import xyz.jpenilla.resourcefactory.bukkit.bukkitPluginYaml
 
 plugins {
     kotlin("jvm") version "2.1.0"
-    id("io.papermc.paperweight.userdev") version "2.0.0-beta.14"
+    id("io.papermc.paperweight.userdev") version "2.0.0-beta.16"
     id("xyz.jpenilla.resource-factory-paper-convention") version "1.2.0"
     id("com.gradleup.shadow") version "8.3.5"
     id("maven-publish")
