@@ -2,7 +2,7 @@
 SET_LANGUAGE_SUCCESSFULLY: "<green>Successfully set your language to </green>{0}<green>!</green>"
 UNKNOWN_LANGUAGE: "<red>Unsupported or unknown language: '{0}'.</red>"
 
-MOTD_1: "              <pink>✳</pink> <bold><color:#ff365e>Firework</color> <color:#00e0e0>Wars</color></bold> <dark_gray>[<gray>1.21.4</gray>]</dark_gray> <gold>☄</gold><newline/>               <pink>Firework</pink> <dark_aqua>Minigames</dark_aqua> <gray>&</gray> <gold>Events</gold>"
+MOTD_1: "              <light_purple>✳</light_purple> <bold><color:#ff365e>Firework</color> <color:#00e0e0>Wars</color></bold> <dark_gray>[<gray>1.21.4</gray>]</dark_gray> <gold>☄</gold><newline/>               <light_purple>Firework</light_purple> <dark_aqua>Minigames</dark_aqua> <gray>&</gray> <gold>Events</gold>"
 MOTD_2: "<gold>Thrilling Firework Battles!</gold>"
 MOTD_3: "<dark_aqua>Unique Firework Minigames!</dark_aqua>"
 
